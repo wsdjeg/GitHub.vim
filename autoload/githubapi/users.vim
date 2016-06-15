@@ -33,3 +33,13 @@ endfunction
 function! githubapi#users#GetAuthUser(username,password) abort
     return githubapi#util#Get('user' ,' -u ' . a:username . ':' . a:password)
 endfunction
+
+"List followers of a user
+"GET /users/:username/followers
+function! githubapi#users#ListFollowers(username) abort
+   let followers = []
+   for i in range(1,githubapi#util#GetLastPage('users/' . a:username . '/followers'))
+       call extend(followers,githubapi#util#Get('users/' . a:username . '/followers?page=' . i,''))
+   endfor
+   return followers
+endfunction
