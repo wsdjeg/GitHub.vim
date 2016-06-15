@@ -21,3 +21,15 @@ function! githubapi#users#GetStarred(user) abort
     endfor
     return rel
 endfunction
+
+" get a single user
+" GET /users/:username
+function! githubapi#users#GetUser(username) abort
+   return githubapi#util#Get('users/' . a:username, '') 
+endfunction
+
+"Get the authenticated user
+"GET /user
+function! githubapi#users#GetAuthUser(username,password) abort
+    return githubapi#util#Get('user' ,' -u ' . a:username . ':' . a:password)
+endfunction

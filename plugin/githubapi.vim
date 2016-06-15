@@ -5,6 +5,7 @@ if exists('g:GitHub_api_plugin_loaded')
     finish
 endif
 
+let g:githubapi_root_url = 'https://api.github.com/'
 
 let g:GitHub_api_plugin_loaded = 1
 
