@@ -43,3 +43,13 @@ function! githubapi#users#ListFollowers(username) abort
    endfor
    return followers
 endfunction
+
+"List users followed by another user
+"GET /users/:username/following
+function! githubapi#users#ListFollowing(username) abort
+   let following = []
+   for i in range(1,githubapi#util#GetLastPage('users/' . a:username . '/following'))
+       call extend(following,githubapi#util#Get('users/' . a:username . '/following?page=' . i,''))
+   endfor
+   return following
+endfunction
