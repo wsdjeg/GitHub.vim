@@ -27,9 +27,20 @@ an impl of github v3 api via viml.
 #### [Enterprise](#enterprise-16)
 
 
-## Issues
+### Issues
+1. List all issues assigned to the authenticated user across all
+visible repositories including owned repositories, member
+repositories, and organization repositories:
+```
+    githubapi#issues#List_All(user,password)
+```
+2. List all issues across owned and member repositories assigned
+to the authenticated user:
+```
+    githubapi#issues#List_All_for_User(user,password)
+```
 #### assignees
-##### list-assignees)
-##### check-assignees)
-##### add-assignees-to-an-issue)
-##### remove-assignees-from-an-issue)
+##### list-assignees
+##### check-assignees
+##### add-assignees-to-an-issue
+##### remove-assignees-from-an-issue
