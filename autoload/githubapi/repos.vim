@@ -9,5 +9,5 @@ function! githubapi#repos#Response() abort
                 \'downloads_url', 'html_url', 'id', 'hooks_url', 'subscribers_url', 'svn_url', 'branches_url', 'pulls_url',
                 \'private', 'forks_count', 'homepage', 'stargazers_count', 'forks_url', 'contributors_url', 'statuses_url',
                 \'stargazers_url', 'git_refs_url']
-
+    return l:keys
 endfunction

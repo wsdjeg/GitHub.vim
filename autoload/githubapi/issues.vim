@@ -38,7 +38,7 @@ endfunction
 function! githubapi#issues#List_All_for_Repo(owner,repo) abort
     let issues = []
     for i in range(1,githubapi#util#GetLastPage('repos/' . a:owner . '/' . a:repo . '/issues'))
-        call extend(issues,githubapi#util#Get('repos/' . a:owner . '/' . a:repo . '/issues', ''))
+        call extend(issues,githubapi#util#Get('repos/' . a:owner . '/' . a:repo . '/issues?page=' . i, ''))
     endfor
     return issues
 endfunction
