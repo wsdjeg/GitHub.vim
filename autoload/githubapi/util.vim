@@ -3,7 +3,8 @@ function! githubapi#util#Get(url,args) abort
     if !empty(a:args)
         let cmd = cmd . a:args
     endif
-    return json_decode(join(systemlist(cmd),"\n"))
+    let result = join(systemlist(cmd),"\n")
+    return empty(result) ? result : json_decode(result)
 endfunction
 
 function! githubapi#util#GetLastPage(url) abort

@@ -51,7 +51,37 @@ endfunction
 
 " Create an issue
 " POST /repos/:owner/:repo/issues
+" {
+"  "title": "Found a bug",
+"  "body": "I'm having a problem with this.",
+"  "assignee": "octocat",
+"  "milestone": 1,
+"  "labels": [
+"    "bug"
+"  ]
+" }
 function! githubapi#issues#Create(owner,repo,user,password,json) abort
-    return githubapi#util#Get('repos/' . a:owner . '/' . a:repo . '/issues',' -X POST -d ' . shellescape(a:json) . ' -u ' . a:user . ':' . a:password)
+    return githubapi#util#Get('repos/' . a:owner . '/' . a:repo . '/issues',
+                \ ' -X POST -d ' . shellescape(a:json) . ' -u ' . a:user . ':' . a:password)
 endfunction
 
+" Edit an issue
+" PATCH /repos/:owner/:repo/issues/:number
+function! githubapi#issues#Edit(owner,repo,num,user,password,json) abort
+    return githubapi#util#Get('repos/' . a:owner . '/' . a:repo . '/issues/' . a:num,
+                \ ' -X PATCH -d ' . shellescape(a:json) . ' -u ' . a:user . ':' . a:password)
+endfunction
+
+" Lock an issue
+" PUT /repos/:owner/:repo/issues/:number/lock
+function! githubapi#issues#Lock(owner,repo,num,user,password) abort
+    return githubapi#util#Get('repos/' . a:owner . '/' . a:repo . '/issues/' . a:num . '/lock',
+                \ ' -X PUT  -u ' . a:user . ':' . a:password . ' -H "Accept: application/vnd.github.the-key-preview"')
+endfunction
+
+" Unlock an issue
+" DELETE /repos/:owner/:repo/issues/:number/lock
+function! githubapi#issues#Unlock(owner,repo,num,user,password) abort
+    return githubapi#util#Get('repos/' . a:owner . '/' . a:repo . '/issues/' . a:num . '/lock',
+                \ ' -X DELETE  -u ' . a:user . ':' . a:password . ' -H "Accept: application/vnd.github.the-key-preview"')
+endfunction
