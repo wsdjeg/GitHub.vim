@@ -15,6 +15,7 @@ an impl of github v3 api via viml.
  - [Check assignee](#check-assignees)
  - [Add assignees to an Issue](#add-assignees-to-an-issue)
  - [Remove assignees from an Issue](#remove-assignees-from-an-issue)
+
 #### [Migration](#migration-8)
 #### [Miscellaneous](#miscellaneous-9)
 #### [Organizations](#organizations-10)
@@ -24,3 +25,11 @@ an impl of github v3 api via viml.
 #### [Search](#search-14)
 #### [Users](#users-15)
 #### [Enterprise](#enterprise-16)
+
+
+## Issues
+#### assignees
+##### list-assignees)
+##### check-assignees)
+##### add-assignees-to-an-issue)
+##### remove-assignees-from-an-issue)
