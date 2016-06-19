@@ -28,16 +28,54 @@ an impl of github v3 api via viml.
 
 
 ### Issues
-1. List all issues assigned to the authenticated user across all
+- List all issues assigned to the authenticated user across all
 visible repositories including owned repositories, member
 repositories, and organization repositories:
 ```
     githubapi#issues#List_All(user,password)
 ```
-2. List all issues across owned and member repositories assigned
+- List all issues across owned and member repositories assigned
 to the authenticated user:
 ```
     githubapi#issues#List_All_for_User(user,password)
+```
+- List all issues for a given organization assigned to the
+authenticated user:
+```
+    githubapi#issues#List_All_for_User_In_Org(org,user,password)
+```
+- List issues for a repository:
+```
+    githubapi#issues#List_All_for_Repo(owner,repo)
+```
+- Get a single issue:
+```
+    githubapi#issues#Get_issue(owner,repo,num)
+```
+- Create an issue:
+```
+    {
+        "title": "Found a bug",
+        "body": "I'm having a problem with this.",
+        "assignee": "octocat",
+        "milestone": 1,
+        "labels": [
+            "bug"
+        ]
+    }
+    githubapi#issues#Create(owner,repo,user,password,json)
+```
+- Edit an issue:
+```
+    githubapi#issues#Edit(owner,repo,num,user,password,json)
+```
+- Lock an issue:
+```
+    githubapi#issues#Lock(owner,repo,num,user,password)
+```
+- Unlock an issue:
+```
+    githubapi#issues#Unlock(owner,repo,num,user,password)
 ```
 #### assignees
 ##### list-assignees
