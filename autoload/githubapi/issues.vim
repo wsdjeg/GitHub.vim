@@ -1,3 +1,4 @@
+""
 " List issues
 " List all issues assigned to the authenticated user across all visible
 " repositories including owned repositories, member repositories, and
@@ -11,6 +12,7 @@ function! githubapi#issues#List_All(user,password) abort
     return issues
 endfunction
 
+""
 " List all issues across owned and member repositories assigned to the
 " authenticated user:
 " GET /user/issues
@@ -22,6 +24,7 @@ function! githubapi#issues#List_All_for_User(user,password) abort
     return issues
 endfunction
 
+""
 " List all issues for a given organization assigned to the authenticated user:
 " GET /orgs/:org/issues
 function! githubapi#issues#List_All_for_User_In_Org(org,user,password) abort
@@ -32,6 +35,7 @@ function! githubapi#issues#List_All_for_User_In_Org(org,user,password) abort
     return issues
 endfunction
 
+""
 " List issues for a repository
 " GET /repos/:owner/:repo/issues
 " NOTE: this only list opened issues and pull request
@@ -43,12 +47,14 @@ function! githubapi#issues#List_All_for_Repo(owner,repo) abort
     return issues
 endfunction
 
+""
 " Get a single issue
 " GET /repos/:owner/:repo/issues/:number
 function! githubapi#issues#Get_issue(owner,repo,num) abort
     return githubapi#util#Get('repos/' . a:owner . '/' . a:repo . '/issues/' . a:num, '')
 endfunction
 
+""
 " Create an issue
 " POST /repos/:owner/:repo/issues
 " {
@@ -66,6 +72,7 @@ function! githubapi#issues#Create(owner,repo,user,password,json) abort
                 \ . ' -u ' . a:user . ':' . a:password)
 endfunction
 
+""
 " Edit an issue
 " PATCH /repos/:owner/:repo/issues/:number
 function! githubapi#issues#Edit(owner,repo,num,user,password,json) abort
@@ -74,6 +81,7 @@ function! githubapi#issues#Edit(owner,repo,num,user,password,json) abort
                 \ . ' -u ' . a:user . ':' . a:password)
 endfunction
 
+""
 " Lock an issue
 " PUT /repos/:owner/:repo/issues/:number/lock
 function! githubapi#issues#Lock(owner,repo,num,user,password) abort
@@ -82,6 +90,7 @@ function! githubapi#issues#Lock(owner,repo,num,user,password) abort
                 \ . ' -H "Accept: application/vnd.github.the-key-preview"')
 endfunction
 
+""
 " Unlock an issue
 " DELETE /repos/:owner/:repo/issues/:number/lock
 function! githubapi#issues#Unlock(owner,repo,num,user,password) abort
@@ -90,6 +99,7 @@ function! githubapi#issues#Unlock(owner,repo,num,user,password) abort
                 \ . ' -H "Accept: application/vnd.github.the-key-preview"')
 endfunction
 
+""
 " List assignees
 " This call lists all the available assignees to which issues may be assigned.
 " GET /repos/:owner/:repo/assignees
@@ -97,6 +107,7 @@ function! githubapi#issues#List_assignees(owner,repo) abort
     return githubapi#util#Get('repos/' . a:owner . '/' . a:repo . '/assignees', '')
 endfunction
 
+""
 " Check assignee
 " GET /repos/:owner/:repo/assignees/:assignee
 function! githubapi#issues#Check_assignee(owner,repo,assignee) abort
@@ -104,6 +115,7 @@ function! githubapi#issues#Check_assignee(owner,repo,assignee) abort
                 \ . a:repo . '/assignees/' . a:assignee) ==# 204
 endfunction
 
+""
 " Add assignees to an Issue
 " POST /repos/:owner/:repo/issues/:number/assignees
 " NOTE: need `Accep:application/vnd.github.cerberus-preview+json`
@@ -119,6 +131,8 @@ function! githubapi#issues#Addassignee(owner,repo,num,assignees,user,password) a
                 \ ' -X POST -d ' . shellescape(a:assignees) . ' -u ' . a:user . ':' . a:password
                 \ . ' -H "Accept: application/vnd.github.cerberus-preview+json"')
 endfunction
+
+""
 " Remove assignees from an Issue
 " DELETE /repos/:owner/:repo/issues/:number/assignees
 " NOTE: need `Accep:application/vnd.github.cerberus-preview+json`
