@@ -1,6 +1,6 @@
 " List issues
 " List all issues assigned to the authenticated user across all visible
-" repositories including owned repositories, member repositories, and 
+" repositories including owned repositories, member repositories, and
 " organization repositories:
 " GET /issues
 function! githubapi#issues#List_All(user,password) abort
@@ -62,26 +62,75 @@ endfunction
 " }
 function! githubapi#issues#Create(owner,repo,user,password,json) abort
     return githubapi#util#Get('repos/' . a:owner . '/' . a:repo . '/issues',
-                \ ' -X POST -d ' . shellescape(a:json) . ' -u ' . a:user . ':' . a:password)
+                \ ' -X POST -d ' . shellescape(a:json)
+                \ . ' -u ' . a:user . ':' . a:password)
 endfunction
 
 " Edit an issue
 " PATCH /repos/:owner/:repo/issues/:number
 function! githubapi#issues#Edit(owner,repo,num,user,password,json) abort
     return githubapi#util#Get('repos/' . a:owner . '/' . a:repo . '/issues/' . a:num,
-                \ ' -X PATCH -d ' . shellescape(a:json) . ' -u ' . a:user . ':' . a:password)
+                \ ' -X PATCH -d ' . shellescape(a:json)
+                \ . ' -u ' . a:user . ':' . a:password)
 endfunction
 
 " Lock an issue
 " PUT /repos/:owner/:repo/issues/:number/lock
 function! githubapi#issues#Lock(owner,repo,num,user,password) abort
     return githubapi#util#Get('repos/' . a:owner . '/' . a:repo . '/issues/' . a:num . '/lock',
-                \ ' -X PUT  -u ' . a:user . ':' . a:password . ' -H "Accept: application/vnd.github.the-key-preview"')
+                \ ' -X PUT  -u ' . a:user . ':' . a:password
+                \ . ' -H "Accept: application/vnd.github.the-key-preview"')
 endfunction
 
 " Unlock an issue
 " DELETE /repos/:owner/:repo/issues/:number/lock
 function! githubapi#issues#Unlock(owner,repo,num,user,password) abort
     return githubapi#util#Get('repos/' . a:owner . '/' . a:repo . '/issues/' . a:num . '/lock',
-                \ ' -X DELETE  -u ' . a:user . ':' . a:password . ' -H "Accept: application/vnd.github.the-key-preview"')
+                \ ' -X DELETE  -u ' . a:user . ':' . a:password
+                \ . ' -H "Accept: application/vnd.github.the-key-preview"')
+endfunction
+
+" List assignees
+" This call lists all the available assignees to which issues may be assigned.
+" GET /repos/:owner/:repo/assignees
+function! githubapi#issues#List_assignees(owner,repo) abort
+    return githubapi#util#Get('repos/' . a:owner . '/' . a:repo . '/assignees', '')
+endfunction
+
+" Check assignee
+" GET /repos/:owner/:repo/assignees/:assignee
+function! githubapi#issues#Check_assignee(owner,repo,assignee) abort
+    return githubapi#util#GetStatus('repos/' . a:owner . '/'
+                \ . a:repo . '/assignees/' . a:assignee) ==# 204
+endfunction
+
+" Add assignees to an Issue
+" POST /repos/:owner/:repo/issues/:number/assignees
+" NOTE: need `Accep:application/vnd.github.cerberus-preview+json`
+" Input:
+" {
+"  "assignees": [
+"    "hubot",
+"    "other_assignee"
+"  ]
+"}
+function! githubapi#issues#Addassignee(owner,repo,num,assignees,user,password) abort
+    return githubapi#util#Get('repos/' . a:owner . '/' . a:repo . '/issues/' . a:num . '/assignees',
+                \ ' -X POST -d ' . shellescape(a:assignees) . ' -u ' . a:user . ':' . a:password
+                \ . ' -H "Accept: application/vnd.github.cerberus-preview+json"')
+endfunction
+" Remove assignees from an Issue
+" DELETE /repos/:owner/:repo/issues/:number/assignees
+" NOTE: need `Accep:application/vnd.github.cerberus-preview+json`
+" Input:
+" {
+"  "assignees": [
+"    "hubot",
+"    "other_assignee"
+"  ]
+"}
+function! githubapi#issues#Removeassignee(owner,repo,num,assignees,user,password) abort
+    return githubapi#util#Get('repos/' . a:owner . '/' . a:repo . '/issues/' . a:num . '/assignees',
+                \ ' -X DELETE -d ' . shellescape(a:assignees) . ' -u ' . a:user . ':' . a:password
+                \ . ' -H "Accept: application/vnd.github.cerberus-preview+json"')
 endfunction

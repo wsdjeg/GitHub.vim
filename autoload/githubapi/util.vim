@@ -8,7 +8,7 @@ function! githubapi#util#Get(url,args) abort
 endfunction
 
 function! githubapi#util#GetLastPage(url) abort
-    let result = systemlist('curl -si ' . g:githubapi_root_url . a:url . '| grep -E "^Link"')
+    let result = systemlist('curl -si ' . g:githubapi_root_url . a:url . ' | grep -E "^Link"')
     if len(result) > 0
         let line = result[0]
         if !empty(line) && !empty(matchstr(line, 'rel="last"'))
@@ -17,4 +17,7 @@ function! githubapi#util#GetLastPage(url) abort
     else
         return 1
     endif
+endfunction
+function! githubapi#util#GetStatus(url) abort
+    return matchstr(systemlist('curl -Is ' . g:githubapi_root_url . a:url . ' | grep -E "^Status:"')[0],'\d\+')
 endfunction
