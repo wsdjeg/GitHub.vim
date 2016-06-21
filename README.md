@@ -1,13 +1,10 @@
 ### GitHub-api.vim
 [![Build Status](https://travis-ci.org/wsdjeg/GitHub-api.vim.svg?branch=master)](https://travis-ci.org/wsdjeg/GitHub-api.vim)
-[![Version 0.1.2](https://img.shields.io/badge/version-0.1.1-yellow.svg?style=flat-square)](https://github.com/wsdjeg/GitHub-api.vim/releases) 
+[![Version 0.1.2](https://img.shields.io/badge/version-0.1.1-yellow.svg?style=flat-square)](https://github.com/wsdjeg/GitHub-api.vim/releases)
 [![Support Vim 7.4 or above](https://img.shields.io/badge/support-%20Vim%207.4%20or%20above-yellowgreen.svg?style=flat-square)](https://github.com/vim/vim-win32-installer)
 [![MIT License](https://img.shields.io/badge/license-MIT-blue.svg?style=flat-square)](LICENSE)
-[![Doc](https://img.shields.io/badge/doc-%3Ah%20githubapi-orange.svg?style=flat-square)](doc/githubapi.txt) 
+[![Doc](https://img.shields.io/badge/doc-%3Ah%20githubapi-orange.svg?style=flat-square)](doc/githubapi.txt)
 [![Powered by vital.vim](https://img.shields.io/badge/powered%20by-vital.vim-80273f.svg?style=flat-square)](https://github.com/vim-jp/vital.vim)
-
-an impl of github v3 api via viml.
-
 #### [Intro](#intro-1)
 #### [Activity](#activity-2)
 #### [Gist](#gist-3)
@@ -20,6 +17,15 @@ an impl of github v3 api via viml.
  - [Check assignee](#check-assignees)
  - [Add assignees to an Issue](#add-assignees-to-an-issue)
  - [Remove assignees from an Issue](#remove-assignees-from-an-issue)
+- [Comments](#comments)
+ - [List comments on an issue](#list-comments-on-an-issue)
+ - [List comments in a repository](#list-comments-in-a-repository)
+ - [Get a single comment](#get-a-single-comment)
+ - [Create a comment](#create-a-comment)
+ - [Edit a comment](#edit-a-comment)
+ - [Delete a comment](#delete-a-comment)
+ - [Custom media types](#custom-media-types)
+
 
 #### [Migration](#migration-8)
 #### [Miscellaneous](#miscellaneous-9)
@@ -31,7 +37,8 @@ an impl of github v3 api via viml.
 #### [Users](#users-15)
 #### [Enterprise](#enterprise-16)
 
-
+### Intro
+    Implement Github API via viml.
 ### Issues
 - List all issues assigned to the authenticated user across all
 visible repositories including owned repositories, member
@@ -84,6 +91,27 @@ authenticated user:
 ```
 #### assignees
 ##### list-assignees
+This call lists all the available assignees to which issues may be assigned.
+```
+    githubapi#issues#List_assignees(owner,repo)
+```
 ##### check-assignees
+```
+    githubapi#issues#Check_assignee(owner,repo,assignee)
+```
 ##### add-assignees-to-an-issue
+```
+    githubapi#issues#Addassignee(owner,repo,num,assignees,user,password)
+```
 ##### remove-assignees-from-an-issue
+```
+    githubapi#issues#Removeassignee(owner,repo,num,assignees,user,password)
+```
+#### Comments
+##### List comments on an issue
+##### List comments in a repository
+##### Get a single comment
+##### Create a comment
+##### Edit a comment
+##### Custom media types
+##### Delete a comment
