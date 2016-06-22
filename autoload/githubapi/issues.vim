@@ -49,6 +49,7 @@ endfunction
 
 ""
 " Get a single issue
+" @public
 " GET /repos/:owner/:repo/issues/:number
 function! githubapi#issues#Get_issue(owner,repo,num) abort
     return githubapi#util#Get('repos/' . a:owner . '/' . a:repo . '/issues/' . a:num, '')
@@ -133,16 +134,26 @@ function! githubapi#issues#Addassignee(owner,repo,num,assignees,user,password) a
 endfunction
 
 ""
+" @public
 " Remove assignees from an Issue
+"
 " DELETE /repos/:owner/:repo/issues/:number/assignees
-" NOTE: need `Accep:application/vnd.github.cerberus-preview+json`
+"
 " Input:
+"
 " {
+"
 "  "assignees": [
+"  
 "    "hubot",
+"
 "    "other_assignee"
+"
 "  ]
+"
 "}
+"
+" NOTE: need `Accep:application/vnd.github.cerberus-preview+json`
 function! githubapi#issues#Removeassignee(owner,repo,num,assignees,user,password) abort
     return githubapi#util#Get('repos/' . a:owner . '/' . a:repo . '/issues/' . a:num . '/assignees',
                 \ ' -X DELETE -d ' . shellescape(a:assignees) . ' -u ' . a:user . ':' . a:password

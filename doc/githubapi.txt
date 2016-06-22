@@ -1,0 +1,47 @@
+*githubapi.txt*	Implement Github API via viml
+Wang Shidong                                                       *githubapi*
+
+==============================================================================
+CONTENTS                                                  *githubapi-contents*
+  1. Configuration..........................................|githubapi-config|
+  2. Functions...........................................|githubapi-functions|
+
+==============================================================================
+CONFIGURATION                                               *githubapi-config*
+
+                                                        *g:githubapi_root_url*
+Github api root url:
+
+default : https://api.github.com/
+
+==============================================================================
+FUNCTIONS                                                *githubapi-functions*
+
+githubapi#issues#Get_issue({owner}, {repo}, {num})
+                                                *githubapi#issues#Get_issue()*
+  Get a single issue GET /repos/:owner/:repo/issues/:number
+
+githubapi#issues#Removeassignee({owner}, {repo}, {num}, {assignees}, {user},
+  {password})                              *githubapi#issues#Removeassignee()*
+  Remove assignees from an Issue
+
+  DELETE /repos/:owner/:repo/issues/:number/assignees
+
+  Input:
+
+  {
+
+   "assignees": [
+
+     "hubot",
+
+     "other_assignee"
+
+   ]
+
+  }
+
+  NOTE: need `Accep:application/vnd.github.cerberus-preview+json`
+
+
+vim:tw=78:ts=8:ft=help:norl:
