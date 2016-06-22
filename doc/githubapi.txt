@@ -17,9 +17,87 @@ default : https://api.github.com/
 ==============================================================================
 FUNCTIONS                                                *githubapi-functions*
 
+githubapi#issues#List_All({user}, {password})    *githubapi#issues#List_All()*
+  List issues List all issues assigned to the authenticated user across all
+  visible repositories including owned repositories, member repositories, and
+  organization repositories:
+
+  Github API : GET /issues
+
+githubapi#issues#List_All_for_User({user}, {password})
+                                        *githubapi#issues#List_All_for_User()*
+  List all issues across owned and member repositories assigned to the
+  authenticated user:
+
+  Github API : GET /user/issues
+
+githubapi#issues#List_All_for_User_In_Org({org}, {user}, {password})
+                                 *githubapi#issues#List_All_for_User_In_Org()*
+  List all issues for a given organization assigned to the authenticated user:
+
+  Github API : GET /orgs/:org/issues
+
 githubapi#issues#Get_issue({owner}, {repo}, {num})
                                                 *githubapi#issues#Get_issue()*
   Get a single issue GET /repos/:owner/:repo/issues/:number
+
+githubapi#issues#Create({owner}, {repo}, {user}, {password}, {json})
+                                                   *githubapi#issues#Create()*
+  Create an issue
+
+  Github API : POST /repos/:owner/:repo/issues
+
+  Input: {
+
+   "title": "Found a bug",
+
+   "body": "I'm having a problem with this.",
+
+   "assignee": "octocat",
+
+   "milestone": 1,
+
+   "labels": [
+
+     "bug"
+
+   ]
+
+  }
+
+githubapi#issues#Lock({owner}, {repo}, {num}, {user}, {password})
+                                                     *githubapi#issues#Lock()*
+  Lock an issue
+
+  Github APi : PUT /repos/:owner/:repo/issues/:number/lock
+
+githubapi#issues#Unlock({owner}, {repo}, {num}, {user}, {password})
+                                                   *githubapi#issues#Unlock()*
+  Unlock an issue
+
+  Github API : DELETE /repos/:owner/:repo/issues/:number/lock
+
+githubapi#issues#List_assignees({owner}, {repo})
+                                           *githubapi#issues#List_assignees()*
+  Lists all the available assignees to which issues may be assigned.
+
+  Github API : GET /repos/:owner/:repo/assignees
+
+githubapi#issues#Check_assignee({owner}, {repo}, {assignee})
+                                           *githubapi#issues#Check_assignee()*
+  Check assignee
+
+  Github API : GET /repos/:owner/:repo/assignees/:assignee
+
+githubapi#issues#Addassignee({owner}, {repo}, {num}, {assignees}, {user},
+  {password})                                 *githubapi#issues#Addassignee()*
+  Add assignees to an Issue
+
+  Github API : POST /repos/:owner/:repo/issues/:number/assignees
+
+  NOTE: need `Accep:application/vnd.github.cerberus-preview+json`
+
+  Input: {  "assignees": [    "hubot",    "other_assignee"  ] }
 
 githubapi#issues#Removeassignee({owner}, {repo}, {num}, {assignees}, {user},
   {password})                              *githubapi#issues#Removeassignee()*
@@ -27,19 +105,7 @@ githubapi#issues#Removeassignee({owner}, {repo}, {num}, {assignees}, {user},
 
   DELETE /repos/:owner/:repo/issues/:number/assignees
 
-  Input:
-
-  {
-
-   "assignees": [
-
-     "hubot",
-
-     "other_assignee"
-
-   ]
-
-  }
+  Input: {  "assignees": [    "hubot",    "other_assignee"  ] }
 
   NOTE: need `Accep:application/vnd.github.cerberus-preview+json`
 

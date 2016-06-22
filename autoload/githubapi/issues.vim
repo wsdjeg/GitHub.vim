@@ -3,7 +3,9 @@
 " List all issues assigned to the authenticated user across all visible
 " repositories including owned repositories, member repositories, and
 " organization repositories:
-" GET /issues
+"
+" Github API : GET /issues
+" @public
 function! githubapi#issues#List_All(user,password) abort
     let issues = []
     for i in range(1,githubapi#util#GetLastPage('issues -u ' . a:user . ':' . a:password))
@@ -15,7 +17,9 @@ endfunction
 ""
 " List all issues across owned and member repositories assigned to the
 " authenticated user:
-" GET /user/issues
+"
+" Github API : GET /user/issues
+" @public
 function! githubapi#issues#List_All_for_User(user,password) abort
     let issues = []
     for i in range(1,githubapi#util#GetLastPage('user/issues -u ' . a:user . ':' . a:password))
@@ -26,7 +30,9 @@ endfunction
 
 ""
 " List all issues for a given organization assigned to the authenticated user:
-" GET /orgs/:org/issues
+"
+" Github API : GET /orgs/:org/issues
+" @public
 function! githubapi#issues#List_All_for_User_In_Org(org,user,password) abort
     let issues = []
     for i in range(1,githubapi#util#GetLastPage('orgs/' . a:org . '/issues -u ' . a:user . ':' . a:password))
@@ -56,16 +62,28 @@ function! githubapi#issues#Get_issue(owner,repo,num) abort
 endfunction
 
 ""
+" @public
 " Create an issue
-" POST /repos/:owner/:repo/issues
+"
+" Github API : POST /repos/:owner/:repo/issues
+"
+" Input:
 " {
+"
 "  "title": "Found a bug",
+"
 "  "body": "I'm having a problem with this.",
+"
 "  "assignee": "octocat",
+"
 "  "milestone": 1,
+"
 "  "labels": [
+"
 "    "bug"
+"
 "  ]
+"
 " }
 function! githubapi#issues#Create(owner,repo,user,password,json) abort
     return githubapi#util#Get('repos/' . a:owner . '/' . a:repo . '/issues',
@@ -83,8 +101,10 @@ function! githubapi#issues#Edit(owner,repo,num,user,password,json) abort
 endfunction
 
 ""
+" @public
 " Lock an issue
-" PUT /repos/:owner/:repo/issues/:number/lock
+"
+" Github APi : PUT /repos/:owner/:repo/issues/:number/lock
 function! githubapi#issues#Lock(owner,repo,num,user,password) abort
     return githubapi#util#Get('repos/' . a:owner . '/' . a:repo . '/issues/' . a:num . '/lock',
                 \ ' -X PUT  -u ' . a:user . ':' . a:password
@@ -92,8 +112,10 @@ function! githubapi#issues#Lock(owner,repo,num,user,password) abort
 endfunction
 
 ""
+" @public
 " Unlock an issue
-" DELETE /repos/:owner/:repo/issues/:number/lock
+"
+" Github API : DELETE /repos/:owner/:repo/issues/:number/lock
 function! githubapi#issues#Unlock(owner,repo,num,user,password) abort
     return githubapi#util#Get('repos/' . a:owner . '/' . a:repo . '/issues/' . a:num . '/lock',
                 \ ' -X DELETE  -u ' . a:user . ':' . a:password
@@ -101,25 +123,32 @@ function! githubapi#issues#Unlock(owner,repo,num,user,password) abort
 endfunction
 
 ""
-" List assignees
-" This call lists all the available assignees to which issues may be assigned.
-" GET /repos/:owner/:repo/assignees
+" @public
+" Lists all the available assignees to which issues may be assigned.
+"
+" Github API : GET /repos/:owner/:repo/assignees
 function! githubapi#issues#List_assignees(owner,repo) abort
     return githubapi#util#Get('repos/' . a:owner . '/' . a:repo . '/assignees', '')
 endfunction
 
 ""
+" @public
 " Check assignee
-" GET /repos/:owner/:repo/assignees/:assignee
+"
+" Github API : GET /repos/:owner/:repo/assignees/:assignee
 function! githubapi#issues#Check_assignee(owner,repo,assignee) abort
     return githubapi#util#GetStatus('repos/' . a:owner . '/'
                 \ . a:repo . '/assignees/' . a:assignee) ==# 204
 endfunction
 
 ""
+" @public
 " Add assignees to an Issue
-" POST /repos/:owner/:repo/issues/:number/assignees
+"
+" Github API : POST /repos/:owner/:repo/issues/:number/assignees
+"
 " NOTE: need `Accep:application/vnd.github.cerberus-preview+json`
+"
 " Input:
 " {
 "  "assignees": [
@@ -140,17 +169,11 @@ endfunction
 " DELETE /repos/:owner/:repo/issues/:number/assignees
 "
 " Input:
-"
 " {
-"
 "  "assignees": [
-"  
 "    "hubot",
-"
 "    "other_assignee"
-"
 "  ]
-"
 "}
 "
 " NOTE: need `Accep:application/vnd.github.cerberus-preview+json`
