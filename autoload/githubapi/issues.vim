@@ -182,3 +182,72 @@ function! githubapi#issues#Removeassignee(owner,repo,num,assignees,user,password
                 \ ' -X DELETE -d ' . shellescape(a:assignees) . ' -u ' . a:user . ':' . a:password
                 \ . ' -H "Accept: application/vnd.github.cerberus-preview+json"')
 endfunction
+
+""
+" @public
+" List comments on an issue, updated at or after {since} .
+" {since} : YYYY-MM-DDTHH:MM:SSZ
+"
+" Github API : GET /repos/:owner/:repo/issues/:number/comments
+function! githubapi#issues#List_comments(owner,repo,num,since) abort
+    let comments = []
+    for i in range(1,githubapi#util#GetLastPage('repos/' . a:owner . '/' . a:repo
+                \. '/issues/' . a:num . '/comments'
+                \. (empty(a:since) ? '' : '?since='.a:since)))
+        call extend(comments,githubapi#util#Get('repos/' . a:owner . '/' . a:repo
+                \. '/issues/' . a:num . '/comments?page=' . i
+                \. (empty(a:since) ? '' : '&since='.a:since), ''))
+    endfor
+    return comments
+endfunction
+
+""
+" @public
+" List comments in a repository
+"
+" Github API : GET /repos/:owner/:repo/issues/comments
+function! githubapi#issues#List_All_comments(owner,repo,sort,desc,since) abort
+    let url = 'repos/' . a:owner . '/' . a:repo . '/issues/comments'
+    if index(['created','updated'], a:sort) != -1
+        let url = url . '?sort=' a:sort
+        if index(['asc','desc'], a:desc) != -1
+            let url = url . '&direction=' . a:desc
+        endif
+        if !empty(a:since)
+            let url = url . '&since=' . a:since
+        endif
+    else
+        if !empty(a:since)
+            let url = url . '?since=' . a:since
+        endif
+    endif
+    let comments = []
+    for i in range(1,githubapi#util#GetLastPage(url))
+        call extend(comments,githubapi#util#Get(url . (stridx(url,'?') == -1 ? '?page='  : '&page=') . i ,''))
+    endfor
+    return comments
+endfunction
+
+""
+" @public
+" Get a single comment
+"
+" Github API : GET /repos/:owner/:repo/issues/comments/:id
+function! githubapi#issues#Get_comment(owner,repo,id) abort
+    return githubapi#util#Get('repos/' . a:owner . '/' . a:repo . '/issues/comments/' . a:id, '')
+endfunction
+
+""
+" @public
+" Create a comment
+"
+" Input:
+"{
+"  "body": "Me too"
+"}
+"
+" Github API : POST /repos/:owner/:repo/issues/:number/comments
+function! githubapi#issues#Create_comment(owner,repo,num,json,user,password) abort
+    return githubapi#util#Get('repos/' . a:owner . '/' . a:repo . '/issues/' . a:num . '/comments/',
+                \' -X POST -u ' . a:user . ':' . a:password . ' -d ' . shellescape(a:json))
+endfunction

@@ -109,5 +109,32 @@ githubapi#issues#Removeassignee({owner}, {repo}, {num}, {assignees}, {user},
 
   NOTE: need `Accep:application/vnd.github.cerberus-preview+json`
 
+githubapi#issues#List_comments({owner}, {repo}, {num}, {since})
+                                            *githubapi#issues#List_comments()*
+  List comments on an issue, updated at or after {since} . {since} :
+  YYYY-MM-DDTHH:MM:SSZ
+
+  Github API : GET /repos/:owner/:repo/issues/:number/comments
+
+githubapi#issues#List_All_comments({owner}, {repo}, {sort}, {desc}, {since})
+                                        *githubapi#issues#List_All_comments()*
+  List comments in a repository
+
+  Github API : GET /repos/:owner/:repo/issues/comments
+
+githubapi#issues#Get_comment({owner}, {repo}, {id})
+                                              *githubapi#issues#Get_comment()*
+  Get a single comment
+
+  Github API : GET /repos/:owner/:repo/issues/comments/:id
+
+githubapi#issues#Create_comment({owner}, {repo}, {num}, {json}, {user},
+  {password})                              *githubapi#issues#Create_comment()*
+  Create a comment
+
+  Input: {  "body": "Me too" }
+
+  Github API : POST /repos/:owner/:repo/issues/:number/comments
+
 
 vim:tw=78:ts=8:ft=help:norl:
