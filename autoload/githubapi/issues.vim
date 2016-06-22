@@ -251,3 +251,29 @@ function! githubapi#issues#Create_comment(owner,repo,num,json,user,password) abo
     return githubapi#util#Get('repos/' . a:owner . '/' . a:repo . '/issues/' . a:num . '/comments/',
                 \' -X POST -u ' . a:user . ':' . a:password . ' -d ' . shellescape(a:json))
 endfunction
+
+""
+" @public
+" Edit a comment
+"
+" Input:
+"{
+"  "body": "Me too"
+"}
+"
+" Github API : PATCH /repos/:owner/:repo/issues/comments/:id
+function! githubapi#issues#Edit_comment(owner,repo,id,json,user,password) abort
+    return githubapi#util#Get('repos/' . a:owner . '/' . a:repo . '/issues/'  . '/comments/' . a:id,
+                \' -X PATCH -u ' . a:user . ':' . a:password . ' -d ' . shellescape(a:json))
+endfunction
+
+""
+" @public
+" Delete a comment
+"
+" ELETE /repos/:owner/:repo/issues/comments/:id
+function! githubapi#issues#Delete_comment(owner,repo,id,user,password) abort
+    return githubapi#util#GetStatus('repos/' . a:owner . '/'
+                \ . a:repo . '/issues/comments/' . a:id
+                \. ' -u ' . a:user . ':' . a:password . ' -X DELETE') ==# 204
+endfunction

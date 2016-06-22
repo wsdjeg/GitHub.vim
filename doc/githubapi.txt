@@ -136,5 +136,19 @@ githubapi#issues#Create_comment({owner}, {repo}, {num}, {json}, {user},
 
   Github API : POST /repos/:owner/:repo/issues/:number/comments
 
+githubapi#issues#Edit_comment({owner}, {repo}, {id}, {json}, {user},
+  {password})                                *githubapi#issues#Edit_comment()*
+  Edit a comment
+
+  Input: {  "body": "Me too" }
+
+  Github API : PATCH /repos/:owner/:repo/issues/comments/:id
+
+githubapi#issues#Delete_comment({owner}, {repo}, {id}, {user}, {password})
+                                           *githubapi#issues#Delete_comment()*
+  Delete a comment
+
+  ELETE /repos/:owner/:repo/issues/comments/:id
+
 
 vim:tw=78:ts=8:ft=help:norl:
