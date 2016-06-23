@@ -67,24 +67,17 @@ endfunction
 "
 " Github API : POST /repos/:owner/:repo/issues
 "
-" Input:
-" {
-"
-"  "title": "Found a bug",
-"
-"  "body": "I'm having a problem with this.",
-"
-"  "assignee": "octocat",
-"
-"  "milestone": 1,
-"
-"  "labels": [
-"
-"    "bug"
-"
-"  ]
-"
-" }
+" Input: >
+"   {
+"    "title": "Found a bug",
+"    "body": "I'm having a problem with this.",
+"    "assignee": "octocat",
+"    "milestone": 1,
+"    "labels": [
+"      "bug"
+"    ]
+"   }
+" <
 function! githubapi#issues#Create(owner,repo,user,password,json) abort
     return githubapi#util#Get('repos/' . a:owner . '/' . a:repo . '/issues',
                 \ ' -X POST -d ' . shellescape(a:json)

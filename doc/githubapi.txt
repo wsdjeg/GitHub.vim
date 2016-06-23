@@ -47,23 +47,18 @@ githubapi#issues#Create({owner}, {repo}, {user}, {password}, {json})
 
   Github API : POST /repos/:owner/:repo/issues
 
-  Input: {
-
-   "title": "Found a bug",
-
-   "body": "I'm having a problem with this.",
-
-   "assignee": "octocat",
-
-   "milestone": 1,
-
-   "labels": [
-
-     "bug"
-
-   ]
-
-  }
+  Input:
+>
+    {
+     "title": "Found a bug",
+     "body": "I'm having a problem with this.",
+     "assignee": "octocat",
+     "milestone": 1,
+     "labels": [
+       "bug"
+     ]
+    }
+<
 
 githubapi#issues#Lock({owner}, {repo}, {num}, {user}, {password})
                                                      *githubapi#issues#Lock()*
