@@ -142,13 +142,14 @@ endfunction
 "
 " NOTE: need `Accep:application/vnd.github.cerberus-preview+json`
 "
-" Input:
-" {
-"  "assignees": [
-"    "hubot",
-"    "other_assignee"
-"  ]
-"}
+" Input: >
+"   {
+"    "assignees": [
+"      "hubot",
+"      "other_assignee"
+"    ]
+"   }
+" <
 function! githubapi#issues#Addassignee(owner,repo,num,assignees,user,password) abort
     return githubapi#util#Get('repos/' . a:owner . '/' . a:repo . '/issues/' . a:num . '/assignees',
                 \ ' -X POST -d ' . shellescape(a:assignees) . ' -u ' . a:user . ':' . a:password
@@ -161,14 +162,14 @@ endfunction
 "
 " DELETE /repos/:owner/:repo/issues/:number/assignees
 "
-" Input:
-" {
-"  "assignees": [
-"    "hubot",
-"    "other_assignee"
-"  ]
-"}
-"
+" Input: >
+"   {
+"    "assignees": [
+"      "hubot",
+"      "other_assignee"
+"    ]
+"   }
+" <
 " NOTE: need `Accep:application/vnd.github.cerberus-preview+json`
 function! githubapi#issues#Removeassignee(owner,repo,num,assignees,user,password) abort
     return githubapi#util#Get('repos/' . a:owner . '/' . a:repo . '/issues/' . a:num . '/assignees',
@@ -234,11 +235,11 @@ endfunction
 " @public
 " Create a comment
 "
-" Input:
-"{
-"  "body": "Me too"
-"}
-"
+" Input: >
+"   {
+"       "body": "Me too"
+"   }
+" <
 " Github API : POST /repos/:owner/:repo/issues/:number/comments
 function! githubapi#issues#Create_comment(owner,repo,num,json,user,password) abort
     return githubapi#util#Get('repos/' . a:owner . '/' . a:repo . '/issues/' . a:num . '/comments/',
@@ -249,11 +250,11 @@ endfunction
 " @public
 " Edit a comment
 "
-" Input:
-"{
-"  "body": "Me too"
-"}
-"
+" Input: >
+"   {
+"       "body": "Me too"
+"   }
+" <
 " Github API : PATCH /repos/:owner/:repo/issues/comments/:id
 function! githubapi#issues#Edit_comment(owner,repo,id,json,user,password) abort
     return githubapi#util#Get('repos/' . a:owner . '/' . a:repo . '/issues/'  . '/comments/' . a:id,
