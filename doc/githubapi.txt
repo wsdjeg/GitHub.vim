@@ -166,7 +166,24 @@ githubapi#issues#Delete_comment({owner}, {repo}, {id}, {user}, {password})
                                            *githubapi#issues#Delete_comment()*
   Delete a comment
 
-  ELETE /repos/:owner/:repo/issues/comments/:id
+  Github API : ELETE /repos/:owner/:repo/issues/comments/:id
+
+githubapi#issues#List_events({owner}, {repo}, {num})
+                                              *githubapi#issues#List_events()*
+  List events for an issue Github API : GET
+  /repos/:owner/:repo/issues/:issue_number/events
+
+githubapi#issues#List_events_for_repo({owner}, {repo})
+                                     *githubapi#issues#List_events_for_repo()*
+  List events for a repository
+
+  Github API : GET /repos/:owner/:repo/issues/events
+
+githubapi#issues#Get_event({owner}, {repo}, {id})
+                                                *githubapi#issues#Get_event()*
+  Get a single event
+
+  Github API : GET /repos/:owner/:repo/issues/events/:id
 
 
 vim:tw=78:ts=8:ft=help:norl:
