@@ -8,6 +8,17 @@
 [![Powered by vital.vim](https://img.shields.io/badge/powered%20by-vital.vim-80273f.svg?style=flat-square)](https://github.com/vim-jp/vital.vim)
 #### [Intro](#intro-1)
 #### [Activity](#activity-2)
+- [Events](#events)
+ - [List public events](#List-public-events)
+ - [List repository events](#List-repository-events)
+ - [List issue events for a repository](#List-issue-events-for-a-repository)
+ - [List public events for a network of repositories](#List-public-events-for-a-network-of-repositories)
+ - [List public events for an organization](#List-public-events-for-an-organization)
+ - [List events that a user has received](#List-events-that-a-user-has-received)
+ - [List public events that a user has received](#List-public-events-that-a-user-has-received)
+ - [List events performed by a user](#List-events-performed-by-a-user)
+ - [List public events performed by a user](#List-public-events-performed-by-a-user)
+ - [List events for an organization](#List-events-for-an-organization)
 #### [Gist](#gist-3)
 #### [Activity](#activity-4)
 #### [Gists](#gists-5)
@@ -26,6 +37,10 @@
  - [Edit a comment](#edit-a-comment)
  - [Delete a comment](#delete-a-comment)
  - [Custom media types](#custom-media-types)
+- [Events](#events)
+ - [List events for an issue](#List-events-for-an-issue)
+ - [List events for a repository](#List-events-for-a-repository)
+ - [Get a single event](#Get-a-single-event)
 
 
 #### [Migration](#migration-8)
@@ -40,6 +55,19 @@
 
 ### Intro
     Implement Github API via viml.
+### Activity
+- Event
+ - List public events
+ - List repository events
+ - List issue events for a repository
+ - List public events for a network of repositories
+ - List public events for an organization
+ - List events that a user has received
+ - List public events that a user has received
+ - List events performed by a user
+ - List public events performed by a user
+ - List events for an organization
+
 ### Issues
 - List all issues assigned to the authenticated user across all
 visible repositories including owned repositories, member
@@ -110,9 +138,40 @@ This call lists all the available assignees to which issues may be assigned.
 ```
 #### Comments
 ##### List comments on an issue
+```
+    githubapi#issues#List_comments(owner,repo,num,since)
+```
 ##### List comments in a repository
+```
+    githubapi#issues#List_All_comments(owner,repo,sort,desc,since)
+```
 ##### Get a single comment
+```
+    githubapi#issues#Get_comment(owner,repo,id)
+```
 ##### Create a comment
+```
+    githubapi#issues#Create_comment(owner,repo,num,json,user,password)
+```
 ##### Edit a comment
-##### Custom media types
+```
+    githubapi#issues#Edit_comment(owner,repo,id,json,user,password)
+```
 ##### Delete a comment
+```
+    githubapi#issues#Delete_comment(owner,repo,id,user,password)
+```
+##### Custom media types
+#### Events
+##### List events for an issue
+```
+    githubapi#issues#List_events(owner,repo,num)
+```
+##### List events for a repository
+```
+    githubapi#issues#List_events_for_repo(owner,repo)
+```
+##### Get a single event
+```
+    githubapi#issues#Get_event(owner,repo,id)
+```
