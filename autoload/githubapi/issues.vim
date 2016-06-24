@@ -280,7 +280,7 @@ function! githubapi#issues#List_events(owner,repo,num) abort
     let url = join(['repos',a:owner,a:repo,'issues',a:num,'events'], '/')
     let events = []
     for i in range(1,githubapi#util#GetLastPage(url))
-        call extend(events,githubapi#util#Get(url, ''))
+        call extend(events,githubapi#util#Get(url . '?page=' . i, ''))
     endfor
     return events
 endfunction
@@ -307,8 +307,8 @@ function! s:GetEvent(event) abort
                \ "head_ref_deleted" : "The pull request's branch was deleted.",
                \ "head_ref_restored" : "The pull request's branch was restored. "
                \ }
-   let event = json_decode(event).event
-   return events[event]
+   let event = json_decode(a:event).event
+   return get(events, event)
 endfunction
 
 ""
@@ -320,7 +320,7 @@ function! githubapi#issues#List_events_for_repo(owner,repo) abort
     let url = join(['repos', a:owner, a:repo, 'issues','events'], '/')
     let events = []
     for i in range(1,githubapi#util#GetLastPage(url))
-        call extend(events,githubapi#util#Get(url, ''))
+        call extend(events,githubapi#util#Get(url . '?page=' . i, ''))
     endfor
     return events
 endfunction
