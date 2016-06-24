@@ -17,6 +17,23 @@ default : https://api.github.com/
 ==============================================================================
 FUNCTIONS                                                *githubapi-functions*
 
+githubapi#activity#List_events()            *githubapi#activity#List_events()*
+  List public events
+
+  Github API : GET /events
+
+githubapi#activity#List_repo_events({owner}, {repo})
+                                       *githubapi#activity#List_repo_events()*
+  List repository events
+
+  Github API : GET /repos/:owner/:repo/events
+
+githubapi#activity#List_net_events({owner}, {repo})
+                                        *githubapi#activity#List_net_events()*
+  List public events for a network of repositories
+
+  Github API : GET /networks/:owner/:repo/events
+
 githubapi#issues#List_All({user}, {password})    *githubapi#issues#List_All()*
   List issues List all issues assigned to the authenticated user across all
   visible repositories including owned repositories, member repositories, and

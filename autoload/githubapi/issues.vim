@@ -203,7 +203,7 @@ endfunction
 function! githubapi#issues#List_All_comments(owner,repo,sort,desc,since) abort
     let url = 'repos/' . a:owner . '/' . a:repo . '/issues/comments'
     if index(['created','updated'], a:sort) != -1
-        let url = url . '?sort=' a:sort
+        let url = url . '?sort=' . a:sort
         if index(['asc','desc'], a:desc) != -1
             let url = url . '&direction=' . a:desc
         endif
