@@ -1,5 +1,5 @@
-let s:save_cpo = &cpo
-set cpo&vim
+let s:save_cpo = &cpoptions
+set cpoptions&vim
 
 if exists('g:GitHub_api_plugin_loaded')
     finish
@@ -12,5 +12,5 @@ let g:githubapi_root_url = 'https://api.github.com/'
 
 let g:GitHub_api_plugin_loaded = 1
 
-let &cpo = s:save_cpo
+let &cpoptions = s:save_cpo
 unlet s:save_cpo
