@@ -19,6 +19,7 @@
  - [List events performed by a user](#List-events-performed-by-a-user)
  - [List public events performed by a user](#List-public-events-performed-by-a-user)
  - [List events for an organization](#List-events-for-an-organization)
+
 #### [Gist](#gist-3)
 #### [Activity](#activity-4)
 #### [Gists](#gists-5)
@@ -42,7 +43,6 @@
  - [List events for a repository](#List-events-for-a-repository)
  - [Get a single event](#Get-a-single-event)
 
-
 #### [Migration](#migration-8)
 #### [Miscellaneous](#miscellaneous-9)
 #### [Organizations](#organizations-10)
@@ -56,17 +56,44 @@
 ### Intro
     Implement Github API via viml.
 ### Activity
-- Event
- - List public events
- - List repository events
- - List issue events for a repository
- - List public events for a network of repositories
- - List public events for an organization
- - List events that a user has received
- - List public events that a user has received
- - List events performed by a user
- - List public events performed by a user
- - List events for an organization
+#### Event
+##### List public events
+```
+    githubapi#activity#List_events()
+```
+##### List repository events
+```
+    githubapi#activity#List_repo_events(owner,repo)
+```
+##### List issue events for a repository
+##### List public events for a network of repositories
+```
+    githubapi#activity#List_net_events(owner,repo)
+```
+##### List public events for an organization
+```
+    githubapi#activity#List_org_events(org)
+```
+##### List events that a user has received
+```
+    githubapi#activity#List_user_events(user)
+```
+##### List public events that a user has received
+```
+    githubapi#activity#List_public_user_events(user)
+```
+##### List events performed by a user
+```
+    githubapi#activity#Performed_events(user)
+```
+##### List public events performed by a user
+```
+    githubapi#activity#Performed_events(user)
+```
+##### List events for an organization
+```
+    githubapi#activity#List_user_org_events(user,org,password)
+```
 
 ### Issues
 - List all issues assigned to the authenticated user across all

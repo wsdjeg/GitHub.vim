@@ -1,10 +1,9 @@
 cmdargs:
-  # Checking more strictly
-  severity: style_problem
-
-  # Enable coloring
-  color: true
+    # Checking more strictly
+    severity: style_problem
 
 policies:
-  ProhibitImplicitScopeVariable:
-    enabled: false
+    ProhibitImplicitScopeVariable:
+        enabled: false
+    ProhibitAbbreviationOption:
+        enabled: false
