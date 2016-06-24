@@ -287,25 +287,25 @@ endfunction
 
 function! s:GetEvent(event) abort
    let events = {
-               \ "closed" : "The issue was closed by the actor. When the commit_id is present, "
-               \ . "it identifies the commit that closed the issue using 'closes / fixes #NN' syntax.",
-               \ "reopened" : "The issue was reopened by the actor.",
-               \ "subscribed" : "The actor subscribed to receive notifications for an issue.",
-               \ "merged" : "The issue was merged by the actor. The `commit_id` attribute is the SHA1 of the HEAD commit that was merged.",
-               \ "referenced" : "The issue was referenced from a commit message. "
-               \ . "The `commit_id` attribute is the commit SHA1 of where that happened.",
-               \ "mentioned" : "The actor was @mentioned in an issue body.",
-               \ "assigned" : "The issue was assigned to the actor.",
-               \ "unassigned" : "The actor was unassigned from the issue.",
-               \ "labeled" : "A label was added to the issue.",
-               \ "unlabeled" : "A label was removed from the issue.",
-               \ "milestoned" : "The issue was added to a milestone.",
-               \ "demilestoned" : "The issue was removed from a milestone.",
-               \ "renamed" : "The issue title was changed.",
-               \ "locked" : "The issue was locked by the actor.",
-               \ "unlocked" : "The issue was unlocked by the actor.",
-               \ "head_ref_deleted" : "The pull request's branch was deleted.",
-               \ "head_ref_restored" : "The pull request's branch was restored. "
+               \ 'closed' : 'The issue was closed by the actor. When the commit_id is present, '
+               \ . 'it identifies the commit that closed the issue using "closes / fixes #NN" syntax.',
+               \ 'reopened' : 'The issue was reopened by the actor.',
+               \ 'subscribed' : 'The actor subscribed to receive notifications for an issue.',
+               \ 'merged' : 'The issue was merged by the actor. The `commit_id` attribute is the SHA1 of the HEAD commit that was merged.',
+               \ 'referenced' : 'The issue was referenced from a commit message. '
+               \ . 'The `commit_id` attribute is the commit SHA1 of where that happened.',
+               \ 'mentioned' : 'The actor was @mentioned in an issue body.',
+               \ 'assigned' : 'The issue was assigned to the actor.',
+               \ 'unassigned' : 'The actor was unassigned from the issue.',
+               \ 'labeled' : 'A label was added to the issue.',
+               \ 'unlabeled' : 'A label was removed from the issue.',
+               \ 'milestoned' : 'The issue was added to a milestone.',
+               \ 'demilestoned' : 'The issue was removed from a milestone.',
+               \ 'renamed' : 'The issue title was changed.',
+               \ 'locked' : 'The issue was locked by the actor.',
+               \ 'unlocked' : 'The issue was unlocked by the actor.',
+               \ 'head_ref_deleted' : 'The pull request`s branch was deleted.',
+               \ 'head_ref_restored' : 'The pull request`s branch was restored. '
                \ }
    let event = json_decode(a:event).event
    return get(events, event)

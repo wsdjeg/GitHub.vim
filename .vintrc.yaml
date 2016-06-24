@@ -1,7 +1,9 @@
 cmdargs:
-  # Checking more strictly
-  severity: style_problem
+    # Checking more strictly
+    severity: style_problem
 
 policies:
-  ProhibitImplicitScopeVariable:
-    enabled: false
+    ProhibitImplicitScopeVariable:
+        enabled: false
+    ProhibitAbbreviationOption:
+        enabled: false
