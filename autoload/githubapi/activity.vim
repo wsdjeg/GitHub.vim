@@ -132,8 +132,10 @@ endfunction
 " Github API : PUT /notifications
 function! githubapi#activity#Mark_All_as_read(user,password,last_read_at) abort
     let time = !empty(a:last_read_at) ? a:last_read_at : githubapi#util#Get_current_time()
-    return githubapi#util#GetStatus('notifications', ' -d ' . "'{\"last_read_at\":\""
-                \ . time . "\"}'" . ' -X PUT -u ' . a:user . ':' . a:password)
+    let data = {}
+    let data.last_read_at = time
+    return githubapi#util#GetStatus('notifications', ' -d ' . "'" . json_encode(data)
+                \ . "'" . ' -X PUT -u ' . a:user . ':' . a:password)
 endfunction
 
 ""
@@ -143,8 +145,10 @@ endfunction
 " Github API : PUT /repos/:owner/:repo/notifications
 function! githubapi#activity#Mark_All_as_read_for_repo(owner,repo,user,password,last_read_at) abort
     let time = !empty(a:last_read_at) ? a:last_read_at : githubapi#util#Get_current_time()
-    return githubapi#util#GetStatus(join(['repos', a:owner, a:repo, 'notifications'], '/'), ' -d ' . "'{\"last_read_at\":\""
-                \ . time . "\"}'" . ' -X PUT -u ' . a:user . ':' . a:password)
+    let data = {}
+    let data.last_read_at = time
+    return githubapi#util#GetStatus(join(['repos', a:owner, a:repo, 'notifications'], '/'), ' -d ' . "'" . json_encode(data)
+                \ . "'" . ' -X PUT -u ' . a:user . ':' . a:password)
 endfunction
 
 ""
@@ -188,7 +192,7 @@ function! githubapi#activity#Set_thread_sub(id,user,password,subscribed,ignored)
    let data.subscribed = a:subscribed
    let data.ignored = a:ignored
    return githubapi#util#Get(join(['notifications', 'threads', a:id, 'subscription'], '/'),
-               \ ' -u ' . a:user . ':' . a:password . ' -d ' . shellescape(string(data)))
+               \ ' -u ' . a:user . ':' . a:password . ' -X PUT -d ' . "'" . json_encode(data) . "'")
 endfunction
 
 ""
