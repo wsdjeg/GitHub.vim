@@ -10,10 +10,10 @@ endfunction
 
 function! s:User.ToString() abort
 
-    echo "Name : " . s:User.name ."\n"
-                \. "github url : " . s:User.html_url . "\n"
-                \. "blog : " . s:User.blog . "\n"
-                \. "email : " . s:User.email 
+    echo 'Name : ' . s:User.name ."\n"
+                \. 'github url : ' . s:User.html_url . "\n"
+                \. 'blog : ' . s:User.blog . "\n"
+                \. 'email : ' . s:User.email 
     
 endfunction
 
