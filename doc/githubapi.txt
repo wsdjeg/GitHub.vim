@@ -80,6 +80,25 @@ githubapi#activity#List_user_org_events({user}, {org}, {password})
 
   Github API : GET /users/:username/events/orgs/:org
 
+githubapi#activity#List_notifications({user}, {password})
+                                     *githubapi#activity#List_notifications()*
+  List your notifications
+
+  Github API : /notifications
+
+githubapi#activity#List_notifications_for_repo({onwer}, {repo}, {user},
+  {password})               *githubapi#activity#List_notifications_for_repo()*
+  List your notifications in a repository
+
+  Github API : GET /repos/:owner/:repo/notifications
+
+githubapi#activity#Mark_All_as_read({user}, {password}, {last_read_at})
+                                       *githubapi#activity#Mark_All_as_read()*
+  Mark as read,you need use {last_read_at} as args. This is a timestamp in ISO
+  8601 format: YYYY-MM-DDTHH:MM:SSZ. Default: Time.now
+
+  PUT /notifications
+
 githubapi#issues#List_All({user}, {password})    *githubapi#issues#List_All()*
   List issues List all issues assigned to the authenticated user across all
   visible repositories including owned repositories, member repositories, and
@@ -247,6 +266,9 @@ githubapi#issues#Get_event({owner}, {repo}, {id})
   Get a single event
 
   Github API : GET /repos/:owner/:repo/issues/events/:id
+
+githubapi#util#Get_current_time()          *githubapi#util#Get_current_time()*
+  Get current time in a timestamp in ISO 8601 format: YYYY-MM-DDTHH:MM:SSZ
 
 
 vim:tw=78:ts=8:ft=help:norl:

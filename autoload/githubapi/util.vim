@@ -20,12 +20,12 @@ function! githubapi#util#GetLastPage(url) abort
 endfunction
 
 function! githubapi#util#GetStatus(url,opt) abort
-    return matchstr(systemlist('curl -Is "' . g:githubapi_root_url . a:url . '" ' . a:opt . ' | grep -E "^Status:"')[0],'\d\+')
+    return matchstr(systemlist('curl -is "' . g:githubapi_root_url . a:url . '" ' . a:opt . ' | grep -E "^Status:"')[0],'\d\+')
 endfunction
 
 ""
 " @public
 " Get current time in a timestamp in ISO 8601 format: YYYY-MM-DDTHH:MM:SSZ
 function! githubapi#util#Get_current_time() abort
-   return strftime('%Y-%m-%dT%TZ') 
+   return strftime('%Y-%m-%dT%TZ')
 endfunction

@@ -1,4 +1,3 @@
-
 ""
 " @public
 " List public events
@@ -133,6 +132,5 @@ endfunction
 " PUT /notifications
 function! githubapi#activity#Mark_All_as_read(user,password,last_read_at) abort
     let time = !empty(a:last_read_at) ? a:last_read_at : githubapi#util#Get_current_time()
-    let date = {'last_read_at' : time}
-    echo date
+    return githubapi#util#GetStatus('notifications', ' -d ' . "'{\"last_read_at\":\"" . time . "\"}'" . ' -X PUT -u ' . a:user . ':' . a:password)
 endfunction
