@@ -184,7 +184,11 @@ endfunction
 "
 " Github API : PUT /notifications/threads/:id/subscription
 function! githubapi#activity#Set_thread_sub(id,user,password,subscribed,ignored) abort
-
+   let data = {}
+   let data.subscribed = a:subscribed
+   let data.ignored = a:ignored
+   return githubapi#util#Get(join(['notifications', 'threads', a:id, 'subscription'], '/'),
+               \ ' -u ' . a:user . ':' . a:password . ' -d ' . shellescape(string(data)))
 endfunction
 
 ""
@@ -193,5 +197,6 @@ endfunction
 "
 " Github API : DELETE /notifications/threads/:id/subscription
 function! githubapi#activity#Del_thread_sub(id,user,password) abort
-
+    return githubapi#util#GetStatus(join(['notifications', 'threads', a:id, 'subscription'], '/'),
+                \' -u ' . a:user . ':' . a:password) == 204
 endfunction
