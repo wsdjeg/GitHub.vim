@@ -80,6 +80,65 @@ githubapi#activity#List_user_org_events({user}, {org}, {password})
 
   Github API : GET /users/:username/events/orgs/:org
 
+githubapi#activity#List_notifications({user}, {password})
+                                     *githubapi#activity#List_notifications()*
+  List your notifications
+
+  Github API : /notifications
+
+githubapi#activity#List_notifications_for_repo({onwer}, {repo}, {user},
+  {password})               *githubapi#activity#List_notifications_for_repo()*
+  List your notifications in a repository
+
+  Github API : GET /repos/:owner/:repo/notifications
+
+githubapi#activity#Mark_All_as_read({user}, {password}, {last_read_at})
+                                       *githubapi#activity#Mark_All_as_read()*
+  Mark as read,you need use {last_read_at} as args. This is a timestamp in ISO
+  8601 format: YYYY-MM-DDTHH:MM:SSZ. Default: Time.now
+
+  Github API : PUT /notifications
+
+githubapi#activity#Mark_All_as_read_for_repo({owner}, {repo}, {user},
+  {password}, {last_read_at}) *githubapi#activity#Mark_All_as_read_for_repo()*
+  Mark notifications as read in a repository
+
+  Github API : PUT /repos/:owner/:repo/notifications
+
+githubapi#activity#Get_thread({id}, {user}, {password})
+                                             *githubapi#activity#Get_thread()*
+  View a single thread
+
+  Github API : GET /notifications/threads/:id
+
+githubapi#activity#Mark_thread({id}, {user}, {password})
+                                            *githubapi#activity#Mark_thread()*
+  Mark a thread as read
+
+  Github API : PATCH /notifications/threads/:id
+
+githubapi#activity#Get_thread_sub({id}, {user}, {password})
+                                         *githubapi#activity#Get_thread_sub()*
+  Get a Thread Subscription
+
+  Github API : GET /notifications/threads/:id/subscription
+
+githubapi#activity#Set_thread_sub({id}, {user}, {password}, {subscribed},
+  {ignored})                             *githubapi#activity#Set_thread_sub()*
+  Set a Thread Subscription
+
+  This lets you subscribe or unsubscribe from a conversation. Unsubscribing
+  from a conversation mutes all future notifications (until you comment or get
+  @mentioned once more).
+
+  Github API : PUT /notifications/threads/:id/subscription
+
+githubapi#activity#Del_thread_sub({id}, {user}, {password})
+                                         *githubapi#activity#Del_thread_sub()*
+  Delete a Thread Subscription
+
+  Github API : DELETE /notifications/threads/:id/subscription
+
 githubapi#issues#List_All({user}, {password})    *githubapi#issues#List_All()*
   List issues List all issues assigned to the authenticated user across all
   visible repositories including owned repositories, member repositories, and
@@ -247,6 +306,16 @@ githubapi#issues#Get_event({owner}, {repo}, {id})
   Get a single event
 
   Github API : GET /repos/:owner/:repo/issues/events/:id
+
+githubapi#util#Get_current_time()          *githubapi#util#Get_current_time()*
+  Get current time in a timestamp in ISO 8601 format: YYYY-MM-DDTHH:MM:SSZ
+
+githubapi#util#ViewLog()                            *githubapi#util#ViewLog()*
+  view the log of API
+
+githubapi#util#CleanLog()                          *githubapi#util#CleanLog()*
+
+  Clean up the log of the API
 
 
 vim:tw=78:ts=8:ft=help:norl:

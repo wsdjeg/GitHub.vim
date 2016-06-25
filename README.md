@@ -19,6 +19,17 @@
  - [List events performed by a user](#list-events-performed-by-a-user)
  - [List public events performed by a user](#list-public-events-performed-by-a-user)
  - [List events for an organization](#list-events-for-an-organization)
+- [Notifications](#notifications)
+ - [Notification Reasons](#notification-Reasons)
+ - [List your notifications](#list-your-notifications)
+ - [List your notifications in a repository](#list-your-notifications-in-a-repository)
+ - [Mark as read](#mark-as-read)
+ - [Mark notifications as read in a repository](#mark-notifications-as-read-in-a-repository)
+ - [View a single thread](#view-a-single-thread)
+ - [Mark a thread as read](#mark-a-thread-as-read)
+ - [Get a Thread Subscription](#get-a-Thread-Subscription)
+ - [Set a Thread Subscription](#set-a-Thread-Subscription)
+ - [Delete a Thread Subscription](#delete-a-Thread-Subscription)
 
 #### [Gist](#gist-3)
 #### [Activity](#activity-4)
@@ -94,6 +105,17 @@
 ```
     githubapi#activity#List_user_org_events(user,org,password)
 ```
+#### Notifications
+##### Notification Reasons
+##### List your notifications
+##### List your notifications in a repository
+##### Mark as read
+##### Mark notifications as read in a repository
+##### View a single thread
+##### Mark a thread as read
+##### Get a Thread Subscription
+##### Set a Thread Subscription
+##### Delete a Thread Subscription
 
 ### Issues
 - List all issues assigned to the authenticated user across all

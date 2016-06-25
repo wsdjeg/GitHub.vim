@@ -1,4 +1,3 @@
-
 ""
 " @public
 " List public events
@@ -86,5 +85,122 @@ endfunction
 "
 " Github API : GET /users/:username/events/orgs/:org
 function! githubapi#activity#List_user_org_events(user,org,password) abort
-   return githubapi#util#Get(join(['users', a:user, 'events', 'org', a:org], '/'), ' -u ' . a:user . ':' . a:password)
+    return githubapi#util#Get(join(['users', a:user, 'events', 'org', a:org], '/'), ' -u ' . a:user . ':' . a:password)
+endfunction
+
+" Notification Reasons
+function! s:notification_reason(n) abort
+    let reasons = {
+                \ 'subscribed': 	'The notification arrived because you`re watching the repository',
+                \ 'manual': 	'The notification arrived because you`ve specifically decided'
+                \ . ' to subscribe to the thread (via an Issue or Pull Request)',
+                \ 'author': 	'The notification arrived because you`ve created the thread',
+                \ 'comment': 	'The notification arrived because you`ve commented on the thread',
+                \ 'mention': 	'The notification arrived because you were specifically @mentioned in the content',
+                \ 'team_mention': 	'The notification arrived because you were on a team that was mentioned (like @org/team)',
+                \ 'state_change': 	'The notification arrived because you changed the thread state '
+                \ . '(like closing an Issue or merging a Pull Request)',
+                \ 'assign': 	'The notification arrived because you were assigned to the Issue',
+                \}
+    return { 'reason' : a:n.reason . '->' . reasons[a:n.reason]}
+endfunction
+
+""
+" @public
+" List your notifications
+"
+" Github API : /notifications
+function! githubapi#activity#List_notifications(user,password) abort
+    return githubapi#util#Get('notifications',' -u ' . a:user . ':' . a:password)
+endfunction
+
+""
+" @public
+" List your notifications in a repository
+"
+" Github API : GET /repos/:owner/:repo/notifications
+function! githubapi#activity#List_notifications_for_repo(onwer,repo,user,password) abort
+    return githubapi#util#Get(join(['repos', a:onwer, a:repo, 'notifications'], '/'),
+                \ ' -u ' . a:user . ':' . a:password)
+endfunction
+
+""
+" @public
+" Mark as read,you need use {last_read_at} as args.
+" This is a timestamp in ISO 8601 format: YYYY-MM-DDTHH:MM:SSZ. Default: Time.now
+"
+" Github API : PUT /notifications
+function! githubapi#activity#Mark_All_as_read(user,password,last_read_at) abort
+    let time = !empty(a:last_read_at) ? a:last_read_at : githubapi#util#Get_current_time()
+    let data = {}
+    let data.last_read_at = time
+    return githubapi#util#GetStatus('notifications', ' -d ' . "'" . json_encode(data)
+                \ . "'" . ' -X PUT -u ' . a:user . ':' . a:password)
+endfunction
+
+""
+" @public
+" Mark notifications as read in a repository
+"
+" Github API : PUT /repos/:owner/:repo/notifications
+function! githubapi#activity#Mark_All_as_read_for_repo(owner,repo,user,password,last_read_at) abort
+    let time = !empty(a:last_read_at) ? a:last_read_at : githubapi#util#Get_current_time()
+    let data = {}
+    let data.last_read_at = time
+    return githubapi#util#GetStatus(join(['repos', a:owner, a:repo, 'notifications'], '/'), ' -d ' . "'" . json_encode(data)
+                \ . "'" . ' -X PUT -u ' . a:user . ':' . a:password)
+endfunction
+
+""
+" @public
+" View a single thread
+"
+" Github API : GET /notifications/threads/:id
+function! githubapi#activity#Get_thread(id,user,password) abort
+    return githubapi#util#Get(join(['notifications', 'threads', a:id], '/'),' -u ' . a:user . ':' . a:password)
+endfunction
+
+""
+" @public
+" Mark a thread as read
+"
+" Github API : PATCH /notifications/threads/:id
+function! githubapi#activity#Mark_thread(id,user,password) abort
+    return githubapi#util#GetStatus(join(['notifications', 'threads', a:id], '/'),' -X PATCH -u ' . a:user . ':' . a:password) == 205
+endfunction
+
+""
+" @public
+" Get a Thread Subscription
+"
+" Github API : GET /notifications/threads/:id/subscription
+function! githubapi#activity#Get_thread_sub(id,user,password) abort
+    return githubapi#util#Get(join(['notifications', 'threads', a:id, 'subscription'], '/'),' -u ' . a:user . ':' . a:password)
+endfunction
+
+""
+" @public
+" Set a Thread Subscription
+"
+" This lets you subscribe or unsubscribe from a conversation.
+" Unsubscribing from a conversation mutes all future notifications
+" (until you comment or get @mentioned once more).
+"
+" Github API : PUT /notifications/threads/:id/subscription
+function! githubapi#activity#Set_thread_sub(id,user,password,subscribed,ignored) abort
+   let data = {}
+   let data.subscribed = a:subscribed
+   let data.ignored = a:ignored
+   return githubapi#util#Get(join(['notifications', 'threads', a:id, 'subscription'], '/'),
+               \ ' -u ' . a:user . ':' . a:password . ' -X PUT -d ' . "'" . json_encode(data) . "'")
+endfunction
+
+""
+" @public
+" Delete a Thread Subscription
+"
+" Github API : DELETE /notifications/threads/:id/subscription
+function! githubapi#activity#Del_thread_sub(id,user,password) abort
+    return githubapi#util#GetStatus(join(['notifications', 'threads', a:id, 'subscription'], '/'),
+                \' -u ' . a:user . ':' . a:password) == 204
 endfunction
