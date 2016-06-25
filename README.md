@@ -78,7 +78,7 @@ scripts.
 It is WIP, it will covers the full API.
 
 Should you have any question, any remark, or if you find a bug, or if there is
-something you can do with the API but not with PyGithub, please open an issue.
+something you can do with the API but not with Github-api.vim, please open an issue.
 
 ### Activity
 #### Event
