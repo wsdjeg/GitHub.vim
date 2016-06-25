@@ -131,7 +131,7 @@ endfunction
 " Github API : GET /repos/:owner/:repo/assignees/:assignee
 function! githubapi#issues#Check_assignee(owner,repo,assignee) abort
     return githubapi#util#GetStatus('repos/' . a:owner . '/'
-                \ . a:repo . '/assignees/' . a:assignee) ==# 204
+                \ . a:repo . '/assignees/' . a:assignee, '') ==# 204
 endfunction
 
 ""
@@ -268,8 +268,8 @@ endfunction
 " Github API : ELETE /repos/:owner/:repo/issues/comments/:id
 function! githubapi#issues#Delete_comment(owner,repo,id,user,password) abort
     return githubapi#util#GetStatus('repos/' . a:owner . '/'
-                \ . a:repo . '/issues/comments/' . a:id
-                \. ' -u ' . a:user . ':' . a:password . ' -X DELETE') ==# 204
+                \ . a:repo . '/issues/comments/' . a:id,
+                \ ' -u ' . a:user . ':' . a:password . ' -X DELETE') ==# 204
 endfunction
 
 ""
