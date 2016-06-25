@@ -71,7 +71,15 @@
 #### [Enterprise](#enterprise-16)
 
 ### Intro
-    Implement Github API via viml.
+This is a viml library to access the Github API v3. With it, you can manage
+Github resources (repositories, user profiles, organizations, etc.) from viml
+scripts.
+
+It is WIP, it will covers the full API.
+
+Should you have any question, any remark, or if you find a bug, or if there is
+something you can do with the API but not with PyGithub, please open an issue.
+
 ### Activity
 #### Event
 ##### List public events
