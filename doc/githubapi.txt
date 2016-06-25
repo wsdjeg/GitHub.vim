@@ -310,5 +310,12 @@ githubapi#issues#Get_event({owner}, {repo}, {id})
 githubapi#util#Get_current_time()          *githubapi#util#Get_current_time()*
   Get current time in a timestamp in ISO 8601 format: YYYY-MM-DDTHH:MM:SSZ
 
+githubapi#util#ViewLog()                            *githubapi#util#ViewLog()*
+  view the log of API
+
+githubapi#util#CleanLog()                          *githubapi#util#CleanLog()*
+
+  Clean up the log of the API
+
 
 vim:tw=78:ts=8:ft=help:norl:
