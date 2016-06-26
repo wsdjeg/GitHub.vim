@@ -243,3 +243,68 @@ function! githubapi#activity#Unstar(owner,repo,user,password) abort
     return githubapi#util#GetStatus(join(['user', 'starred', a:owner, a:repo], '/'),
                 \ ' -X DELETE -u ' . a:user . ':' . a:password) == 204
 endfunction
+
+""
+" @public
+" List watchers
+"
+" Github API : GET /repos/:owner/:repo/subscribers
+function! githubapi#activity#List_watchers(owner,repo) abort
+    return githubapi#util#Get(join(['repos', a:owner, a:repo , 'subscribers'], '/'), '')
+endfunction
+
+""
+" @public
+" List repositories being watched by a user.
+"
+" Github API : GET /users/:username/subscriptions
+function! githubapi#activity#List_watched_repo(user) abort
+    return githubapi#util#Get(join(['users', a:user, 'subscriptions'], '/'), '')
+endfunction
+
+""
+" @public
+" List repositories being watched by the authenticated user.
+"
+" Github API : GET /user/subscriptions
+function! githubapi#activity#List_auth_watched_repo(user,password) abort
+    return githubapi#util#Get(join(['user', 'subscriptions'], '/'),
+                \ ' -u ' . a:user . ':' . a:password)
+endfunction
+
+""
+" @public
+" Get a Repository Subscription
+"
+" Github API : GET /repos/:owner/:repo/subscription
+function! githubapi#activity#Check_repo_Sub(owner,repo,user,password) abort
+    return githubapi#util#Get(join(['repos', a:owner, a:repo, 'subscription'], '/'),
+                \ ' -u ' . a:user . ':' . a:password)
+endfunction
+
+""
+" @public
+" Set a Repository Subscription
+"
+" If you would like to watch a repository, set {sub} to 1. If you would like to ignore
+" notifications made within a repository, set {ignore} to 1. If you would like to stop
+" watching a repository, delete the repository's subscription completely.
+"
+" Github API : PUT /repos/:owner/:repo/subscription
+function! githubapi#activity#Set_repo_sub(owner,repo,user,password,sub,ignore) abort
+    let data = {}
+    let data.subscribed = a:sub == 1 ? v:true : v:false
+    let data.ignored = a:ignore == 1 ? v:true : v:false
+    return githubapi#util#Get(join(['repos', a:owner, a:repo, 'subscription'], '/'),
+                \ ' -u ' . a:user . ':' . a:password
+                \ . " -X PUT -d '" . json_encode(data) . "'")
+endfunction
+""
+" @public
+" Delete a Repository Subscription
+"
+" Github API : DELETE /repos/:owner/:repo/subscription
+function! githubapi#activity#Del_repo_sub(owner,repo,user,password) abort
+    return githubapi#util#GetStatus(join(['repos', a:owner, a:repo, 'subscription'], '/'),
+                \ ' -X DELETE -u ' . a:user . ':' . a:password) == 204
+endfunction
