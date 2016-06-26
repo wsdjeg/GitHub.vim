@@ -47,6 +47,24 @@
  - Stop watching a repository (LEGACY)
 
 #### [Gist](#gist-3)
+- [Authentication](#authentication)
+- [Truncation](#truncation)
+- [List a user's gists](#list-a-user's-gists)
+- [List all public gists](#list-all-public-gists)
+- [List starred gists](#list-starred-gists)
+- [Get a single gist](#get-a-single-gist)
+- [Get a specific revision of a gist](#get-a-specific-revision-of-a-gist)
+- [Create a gist](#create-a-gist)
+- [Edit a gist](#edit-a-gist)
+- [List gist commits](#list-gist-commits)
+- [Star a gist](#star-a-gist)
+- [Unstar a gist](#unstar-a-gist)
+- [Check if a gist is starred](#check-if-a-gist-is-starred)
+- [Fork a gist](#fork-a-gist)
+- [List gist forks](#list-gist-forks)
+- [Delete a gist](#delete-a-gist)
+- [Custom media types](#custom-media-types)
+
 #### [Activity](#activity-4)
 #### [Gists](#gists-5)
 #### [Git Data](#git_date-6)
@@ -210,7 +228,24 @@ List repositories being watched by the authenticated user.
 ```
     githubapi#activity#Del_repo_sub(owner,repo,user,password)
 ```
-
+#### Gists
+##### Authentication
+##### Truncation
+##### List a user's gists
+##### List all public gists
+##### List starred gists
+##### Get a single gist
+##### Get a specific revision of a gist
+##### Create a gist
+##### Edit a gist
+##### List gist commits
+##### Star a gist
+##### Unstar a gist
+##### Check if a gist is starred
+##### Fork a gist
+##### List gist forks
+##### Delete a gist
+##### Custom media types
 ### Issues
 - List all issues assigned to the authenticated user across all
 visible repositories including owned repositories, member
