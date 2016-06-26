@@ -204,3 +204,42 @@ function! githubapi#activity#Del_thread_sub(id,user,password) abort
     return githubapi#util#GetStatus(join(['notifications', 'threads', a:id, 'subscription'], '/'),
                 \' -u ' . a:user . ':' . a:password) == 204
 endfunction
+
+""
+" @public
+" List stargazers of the repo
+"
+" Github API : GET /repos/:owner/:repo/stargazers
+function! githubapi#activity#List_stargazers(owner,repo) abort
+    return githubapi#util#Get(join(['repos', a:owner, a:repo, 'stargazers'], '/'), '')
+endfunction
+
+""
+" @public
+" Check starred
+"
+" Github API : GET /user/starred/:owner/:repo
+function! githubapi#activity#CheckStarred(owner,repo,user,password) abort
+    return githubapi#util#GetStatus(join(['user', 'starred', a:owner, a:repo], '/'),
+                \ ' -u ' . a:user . ':' . a:password) == 204
+endfunction
+
+""
+" @public
+" Star a repository
+"
+" Github API : PUT /user/starred/:owner/:repo
+function! githubapi#activity#Star(owner,repo,user,password) abort
+    return githubapi#util#GetStatus(join(['user', 'starred', a:owner, a:repo], '/'),
+                \ ' -X PUT -u ' . a:user . ':' . a:password) == 204
+endfunction
+
+""
+" @public
+" Unstar a repository
+"
+" Github API : DELETE /user/starred/:owner/:repo
+function! githubapi#activity#Unstar(owner,repo,user,password) abort
+    return githubapi#util#GetStatus(join(['user', 'starred', a:owner, a:repo], '/'),
+                \ ' -X DELETE -u ' . a:user . ':' . a:password) == 204
+endfunction

@@ -139,6 +139,30 @@ githubapi#activity#Del_thread_sub({id}, {user}, {password})
 
   Github API : DELETE /notifications/threads/:id/subscription
 
+githubapi#activity#List_stargazers({owner}, {repo})
+                                        *githubapi#activity#List_stargazers()*
+  List stargazers of the repo
+
+  Github API : GET /repos/:owner/:repo/stargazers
+
+githubapi#activity#CheckStarred({owner}, {repo}, {user}, {password})
+                                           *githubapi#activity#CheckStarred()*
+  Check starred
+
+  Github API : GET /user/starred/:owner/:repo
+
+githubapi#activity#Star({owner}, {repo}, {user}, {password})
+                                                   *githubapi#activity#Star()*
+  Star a repository
+
+  Github API : PUT /user/starred/:owner/:repo
+
+githubapi#activity#Unstar({owner}, {repo}, {user}, {password})
+                                                 *githubapi#activity#Unstar()*
+  Unstar a repository
+
+  Github API : DELETE /user/starred/:owner/:repo
+
 githubapi#issues#List_All({user}, {password})    *githubapi#issues#List_All()*
   List issues List all issues assigned to the authenticated user across all
   visible repositories including owned repositories, member repositories, and
