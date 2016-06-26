@@ -168,10 +168,48 @@ something you can do with the API but not with Github-api.vim, please open an is
 ```
 #### Starring
 ##### List Stargazers
+```
+    githubapi#activity#List_stargazers(owner,repo)
+```
 ##### List repositories being starred
 ##### Check if you are starring a repository
+```
+    githubapi#activity#CheckStarred(owner,repo,user,password)
+```
 ##### Star a repository
+```
+    githubapi#activity#Star(owner,repo,user,password)
+```
 ##### Unstar a repository
+```
+    githubapi#activity#Unstar(owner,repo,user,password)
+```
+#### Watching
+##### List watchers
+```
+    githubapi#activity#List_watchers(owner,repo)
+```
+##### List repositories being watched
+List repositories being watched by a user.
+```
+    githubapi#activity#List_watched_repo(user)
+```
+List repositories being watched by the authenticated user.
+```
+    githubapi#activity#List_auth_watched_repo(user,password)
+```
+##### Get a Repository Subscription
+```
+    githubapi#activity#Check_repo_Sub(owner,repo,user,password)
+```
+##### Set a Repository Subscription
+```
+    githubapi#activity#Set_repo_sub(owner,repo,user,password,sub,ignore)
+```
+##### Delete a Repository Subscription
+```
+    githubapi#activity#Del_repo_sub(owner,repo,user,password)
+```
 
 ### Issues
 - List all issues assigned to the authenticated user across all
