@@ -30,6 +30,12 @@
  - [Get a Thread Subscription](#get-a-Thread-Subscription)
  - [Set a Thread Subscription](#set-a-Thread-Subscription)
  - [Delete a Thread Subscription](#delete-a-Thread-Subscription)
+- [Starring](#starring)
+ - [List Stargazers](#list-Stargazers)
+ - [List repositories being starred](#list-repositories-being-starred)
+ - [Check if you are starring a repository](#check-if-you-are-starring-a-repository)
+ - [Star a repository](#star-a-repository)
+ - [Unstar a repository](#unstar-a-repository)
 
 #### [Gist](#gist-3)
 #### [Activity](#activity-4)
@@ -65,7 +71,15 @@
 #### [Enterprise](#enterprise-16)
 
 ### Intro
-    Implement Github API via viml.
+This is a viml library to access the Github API v3. With it, you can manage
+Github resources (repositories, user profiles, organizations, etc.) from viml
+scripts.
+
+It is WIP, it will covers the full API.
+
+Should you have any question, any remark, or if you find a bug, or if there is
+something you can do with the API but not with Github-api.vim, please open an issue.
+
 ### Activity
 #### Event
 ##### List public events
@@ -108,14 +122,47 @@
 #### Notifications
 ##### Notification Reasons
 ##### List your notifications
+```
+    githubapi#activity#List_notifications(user,password)
+```
 ##### List your notifications in a repository
+```
+    githubapi#activity#List_notifications_for_repo(onwer,repo,user,password)
+```
 ##### Mark as read
+```
+    githubapi#activity#Mark_All_as_read(user,password,last_read_at)
+```
 ##### Mark notifications as read in a repository
+```
+    githubapi#activity#Mark_All_as_read_for_repo(owner,repo,user,password,last_read_at)
+```
 ##### View a single thread
+```
+    githubapi#activity#Get_thread(id,user,password)
+```
 ##### Mark a thread as read
+```
+    githubapi#activity#Mark_thread(id,user,password)
+```
 ##### Get a Thread Subscription
+```
+    githubapi#activity#Get_thread_sub(id,user,password)
+```
 ##### Set a Thread Subscription
+```
+    githubapi#activity#Set_thread_sub(id,user,password,subscribed,ignored)
+```
 ##### Delete a Thread Subscription
+```
+    githubapi#activity#Del_thread_sub(id,user,password)
+```
+#### Starring
+##### List Stargazers
+##### List repositories being starred
+##### Check if you are starring a repository
+##### Star a repository
+##### Unstar a repository
 
 ### Issues
 - List all issues assigned to the authenticated user across all
