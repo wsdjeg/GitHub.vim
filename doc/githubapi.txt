@@ -204,6 +204,56 @@ githubapi#activity#Del_repo_sub({owner}, {repo}, {user}, {password})
 
   Github API : DELETE /repos/:owner/:repo/subscription
 
+githubapi#gist#List({user})                            *githubapi#gist#List()*
+  List public gists for the specified user:
+
+  GET /users/:username/gists
+
+githubapi#gist#ListAll({user}, {password})          *githubapi#gist#ListAll()*
+  List the authenticated user's gists or if called anonymously, this will
+  return all public gists:
+
+  GET /gists
+
+githubapi#gist#ListPublic({since})               *githubapi#gist#ListPublic()*
+  List all public gists
+
+  Get /gists/public
+
+githubapi#gist#ListStarred({user}, {password}, {since})
+                                                *githubapi#gist#ListStarred()*
+  List starred gists,{since}A timestamp in ISO 8601 format:
+  YYYY-MM-DDTHH:MM:SSZ. Only gists updated at or after this time are returned.
+
+  GET /gists/starred
+
+githubapi#gist#GetSingle({id})                    *githubapi#gist#GetSingle()*
+  Get a single gist
+
+  Github API : GET /gists/:id
+
+githubapi#gist#GetSingleSha({id}, {sha})       *githubapi#gist#GetSingleSha()*
+  Get a specific revision of a gist
+
+  Github API : GET /gists/:id/:sha
+
+githubapi#gist#Create({desc}, {filename}, {content}, {public}, {user},
+  {password})                                        *githubapi#gist#Create()*
+  Create a gist
+
+  POST : /gists Input:
+>
+     {
+       "description": "the description for this gist",
+       "public": true,
+       "files": {
+         "file1.txt": {
+           "content": "String file contents"
+         }
+       }
+     }
+<
+
 githubapi#issues#List_All({user}, {password})    *githubapi#issues#List_All()*
   List issues List all issues assigned to the authenticated user across all
   visible repositories including owned repositories, member repositories, and
