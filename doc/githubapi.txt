@@ -254,6 +254,33 @@ githubapi#gist#Create({desc}, {filename}, {content}, {public}, {user},
      }
 <
 
+githubapi#gist#Edit({desc}, {filename}, {content}, {public}, {user},
+  {password}, {id})                                    *githubapi#gist#Edit()*
+  Edit a gist
+
+  PATCH : /gists/:id Input:
+>
+     {
+       "description": "the description for this gist",
+       "files": {
+         "file1.txt": {
+           "content": "updated file contents"
+         },
+         "old_name.txt": {
+           "filename": "new_name.txt",
+           "content": "modified contents"
+         },
+         "new_file.txt": {
+           "content": "a new file"
+         },
+         "delete_this_file.txt": null
+       }
+     }
+<
+  Note: All files from the previous version of the gist are carried over by
+  default if not included in the object. Deletes can be performed by including
+  the filename with a null object.
+
 githubapi#issues#List_All({user}, {password})    *githubapi#issues#List_All()*
   List issues List all issues assigned to the authenticated user across all
   visible repositories including owned repositories, member repositories, and
