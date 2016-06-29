@@ -86,7 +86,7 @@ function! githubapi#gist#Create(desc,filename,content,public,user,password) abor
     let data.description = a:desc
     let data.public = a:public
     call extend(data, {'files': {a:filename : {'content' :a:content}}})
-    return githubapi#util#Get('gists', " -d '" . json_encode(data) . "' -X POST -u " . a:user . ':' .a:password)
+    return githubapi#util#Get('gists', ['-d', json_encode(data),  '-X POST -u ' . a:user . ':' .a:password])
 endfunction
 
 

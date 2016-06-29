@@ -1,9 +1,9 @@
 function! githubapi#util#Get(url,args) abort
-    let cmd = 'curl -s "' .g:githubapi_root_url . a:url . '"'
-    if !empty(a:args)
-        let cmd = cmd . a:args
+    let cmd = ['curl', '-s', g:githubapi_root_url . a:url]
+    if len(a:args) > 0
+        call extend(cmd, a:args)
     endif
-    call githubapi#util#log('util#Get cmd : ' . cmd)
+    call githubapi#util#log('util#Get cmd : ' . string(cmd))
     let result = join(systemlist(cmd),"\n")
     return empty(result) ? result : json_decode(result)
 endfunction
