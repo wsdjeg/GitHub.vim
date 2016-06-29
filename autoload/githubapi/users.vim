@@ -23,13 +23,13 @@ endfunction
 " get a single user
 " GET /users/:username
 function! githubapi#users#GetUser(username) abort
-   return githubapi#util#Get('users/' . a:username, '') 
+   return githubapi#util#Get('users/' . a:username, [])
 endfunction
 
 "Get the authenticated user
 "GET /user
 function! githubapi#users#GetAuthUser(username,password) abort
-    return githubapi#util#Get('user' ,' -u ' . a:username . ':' . a:password)
+    return githubapi#util#Get('user' , ['-u', a:username . ':' . a:password])
 endfunction
 
 "List followers of a user
@@ -37,7 +37,7 @@ endfunction
 function! githubapi#users#ListFollowers(username) abort
    let followers = []
    for i in range(1,githubapi#util#GetLastPage('users/' . a:username . '/followers'))
-       call extend(followers,githubapi#util#Get('users/' . a:username . '/followers?page=' . i,''))
+       call extend(followers,githubapi#util#Get('users/' . a:username . '/followers?page=' . i, []))
    endfor
    return followers
 endfunction
@@ -47,7 +47,7 @@ endfunction
 function! githubapi#users#ListFollowing(username) abort
    let following = []
    for i in range(1,githubapi#util#GetLastPage('users/' . a:username . '/following'))
-       call extend(following,githubapi#util#Get('users/' . a:username . '/following?page=' . i,''))
+       call extend(following,githubapi#util#Get('users/' . a:username . '/following?page=' . i, []))
    endfor
    return following
 endfunction

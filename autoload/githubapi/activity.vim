@@ -4,7 +4,7 @@
 "
 " Github API : GET /events
 function! githubapi#activity#List_events() abort
-    return githubapi#util#Get('events','')
+    return githubapi#util#Get('events', [])
 endfunction
 
 ""
@@ -13,7 +13,7 @@ endfunction
 "
 " Github API : GET /repos/:owner/:repo/events
 function! githubapi#activity#List_repo_events(owner,repo) abort
-    return githubapi#util#Get(join(['repos', a:owner, a:repo, 'events'], '/'), '')
+    return githubapi#util#Get(join(['repos', a:owner, a:repo, 'events'], '/'), [])
 endfunction
 
 ""
@@ -22,7 +22,7 @@ endfunction
 "
 " Github API : GET /networks/:owner/:repo/events
 function! githubapi#activity#List_net_events(owner,repo) abort
-    return githubapi#util#Get(join(['networks', a:owner, a:repo, 'events'], '/'), '')
+    return githubapi#util#Get(join(['networks', a:owner, a:repo, 'events'], '/'), [])
 endfunction
 
 ""
@@ -31,7 +31,7 @@ endfunction
 "
 " Github API : GET /orgs/:org/events
 function! githubapi#activity#List_org_events(org) abort
-    return githubapi#util#Get(join(['orgs/', a:org, 'events'], '/'), '')
+    return githubapi#util#Get(join(['orgs/', a:org, 'events'], '/'), [])
 endfunction
 
 ""
@@ -44,7 +44,7 @@ endfunction
 "
 " Github API : GET /users/:username/received_events
 function! githubapi#activity#List_user_events(user) abort
-    return githubapi#util#Get(join(['users', a:user, 'received_events'], '/'), '')
+    return githubapi#util#Get(join(['users', a:user, 'received_events'], '/'), [])
 endfunction
 
 ""
@@ -53,7 +53,7 @@ endfunction
 "
 " Github API : GET /users/:username/received_events/public
 function! githubapi#activity#List_public_user_events(user) abort
-    return githubapi#util#Get(join(['users', a:user, 'received_events', 'public'], '/'), '')
+    return githubapi#util#Get(join(['users', a:user, 'received_events', 'public'], '/'), [])
 endfunction
 
 ""
@@ -65,7 +65,7 @@ endfunction
 "
 " Github API : GET /users/:username/events
 function! githubapi#activity#Performed_events(user) abort
-    return githubapi#util#Get(join(['users', a:user, 'events'], '/'), '')
+    return githubapi#util#Get(join(['users', a:user, 'events'], '/'), [])
 endfunction
 
 ""
@@ -74,7 +74,7 @@ endfunction
 "
 " Github API : GET /users/:username/events/public
 function! githubapi#activity#Performed_events(user) abort
-    return githubapi#util#Get(join(['users', a:user, 'events', 'public'], '/'), '')
+    return githubapi#util#Get(join(['users', a:user, 'events', 'public'], '/'), [])
 endfunction
 
 ""
@@ -85,7 +85,8 @@ endfunction
 "
 " Github API : GET /users/:username/events/orgs/:org
 function! githubapi#activity#List_user_org_events(user,org,password) abort
-    return githubapi#util#Get(join(['users', a:user, 'events', 'org', a:org], '/'), ' -u ' . a:user . ':' . a:password)
+    return githubapi#util#Get(join(['users', a:user, 'events', 'org', a:org], '/'),
+                \ ['-u', a:user . ':' . a:password])
 endfunction
 
 " Notification Reasons
@@ -111,7 +112,7 @@ endfunction
 "
 " Github API : /notifications
 function! githubapi#activity#List_notifications(user,password) abort
-    return githubapi#util#Get('notifications',' -u ' . a:user . ':' . a:password)
+    return githubapi#util#Get('notifications', ['-u', a:user . ':' . a:password])
 endfunction
 
 ""
@@ -121,7 +122,7 @@ endfunction
 " Github API : GET /repos/:owner/:repo/notifications
 function! githubapi#activity#List_notifications_for_repo(onwer,repo,user,password) abort
     return githubapi#util#Get(join(['repos', a:onwer, a:repo, 'notifications'], '/'),
-                \ ' -u ' . a:user . ':' . a:password)
+                \ ['-u', a:user . ':' . a:password])
 endfunction
 
 ""
@@ -134,8 +135,8 @@ function! githubapi#activity#Mark_All_as_read(user,password,last_read_at) abort
     let time = !empty(a:last_read_at) ? a:last_read_at : githubapi#util#Get_current_time()
     let data = {}
     let data.last_read_at = time
-    return githubapi#util#GetStatus('notifications', ' -d ' . "'" . json_encode(data)
-                \ . "'" . ' -X PUT -u ' . a:user . ':' . a:password)
+    return githubapi#util#GetStatus('notifications', ['-d', json_encode(data),
+                \ '-X', 'PUT', '-u', a:user . ':' . a:password]) == 205
 endfunction
 
 ""
@@ -147,8 +148,9 @@ function! githubapi#activity#Mark_All_as_read_for_repo(owner,repo,user,password,
     let time = !empty(a:last_read_at) ? a:last_read_at : githubapi#util#Get_current_time()
     let data = {}
     let data.last_read_at = time
-    return githubapi#util#GetStatus(join(['repos', a:owner, a:repo, 'notifications'], '/'), ' -d ' . "'" . json_encode(data)
-                \ . "'" . ' -X PUT -u ' . a:user . ':' . a:password)
+    return githubapi#util#GetStatus(join(['repos', a:owner, a:repo, 'notifications'], '/'),
+                \ ['-d', json_encode(data),
+                \ '-X', 'PUT', '-u', a:user . ':' . a:password])
 endfunction
 
 ""
@@ -157,7 +159,8 @@ endfunction
 "
 " Github API : GET /notifications/threads/:id
 function! githubapi#activity#Get_thread(id,user,password) abort
-    return githubapi#util#Get(join(['notifications', 'threads', a:id], '/'),' -u ' . a:user . ':' . a:password)
+    return githubapi#util#Get(join(['notifications', 'threads', a:id], '/'),
+                \ ['-u', a:user . ':' . a:password])
 endfunction
 
 ""
@@ -166,7 +169,9 @@ endfunction
 "
 " Github API : PATCH /notifications/threads/:id
 function! githubapi#activity#Mark_thread(id,user,password) abort
-    return githubapi#util#GetStatus(join(['notifications', 'threads', a:id], '/'),' -X PATCH -u ' . a:user . ':' . a:password) == 205
+    return githubapi#util#GetStatus(join(['notifications', 'threads', a:id], '/'),
+                \ ['-X', 'PATCH',
+                \ '-u', a:user . ':' . a:password]) == 205
 endfunction
 
 ""
@@ -175,7 +180,8 @@ endfunction
 "
 " Github API : GET /notifications/threads/:id/subscription
 function! githubapi#activity#Get_thread_sub(id,user,password) abort
-    return githubapi#util#Get(join(['notifications', 'threads', a:id, 'subscription'], '/'),' -u ' . a:user . ':' . a:password)
+    return githubapi#util#Get(join(['notifications', 'threads', a:id, 'subscription'], '/'),
+                \ ['-u', a:user . ':' . a:password])
 endfunction
 
 ""
@@ -192,7 +198,8 @@ function! githubapi#activity#Set_thread_sub(id,user,password,subscribed,ignored)
    let data.subscribed = a:subscribed
    let data.ignored = a:ignored
    return githubapi#util#Get(join(['notifications', 'threads', a:id, 'subscription'], '/'),
-               \ ' -u ' . a:user . ':' . a:password . ' -X PUT -d ' . "'" . json_encode(data) . "'")
+               \ ['-X', 'PUT', '-d', json_encode(data),
+               \ '-u', a:user . ':' . a:password])
 endfunction
 
 ""
@@ -202,7 +209,7 @@ endfunction
 " Github API : DELETE /notifications/threads/:id/subscription
 function! githubapi#activity#Del_thread_sub(id,user,password) abort
     return githubapi#util#GetStatus(join(['notifications', 'threads', a:id, 'subscription'], '/'),
-                \' -u ' . a:user . ':' . a:password) == 204
+                \ ['-u', a:user . ':' . a:password]) == 204
 endfunction
 
 ""
@@ -211,7 +218,7 @@ endfunction
 "
 " Github API : GET /repos/:owner/:repo/stargazers
 function! githubapi#activity#List_stargazers(owner,repo) abort
-    return githubapi#util#Get(join(['repos', a:owner, a:repo, 'stargazers'], '/'), '')
+    return githubapi#util#Get(join(['repos', a:owner, a:repo, 'stargazers'], '/'), [])
 endfunction
 
 ""
@@ -221,7 +228,7 @@ endfunction
 " Github API : GET /user/starred/:owner/:repo
 function! githubapi#activity#CheckStarred(owner,repo,user,password) abort
     return githubapi#util#GetStatus(join(['user', 'starred', a:owner, a:repo], '/'),
-                \ ' -u ' . a:user . ':' . a:password) == 204
+                \ ['-u', a:user . ':' . a:password]) == 204
 endfunction
 
 ""
@@ -231,7 +238,8 @@ endfunction
 " Github API : PUT /user/starred/:owner/:repo
 function! githubapi#activity#Star(owner,repo,user,password) abort
     return githubapi#util#GetStatus(join(['user', 'starred', a:owner, a:repo], '/'),
-                \ ' -X PUT -u ' . a:user . ':' . a:password) == 204
+                \ ['-X', 'PUT',
+                \ '-u', a:user . ':' . a:password]) == 204
 endfunction
 
 ""
@@ -241,7 +249,8 @@ endfunction
 " Github API : DELETE /user/starred/:owner/:repo
 function! githubapi#activity#Unstar(owner,repo,user,password) abort
     return githubapi#util#GetStatus(join(['user', 'starred', a:owner, a:repo], '/'),
-                \ ' -X DELETE -u ' . a:user . ':' . a:password) == 204
+                \ ['-X', 'DELETE',
+                \ '-u', a:user . ':' . a:password]) == 204
 endfunction
 
 ""
@@ -250,7 +259,7 @@ endfunction
 "
 " Github API : GET /repos/:owner/:repo/subscribers
 function! githubapi#activity#List_watchers(owner,repo) abort
-    return githubapi#util#Get(join(['repos', a:owner, a:repo , 'subscribers'], '/'), '')
+    return githubapi#util#Get(join(['repos', a:owner, a:repo , 'subscribers'], '/'), [])
 endfunction
 
 ""
@@ -259,7 +268,7 @@ endfunction
 "
 " Github API : GET /users/:username/subscriptions
 function! githubapi#activity#List_watched_repo(user) abort
-    return githubapi#util#Get(join(['users', a:user, 'subscriptions'], '/'), '')
+    return githubapi#util#Get(join(['users', a:user, 'subscriptions'], '/'), [])
 endfunction
 
 ""
@@ -269,7 +278,7 @@ endfunction
 " Github API : GET /user/subscriptions
 function! githubapi#activity#List_auth_watched_repo(user,password) abort
     return githubapi#util#Get(join(['user', 'subscriptions'], '/'),
-                \ ' -u ' . a:user . ':' . a:password)
+                \ ['-u', a:user . ':' . a:password])
 endfunction
 
 ""
@@ -279,7 +288,7 @@ endfunction
 " Github API : GET /repos/:owner/:repo/subscription
 function! githubapi#activity#Check_repo_Sub(owner,repo,user,password) abort
     return githubapi#util#Get(join(['repos', a:owner, a:repo, 'subscription'], '/'),
-                \ ' -u ' . a:user . ':' . a:password)
+                \ ['-u', a:user . ':' . a:password])
 endfunction
 
 ""
@@ -296,8 +305,8 @@ function! githubapi#activity#Set_repo_sub(owner,repo,user,password,sub,ignore) a
     let data.subscribed = a:sub == 1 ? v:true : v:false
     let data.ignored = a:ignore == 1 ? v:true : v:false
     return githubapi#util#Get(join(['repos', a:owner, a:repo, 'subscription'], '/'),
-                \ ' -u ' . a:user . ':' . a:password
-                \ . " -X PUT -d '" . json_encode(data) . "'")
+                \ ['-X', 'PUT', '-d', json_encode(data),
+                \ '-u', a:user . ':' . a:password])
 endfunction
 ""
 " @public
@@ -306,5 +315,6 @@ endfunction
 " Github API : DELETE /repos/:owner/:repo/subscription
 function! githubapi#activity#Del_repo_sub(owner,repo,user,password) abort
     return githubapi#util#GetStatus(join(['repos', a:owner, a:repo, 'subscription'], '/'),
-                \ ' -X DELETE -u ' . a:user . ':' . a:password) == 204
+                \ ['-X', 'DELETE',
+                \ '-u', a:user . ':' . a:password]) == 204
 endfunction

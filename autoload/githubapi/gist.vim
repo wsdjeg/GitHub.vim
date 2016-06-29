@@ -4,7 +4,7 @@
 "
 " GET /users/:username/gists
 function! githubapi#gist#List(user) abort
-    return githubapi#util#Get(join(['users', a:user, 'gists'], '/'), '')
+    return githubapi#util#Get(join(['users', a:user, 'gists'], '/'), [])
 endfunction
 
 ""
@@ -16,7 +16,7 @@ function! githubapi#gist#ListAll(user,password) abort
     if empty(a:user) || empty(a:password)
         return githubapi#util#Get('gists','')
     else
-        return githubapi#util#Get('gists',' -u ' . a:user . ':' . a:password)
+        return githubapi#util#Get('gists', ['-u',  a:user . ':' . a:password])
     endif
 endfunction
 
@@ -30,7 +30,7 @@ function! githubapi#gist#ListPublic(since) abort
     if !empty(a:since)
          let url = url . '?since=' . a:since
     endif
-    return githubapi#util#Get(url, '')
+    return githubapi#util#Get(url, [])
 endfunction
 
 ""
@@ -44,7 +44,7 @@ function! githubapi#gist#ListStarred(user,password,since) abort
     if !empty(a:since)
          let url = url . '?since=' . a:since
     endif
-    return githubapi#util#Get(url,' -u ' . a:user . ':' . a:password)
+    return githubapi#util#Get(url, ['-u',  a:user . ':' . a:password])
 endfunction
 
 ""
@@ -53,7 +53,7 @@ endfunction
 "
 " Github API : GET /gists/:id
 function! githubapi#gist#GetSingle(id) abort
-    return githubapi#util#Get('gists/' . a:id, '')
+    return githubapi#util#Get('gists/' . a:id, [])
 endfunction
 
 ""
@@ -62,7 +62,7 @@ endfunction
 "
 " Github API : GET /gists/:id/:sha
 function! githubapi#gist#GetSingleSha(id,sha) abort
-    return githubapi#util#Get(join(['gists', a:id, a:sha], '/'), '')
+    return githubapi#util#Get(join(['gists', a:id, a:sha], '/'), [])
 endfunction
 
 ""
@@ -121,7 +121,7 @@ function! githubapi#gist#Edit(desc,filename,content,public,user,password,id) abo
     let data.description = a:desc
     let data.public = a:public
     call extend(data, {'files': {a:filename : {'content' :a:content}}})
-    return githubapi#util#Get('gists/' . a:id, " -d '" . json_encode(data) . "' -X PATCH -u " . a:user . ':' .a:password)
+    return githubapi#util#Get('gists/' . a:id, ['-d',  json_encode(data),  '-X', 'PATCH', '-u',   a:user . ':' .a:password])
 endfunction
 
 ""
@@ -130,7 +130,7 @@ endfunction
 "
 " Github API : GET /gists/:id/commits
 function! githubapi#gist#ListCommits(id) abort
-    return githubapi#util#Get(join(['gists', a:id, 'commits'], '/'), '')
+    return githubapi#util#Get(join(['gists', a:id, 'commits'], '/'), [])
 endfunction
 
 ""
@@ -140,7 +140,7 @@ endfunction
 " Github API : PUT /gists/:id/star
 function! githubapi#gist#Star(user,password,id) abort
     return githubapi#util#GetStatus(join(['gists', a:id, 'star'], '/'),
-                \ ' -X PUT -u ' . a:user . ':' . a:password) == 204
+                \ ['-X', 'PUT', '-u', a:user . ':' . a:password]) == 204
 endfunction
 
 ""
@@ -150,7 +150,7 @@ endfunction
 " Github API : DELETE /gists/:id/star
 function! githubapi#gist#Unstar(user,password,id) abort
     return githubapi#util#GetStatus(join(['gists', a:id, 'star'], '/'),
-                \ ' -X DELETE -u ' . a:user . ':' . a:password) == 204
+                \ ['-X', 'DELETE', '-u', a:user . ':' . a:password]) == 204
 endfunction
 
 ""
@@ -160,7 +160,7 @@ endfunction
 " Github API : GET /gists/:id/star
 function! githubapi#gist#CheckStar(user,password,id) abort
     return githubapi#util#GetStatus(join(['gists', a:id, 'star'], '/'),
-                \ ' -u ' . a:user . ':' . a:password) == 204
+                \ ['-u', a:user . ':' . a:password]) == 204
 endfunction
 
 ""
@@ -170,7 +170,7 @@ endfunction
 " Github API : POST /gists/:id/forks
 function! githubapi#gist#Fork(user,password,id) abort
     return githubapi#util#Get(join(['gists', a:id, 'forks'], '/'),
-                \ ' -X POST -u ' . a:user . ':' . a:password)
+                \ ['-X', 'POST', '-u', a:user . ':' . a:password])
 endfunction
 
 ""
@@ -180,7 +180,7 @@ endfunction
 " Github API : GET /gists/:id/forks
 function! githubapi#gist#ListFork(user,password,id) abort
     return githubapi#util#Get(join(['gists', a:id, 'forks'], '/'),
-                \ ' -u ' . a:user . ':' . a:password)
+                \ ['-u', a:user . ':' . a:password])
 endfunction
 
 ""
@@ -190,5 +190,5 @@ endfunction
 " Github API : DELETE /gists/:id
 function! githubapi#gist#Del(user,password,id) abort
     return githubapi#util#GetStatus(join(['gists', a:id], '/'),
-                \ ' -X DELETE -u ' . a:user . ':' . a:password) == 204
+                \ ['-X', 'DELETE', '-u', a:user . ':' . a:password]) == 204
 endfunction
