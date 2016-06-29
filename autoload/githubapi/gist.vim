@@ -129,7 +129,7 @@ endfunction
 " List gist commits
 "
 " Github API : GET /gists/:id/commits
-function! githubapi#gitst#ListCommits(id) abort
+function! githubapi#gist#ListCommits(id) abort
     return githubapi#util#Get(join(['gists', a:id, 'commits'], '/'), '')
 endfunction
 
