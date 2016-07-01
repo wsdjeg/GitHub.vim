@@ -281,6 +281,42 @@ githubapi#gist#Edit({desc}, {filename}, {content}, {public}, {user},
   default if not included in the object. Deletes can be performed by including
   the filename with a null object.
 
+githubapi#gist#ListCommits({id})                *githubapi#gist#ListCommits()*
+  List gist commits
+
+  Github API : GET /gists/:id/commits
+
+githubapi#gist#Star({user}, {password}, {id})          *githubapi#gist#Star()*
+  Star a gist
+
+  Github API : PUT /gists/:id/star
+
+githubapi#gist#Unstar({user}, {password}, {id})      *githubapi#gist#Unstar()*
+  Unstar a gist
+
+  Github API : DELETE /gists/:id/star
+
+githubapi#gist#CheckStar({user}, {password}, {id})
+                                                  *githubapi#gist#CheckStar()*
+  Check if a gist is starred
+
+  Github API : GET /gists/:id/star
+
+githubapi#gist#Fork({user}, {password}, {id})          *githubapi#gist#Fork()*
+  Fork a gist
+
+  Github API : POST /gists/:id/forks
+
+githubapi#gist#ListFork({user}, {password}, {id})  *githubapi#gist#ListFork()*
+  List Fork of a gist
+
+  Github API : GET /gists/:id/forks
+
+githubapi#gist#Del({user}, {password}, {id})            *githubapi#gist#Del()*
+  Delete a gist
+
+  Github API : DELETE /gists/:id
+
 githubapi#issues#List_All({user}, {password})    *githubapi#issues#List_All()*
   List issues List all issues assigned to the authenticated user across all
   visible repositories including owned repositories, member repositories, and
@@ -305,7 +341,7 @@ githubapi#issues#Get_issue({owner}, {repo}, {num})
                                                 *githubapi#issues#Get_issue()*
   Get a single issue GET /repos/:owner/:repo/issues/:number
 
-githubapi#issues#Create({owner}, {repo}, {user}, {password}, {json})
+githubapi#issues#Create({owner}, {repo}, {user}, {password}, {issue})
                                                    *githubapi#issues#Create()*
   Create an issue
 
@@ -452,7 +488,7 @@ githubapi#issues#Get_event({owner}, {repo}, {id})
 githubapi#util#Get_current_time()          *githubapi#util#Get_current_time()*
   Get current time in a timestamp in ISO 8601 format: YYYY-MM-DDTHH:MM:SSZ
 
-githubapi#util#ViewLog()                            *githubapi#util#ViewLog()*
+githubapi#util#GetLog()                              *githubapi#util#GetLog()*
   view the log of API
 
 githubapi#util#CleanLog()                          *githubapi#util#CleanLog()*

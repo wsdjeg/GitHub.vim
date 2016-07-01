@@ -8,8 +8,8 @@
 " @public
 function! githubapi#issues#List_All(user,password) abort
     let issues = []
-    for i in range(1,githubapi#util#GetLastPage('issues -u ' . a:user . ':' . a:password))
-        call extend(issues,githubapi#util#Get('issues?page=' . i,' -u ' . a:user . ':' . a:password))
+    for i in range(1,githubapi#util#GetLastPage('issues', ['-u', a:user . ':' . a:password]))
+        call extend(issues,githubapi#util#Get('issues?page=' . i, ['-u', a:user . ':' . a:password]))
     endfor
     return issues
 endfunction
@@ -22,8 +22,8 @@ endfunction
 " @public
 function! githubapi#issues#List_All_for_User(user,password) abort
     let issues = []
-    for i in range(1,githubapi#util#GetLastPage('user/issues -u ' . a:user . ':' . a:password))
-        call extend(issues,githubapi#util#Get('user/issues?page=' . i,' -u ' . a:user . ':' . a:password))
+    for i in range(1,githubapi#util#GetLastPage('user/issues', ['-u', a:user . ':' . a:password]))
+        call extend(issues,githubapi#util#Get('user/issues?page=' . i, ['-u', a:user . ':' . a:password]))
     endfor
     return issues
 endfunction
@@ -35,8 +35,8 @@ endfunction
 " @public
 function! githubapi#issues#List_All_for_User_In_Org(org,user,password) abort
     let issues = []
-    for i in range(1,githubapi#util#GetLastPage('orgs/' . a:org . '/issues -u ' . a:user . ':' . a:password))
-        call extend(issues,githubapi#util#Get('orgs/' . a:org . '/issues?page=' . i,' -u ' . a:user . ':' . a:password))
+    for i in range(1,githubapi#util#GetLastPage('orgs/' . a:org . '/issues', ['-u', a:user . ':' . a:password]))
+        call extend(issues,githubapi#util#Get('orgs/' . a:org . '/issues?page=' . i, ['-u', a:user . ':' . a:password]))
     endfor
     return issues
 endfunction
@@ -48,7 +48,7 @@ endfunction
 function! githubapi#issues#List_All_for_Repo(owner,repo) abort
     let issues = []
     for i in range(1,githubapi#util#GetLastPage('repos/' . a:owner . '/' . a:repo . '/issues'))
-        call extend(issues,githubapi#util#Get('repos/' . a:owner . '/' . a:repo . '/issues?page=' . i, ''))
+        call extend(issues,githubapi#util#Get('repos/' . a:owner . '/' . a:repo . '/issues?page=' . i, []))
     endfor
     return issues
 endfunction
@@ -58,7 +58,7 @@ endfunction
 " @public
 " GET /repos/:owner/:repo/issues/:number
 function! githubapi#issues#Get_issue(owner,repo,num) abort
-    return githubapi#util#Get('repos/' . a:owner . '/' . a:repo . '/issues/' . a:num, '')
+    return githubapi#util#Get('repos/' . a:owner . '/' . a:repo . '/issues/' . a:num, [])
 endfunction
 
 ""
@@ -78,19 +78,19 @@ endfunction
 "    ]
 "   }
 " <
-function! githubapi#issues#Create(owner,repo,user,password,json) abort
+function! githubapi#issues#Create(owner,repo,user,password,issue) abort
     return githubapi#util#Get('repos/' . a:owner . '/' . a:repo . '/issues',
-                \ ' -X POST -d ' . shellescape(a:json)
-                \ . ' -u ' . a:user . ':' . a:password)
+                \ ['-X', 'POST', '-d', json_encode(a:issue),
+                \ '-u', a:user . ':' . a:password])
 endfunction
 
 ""
 " Edit an issue
 " PATCH /repos/:owner/:repo/issues/:number
-function! githubapi#issues#Edit(owner,repo,num,user,password,json) abort
+function! githubapi#issues#Edit(owner,repo,num,user,password,issue) abort
     return githubapi#util#Get('repos/' . a:owner . '/' . a:repo . '/issues/' . a:num,
-                \ ' -X PATCH -d ' . shellescape(a:json)
-                \ . ' -u ' . a:user . ':' . a:password)
+                \ ['-X', 'PATCH', '-d', json_encode(a:issue),
+                \ '-u', a:user . ':' . a:password])
 endfunction
 
 ""
@@ -100,8 +100,8 @@ endfunction
 " Github APi : PUT /repos/:owner/:repo/issues/:number/lock
 function! githubapi#issues#Lock(owner,repo,num,user,password) abort
     return githubapi#util#Get('repos/' . a:owner . '/' . a:repo . '/issues/' . a:num . '/lock',
-                \ ' -X PUT  -u ' . a:user . ':' . a:password
-                \ . ' -H "Accept: application/vnd.github.the-key-preview"')
+                \ ['-X', 'PUT',  '-u',  a:user . ':' . a:password,
+                \ '-H', 'Accept: application/vnd.github.the-key-preview'])
 endfunction
 
 ""
@@ -111,8 +111,8 @@ endfunction
 " Github API : DELETE /repos/:owner/:repo/issues/:number/lock
 function! githubapi#issues#Unlock(owner,repo,num,user,password) abort
     return githubapi#util#Get('repos/' . a:owner . '/' . a:repo . '/issues/' . a:num . '/lock',
-                \ ' -X DELETE  -u ' . a:user . ':' . a:password
-                \ . ' -H "Accept: application/vnd.github.the-key-preview"')
+                \ ['-X', 'DELETE',  '-u', a:user . ':' . a:password,
+                \ '-H', 'Accept: application/vnd.github.the-key-preview'])
 endfunction
 
 ""
@@ -121,7 +121,7 @@ endfunction
 "
 " Github API : GET /repos/:owner/:repo/assignees
 function! githubapi#issues#List_assignees(owner,repo) abort
-    return githubapi#util#Get('repos/' . a:owner . '/' . a:repo . '/assignees', '')
+    return githubapi#util#Get('repos/' . a:owner . '/' . a:repo . '/assignees', [])
 endfunction
 
 ""
@@ -131,7 +131,7 @@ endfunction
 " Github API : GET /repos/:owner/:repo/assignees/:assignee
 function! githubapi#issues#Check_assignee(owner,repo,assignee) abort
     return githubapi#util#GetStatus('repos/' . a:owner . '/'
-                \ . a:repo . '/assignees/' . a:assignee, '') ==# 204
+                \ . a:repo . '/assignees/' . a:assignee, []) ==# 204
 endfunction
 
 ""
@@ -152,8 +152,8 @@ endfunction
 " <
 function! githubapi#issues#Addassignee(owner,repo,num,assignees,user,password) abort
     return githubapi#util#Get('repos/' . a:owner . '/' . a:repo . '/issues/' . a:num . '/assignees',
-                \ ' -X POST -d ' . shellescape(a:assignees) . ' -u ' . a:user . ':' . a:password
-                \ . ' -H "Accept: application/vnd.github.cerberus-preview+json"')
+                \ ['-X', 'POST', '-d', json_encode(a:assignees), '-u', a:user . ':' . a:password,
+                \ '-H', 'Accept: application/vnd.github.cerberus-preview+json'])
 endfunction
 
 ""
@@ -173,8 +173,8 @@ endfunction
 " NOTE: need `Accep:application/vnd.github.cerberus-preview+json`
 function! githubapi#issues#Removeassignee(owner,repo,num,assignees,user,password) abort
     return githubapi#util#Get('repos/' . a:owner . '/' . a:repo . '/issues/' . a:num . '/assignees',
-                \ ' -X DELETE -d ' . shellescape(a:assignees) . ' -u ' . a:user . ':' . a:password
-                \ . ' -H "Accept: application/vnd.github.cerberus-preview+json"')
+                \ ['-X', 'DELETE', '-d', json_encode(a:assignees), '-u', a:user . ':' . a:password,
+                \ '-H', 'Accept: application/vnd.github.cerberus-preview+json'])
 endfunction
 
 ""
@@ -190,7 +190,7 @@ function! githubapi#issues#List_comments(owner,repo,num,since) abort
                 \. (empty(a:since) ? '' : '?since='.a:since)))
         call extend(comments,githubapi#util#Get('repos/' . a:owner . '/' . a:repo
                 \. '/issues/' . a:num . '/comments?page=' . i
-                \. (empty(a:since) ? '' : '&since='.a:since), ''))
+                \. (empty(a:since) ? '' : '&since='.a:since), []))
     endfor
     return comments
 endfunction
@@ -217,7 +217,7 @@ function! githubapi#issues#List_All_comments(owner,repo,sort,desc,since) abort
     endif
     let comments = []
     for i in range(1,githubapi#util#GetLastPage(url))
-        call extend(comments,githubapi#util#Get(url . (stridx(url,'?') == -1 ? '?page='  : '&page=') . i ,''))
+        call extend(comments,githubapi#util#Get(url . (stridx(url,'?') == -1 ? '?page='  : '&page=') . i ,[]))
     endfor
     return comments
 endfunction
@@ -228,7 +228,7 @@ endfunction
 "
 " Github API : GET /repos/:owner/:repo/issues/comments/:id
 function! githubapi#issues#Get_comment(owner,repo,id) abort
-    return githubapi#util#Get('repos/' . a:owner . '/' . a:repo . '/issues/comments/' . a:id, '')
+    return githubapi#util#Get('repos/' . a:owner . '/' . a:repo . '/issues/comments/' . a:id, [])
 endfunction
 
 ""
@@ -243,7 +243,7 @@ endfunction
 " Github API : POST /repos/:owner/:repo/issues/:number/comments
 function! githubapi#issues#Create_comment(owner,repo,num,json,user,password) abort
     return githubapi#util#Get('repos/' . a:owner . '/' . a:repo . '/issues/' . a:num . '/comments/',
-                \' -X POST -u ' . a:user . ':' . a:password . ' -d ' . shellescape(a:json))
+                \ ['-X', 'POST', '-u', a:user . ':' . a:password, '-d', json_encode(a:json)])
 endfunction
 
 ""
@@ -258,7 +258,7 @@ endfunction
 " Github API : PATCH /repos/:owner/:repo/issues/comments/:id
 function! githubapi#issues#Edit_comment(owner,repo,id,json,user,password) abort
     return githubapi#util#Get('repos/' . a:owner . '/' . a:repo . '/issues/'  . '/comments/' . a:id,
-                \' -X PATCH -u ' . a:user . ':' . a:password . ' -d ' . shellescape(a:json))
+                \ ['-X', 'PATCH', '-u', a:user . ':' . a:password, '-d', json_encode(a:json)])
 endfunction
 
 ""
@@ -269,7 +269,7 @@ endfunction
 function! githubapi#issues#Delete_comment(owner,repo,id,user,password) abort
     return githubapi#util#GetStatus('repos/' . a:owner . '/'
                 \ . a:repo . '/issues/comments/' . a:id,
-                \ ' -u ' . a:user . ':' . a:password . ' -X DELETE') ==# 204
+                \ ['-u', a:user . ':' . a:password, '-X', 'DELETE']) ==# 204
 endfunction
 
 ""
@@ -280,7 +280,7 @@ function! githubapi#issues#List_events(owner,repo,num) abort
     let url = join(['repos',a:owner,a:repo,'issues',a:num,'events'], '/')
     let events = []
     for i in range(1,githubapi#util#GetLastPage(url))
-        call extend(events,githubapi#util#Get(url . '?page=' . i, ''))
+        call extend(events,githubapi#util#Get(url . '?page=' . i, []))
     endfor
     return events
 endfunction
@@ -320,7 +320,7 @@ function! githubapi#issues#List_events_for_repo(owner,repo) abort
     let url = join(['repos', a:owner, a:repo, 'issues','events'], '/')
     let events = []
     for i in range(1,githubapi#util#GetLastPage(url))
-        call extend(events,githubapi#util#Get(url . '?page=' . i, ''))
+        call extend(events,githubapi#util#Get(url . '?page=' . i, []))
     endfor
     return events
 endfunction
@@ -331,5 +331,5 @@ endfunction
 "
 " Github API : GET /repos/:owner/:repo/issues/events/:id
 function! githubapi#issues#Get_event(owner,repo,id) abort
-    return githubapi#util#Get('repos/' . a:owner . '/' . a:repo . '/issues/events/' . a:id, '')
+    return githubapi#util#Get('repos/' . a:owner . '/' . a:repo . '/issues/events/' . a:id, [])
 endfunction
