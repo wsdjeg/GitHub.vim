@@ -192,3 +192,53 @@ function! githubapi#gist#Del(user,password,id) abort
     return githubapi#util#GetStatus(join(['gists', a:id], '/'),
                 \ ['-X', 'DELETE', '-u', a:user . ':' . a:password]) == 204
 endfunction
+
+""
+" @public
+" List comments on a gist
+"
+" Github API : GET /gists/:gist_id/comments
+function! githubapi#gist#ListComments(id) abort
+    return githubapi#util#Get(join(['gists', a:id, 'comments'], '/') , [])
+endfunction
+
+""
+" @public
+" Get a single comment
+"
+" Github API : GET /gists/:gist_id/comments/:id
+function! githubapi#gist#GetComment(gistid,commentid) abort
+    return githubapi#util#Get(join(['gists', a:gistid, 'comments', a:commentid], '/'), [])
+endfunction
+
+""
+" @public
+" Create a comment
+"
+" Github API : POST /gists/:gist_id/comments
+function! githubapi#gist#CreateComment(id,user,password,body) abort
+    return githubapi#util#Get(join(['gists', a:id, 'comments'], '/'),
+                \ ['-X', 'POST', '-d', json_encode({'body':a:body}),
+                \ '-u', a:user . ':' . a:password])
+endfunction
+
+""
+" @public
+" Edit a comment
+"
+" Github API : PATCH /gists/:gist_id/comments
+function! githubapi#gist#EditComment(id,user,password,body) abort
+    return githubapi#util#Get(join(['gists', a:id, 'comments'], '/'),
+                \ ['-X', 'PATCH', '-d', json_encode({'body':a:body}),
+                \ '-u', a:user . ':' . a:password])
+endfunction
+
+""
+" @public
+" Delete a comment
+"
+" Github API : DELETE /gists/:gist_id/comments/:id
+function! githubapi#gist#DelComment(gistid,id,user,password) abort
+    return githubapi#util#GetStatus(join(['gists', a:gistid, 'comments', a:id], '/'),
+                \ ['-u', a:user . ':' . a:password]) == 204
+endfunction

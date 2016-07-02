@@ -66,6 +66,13 @@
 - [List gist forks](#list-gist-forks)
 - [Delete a gist](#delete-a-gist)
 - [Custom media types](#custom-media-types)
+- [Comments](#comments)
+ - [List comments on a gist](#list-comments-on-a-gist)
+ - [Get a single comment](#get-a-single-comment)
+ - [Create a comment](#create-a-comment)
+ - [Edit a comment](#edit-a-comment)
+ - [Delete a comment](#delete-a-comment)
+ - [Custom media types](#custom-media-types)
 
 #### [Git Data](#git_date-6)
 #### [Issues](#issues-7)
@@ -290,6 +297,28 @@ List repositories being watched by the authenticated user.
 ##### Delete a gist
 ```
     githubapi#gist#Del(user,password,id)
+```
+##### Custom media types
+##### Comments
+##### List comments on a gist
+```
+    githubapi#gist#ListComments(id)
+```
+##### Get a single comment
+```
+    githubapi#gist#GetComment(gistid,commentid)
+```
+##### Create a comment
+```
+    githubapi#gist#CreateComment(id,user,password,body)
+```
+##### Edit a comment
+```
+    githubapi#gist#EditComment(id,user,password,body)
+```
+##### Delete a comment
+```
+    githubapi#gist#DelComment(gistid,id,user,password)
 ```
 ##### Custom media types
 ### Issues
