@@ -73,7 +73,7 @@ endfunction
 " List public events performed by a user
 "
 " Github API : GET /users/:username/events/public
-function! githubapi#activity#Performed_events(user) abort
+function! githubapi#activity#Performed_public_events(user) abort
     return githubapi#util#Get(join(['users', a:user, 'events', 'public'], '/'), [])
 endfunction
 

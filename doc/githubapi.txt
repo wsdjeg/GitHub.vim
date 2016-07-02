@@ -65,8 +65,8 @@ githubapi#activity#Performed_events({user})
 
   Github API : GET /users/:username/events
 
-githubapi#activity#Performed_events({user})
-                                       *githubapi#activity#Performed_events()*
+githubapi#activity#Performed_public_events({user})
+                                *githubapi#activity#Performed_public_events()*
   List public events performed by a user
 
   Github API : GET /users/:username/events/public
