@@ -1,4 +1,5 @@
 ### GitHub-api.vim
+
 [![Build Status](https://travis-ci.org/wsdjeg/GitHub-api.vim.svg?branch=master)](https://travis-ci.org/wsdjeg/GitHub-api.vim)
 [![Gitter](https://badges.gitter.im/wsdjeg/GitHub-api.vim.svg)](https://gitter.im/wsdjeg/GitHub-api.vim?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge)
 [![Version 0.1.2](https://img.shields.io/badge/version-0.1.1-yellow.svg?style=flat-square)](https://github.com/wsdjeg/GitHub-api.vim/releases)
@@ -6,6 +7,7 @@
 [![MIT License](https://img.shields.io/badge/license-MIT-blue.svg?style=flat-square)](LICENSE)
 [![Doc](https://img.shields.io/badge/doc-%3Ah%20githubapi-orange.svg?style=flat-square)](doc/githubapi.txt)
 [![Powered by vital.vim](https://img.shields.io/badge/powered%20by-vital.vim-80273f.svg?style=flat-square)](https://github.com/vim-jp/vital.vim)
+
 #### [Intro](#intro-1)
 #### [Activity](#activity-2)
 - [Events](#events)
@@ -65,8 +67,6 @@
 - [Delete a gist](#delete-a-gist)
 - [Custom media types](#custom-media-types)
 
-#### [Activity](#activity-4)
-#### [Gists](#gists-5)
 #### [Git Data](#git_date-6)
 #### [Issues](#issues-7)
 - [Assignees](#assignees)
@@ -232,19 +232,65 @@ List repositories being watched by the authenticated user.
 ##### Authentication
 ##### Truncation
 ##### List a user's gists
+```
+    githubapi#gist#List(user)
+```
+##### List a authenticated user's gists
+```
+    githubapi#gist#ListAll(user,password)
+```
 ##### List all public gists
+```
+    githubapi#gist#ListPublic(since)
+```
 ##### List starred gists
+```
+    githubapi#gist#ListStarred(user,password,since)
+```
 ##### Get a single gist
+```
+    githubapi#gist#GetSingle(id)
+```
 ##### Get a specific revision of a gist
+```
+    githubapi#gist#GetSingleSha(id,sha)
+```
 ##### Create a gist
+```
+    githubapi#gist#Create(desc,filename,content,public,user,password)
+```
 ##### Edit a gist
+```
+    githubapi#gist#Edit(desc,filename,content,public,user,password,id)
+```
 ##### List gist commits
+```
+    githubapi#gist#ListCommits(id)
+```
 ##### Star a gist
+```
+    githubapi#gist#Star(user,password,id)
+```
 ##### Unstar a gist
+```
+    githubapi#gist#Unstar(user,password,id)
+```
 ##### Check if a gist is starred
+```
+    githubapi#gist#CheckStar(user,password,id)
+```
 ##### Fork a gist
+```
+    githubapi#gist#Fork(user,password,id)
+```
 ##### List gist forks
+```
+    githubapi#gist#ListFork(user,password,id)
+```
 ##### Delete a gist
+```
+    githubapi#gist#Del(user,password,id)
+```
 ##### Custom media types
 ### Issues
 - List all issues assigned to the authenticated user across all
