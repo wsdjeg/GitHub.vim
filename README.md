@@ -93,6 +93,18 @@
  - [List events for an issue](#List-events-for-an-issue)
  - [List events for a repository](#List-events-for-a-repository)
  - [Get a single event](#Get-a-single-event)
+- [Labels](#labels)
+ - [List all labels for this repository](#list all labels for this repository)
+ - [Get a single label](#get a single label)
+ - [Create a label](#create a label)
+ - [Update a label](#update a label)
+ - [Delete a label](#delete a label)
+ - [List labels on an issue](#list labels on an issue)
+ - [Add labels to an issue](#add labels to an issue)
+ - [Remove a label from an issue](#remove a label from an issue)
+ - [Replace all labels for an issue](#replace all labels for an issue)
+ - [Remove all labels from an issue](#remove all labels from an issue)
+ - [Get labels for every issue in a milestone](#get labels for every issue in a milestone)
 
 #### [Migration](#migration-8)
 #### [Miscellaneous](#miscellaneous-9)
@@ -428,3 +440,15 @@ This call lists all the available assignees to which issues may be assigned.
 ```
     githubapi#issues#Get_event(owner,repo,id)
 ```
+#### Labels
+##### List all labels for this repository
+##### Get a single label
+##### Create a label
+##### Update a label
+##### Delete a label
+##### List labels on an issue
+##### Add labels to an issue
+##### Remove a label from an issue
+##### Replace all labels for an issue
+##### Remove all labels from an issue
+##### Get labels for every issue in a milestone
