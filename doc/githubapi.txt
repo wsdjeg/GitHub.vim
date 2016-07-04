@@ -513,6 +513,53 @@ githubapi#issues#Get_event({owner}, {repo}, {id})
 
   Github API : GET /repos/:owner/:repo/issues/events/:id
 
+githubapi#issues#ListAllMilestones({owner}, {repo}, {state}, {sort},
+  {direction})                          *githubapi#issues#ListAllMilestones()*
+  List milestones for a repository
+
+  Github API : GET /repos/:owner/:repo/milestones Parameters
+>
+    Name      Type      Description
+    state     string The state of the milestone. Either open, closed, or all.
+                     Default: open
+    sort      string What to sort results by. Either due_on or completeness.
+                     Default: due_on
+    direction string The direction of the sort. Either asc or desc.
+                     Default: asc
+<
+
+githubapi#issues#GetSingleMilestone({owner}, {repo}, {num})
+                                       *githubapi#issues#GetSingleMilestone()*
+  Get a single milestone
+
+  Github API : GET /repos/:owner/:repo/milestones/:number
+
+githubapi#issues#CreateMilestone({owner}, {repo}, {milestone}, {user},
+  {password})                             *githubapi#issues#CreateMilestone()*
+  Create a milestone
+
+  Github API : POST /repos/:owner/:repo/milestones Input
+>
+     {
+       "title": "v1.0",
+       "state": "open",
+       "description": "Tracking milestone for version 1.0",
+       "due_on": "2012-10-09T23:39:01Z"
+     }
+<
+
+githubapi#issues#UpdateMilestone({owner}, {repo}, {num}, {milestone}, {user},
+  {password})                             *githubapi#issues#UpdateMilestone()*
+  Update a milestone
+
+  Github API : PATCH /repos/:owner/:repo/milestones/:number
+
+githubapi#issues#DeleteMilestone({owner}, {repo}, {num}, {user}, {password})
+                                          *githubapi#issues#DeleteMilestone()*
+  Delete a milestone
+
+  Github API : DELETE /repos/:owner/:repo/milestones/:number
+
 githubapi#labels#GetAll({owner}, {repo})           *githubapi#labels#GetAll()*
   List all labels for this repository
 

@@ -333,3 +333,88 @@ endfunction
 function! githubapi#issues#Get_event(owner,repo,id) abort
     return githubapi#util#Get('repos/' . a:owner . '/' . a:repo . '/issues/events/' . a:id, [])
 endfunction
+
+""
+" @public
+" List milestones for a repository
+"
+" Github API : GET /repos/:owner/:repo/milestones
+" Parameters >
+"   Name      Type      Description
+"   state     string The state of the milestone. Either open, closed, or all.
+"                    Default: open
+"   sort      string What to sort results by. Either due_on or completeness.
+"                    Default: due_on
+"   direction string The direction of the sort. Either asc or desc.
+"                    Default: asc
+" <
+function! githubapi#issues#ListAllMilestones(owner,repo,state,sort,direction) abort
+    let url = join(['repos', a:owner, a:repo, 'milestones'], '/')
+    if index(['open', 'closed', 'all'], a:state) == -1
+        let url = url . '?state=open'
+    else
+        let url = url . '?state=' . a:state
+    endif
+    if index(['due_on', 'completeness'], a:sort) == -1
+        let url = url . '&sort=due_on'
+    else
+        let url = url . '&sort=' . a:sort
+    endif
+    if index(['asc', 'desc'], a:direction) == -1
+        let url = url . '&direction=asc'
+    else
+        let url = url . '&direction=' . a:direction
+    endif
+    return githubapi#util#Get(url, [])
+endfunction
+
+""
+" @public
+" Get a single milestone
+"
+" Github API : GET /repos/:owner/:repo/milestones/:number
+function! githubapi#issues#GetSingleMilestone(owner,repo,num) abort
+    return githubapi#util#Get(join(['repos', a:owner, a:repo, 'milestones', a:num], '/'), [])
+endfunction
+
+""
+" @public
+" Create a milestone
+"
+" Github API : POST /repos/:owner/:repo/milestones
+" Input >
+"    {
+"      "title": "v1.0",
+"      "state": "open",
+"      "description": "Tracking milestone for version 1.0",
+"      "due_on": "2012-10-09T23:39:01Z"
+"    }
+" <
+function! githubapi#issues#CreateMilestone(owner,repo,milestone,user,password) abort
+    return githubapi#util#GetStatus(join(['repos', a:owner, a:repo, 'milestones'], '/'),
+                \ ['-X', 'POST',
+                \ '-d', json_encode(a:milestone),
+                \ '-u', a:user . ':' . a:password]) == 201
+endfunction
+
+""
+" @public
+" Update a milestone
+"
+" Github API : PATCH /repos/:owner/:repo/milestones/:number
+function! githubapi#issues#UpdateMilestone(owner,repo,num,milestone,user,password) abort
+    return githubapi#util#Get(join(['repos', a:owner, a:repo, 'milestones', a:num], '/'),
+                \ ['-X', 'PATCH',
+                \ '-d', json_encode(a:milestone),
+                \ '-u', a:user . ':' . a:password])
+endfunction
+
+""
+" @public
+" Delete a milestone
+"
+" Github API : DELETE /repos/:owner/:repo/milestones/:number
+function! githubapi#issues#DeleteMilestone(owner,repo,num,user,password) abort
+    return githubapi#util#GetStatus(join(['repos', a:owner, a:repo, 'milestones', a:num], '/'),
+                \ ['-u', a:user . ':' . a:password]) == 204
+endfunction
