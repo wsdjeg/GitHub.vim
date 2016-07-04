@@ -317,6 +317,34 @@ githubapi#gist#Del({user}, {password}, {id})            *githubapi#gist#Del()*
 
   Github API : DELETE /gists/:id
 
+githubapi#gist#ListComments({id})              *githubapi#gist#ListComments()*
+  List comments on a gist
+
+  Github API : GET /gists/:gist_id/comments
+
+githubapi#gist#GetComment({gistid}, {commentid}) *githubapi#gist#GetComment()*
+  Get a single comment
+
+  Github API : GET /gists/:gist_id/comments/:id
+
+githubapi#gist#CreateComment({id}, {user}, {password}, {body})
+                                              *githubapi#gist#CreateComment()*
+  Create a comment
+
+  Github API : POST /gists/:gist_id/comments
+
+githubapi#gist#EditComment({id}, {user}, {password}, {body})
+                                                *githubapi#gist#EditComment()*
+  Edit a comment
+
+  Github API : PATCH /gists/:gist_id/comments
+
+githubapi#gist#DelComment({gistid}, {id}, {user}, {password})
+                                                 *githubapi#gist#DelComment()*
+  Delete a comment
+
+  Github API : DELETE /gists/:gist_id/comments/:id
+
 githubapi#issues#List_All({user}, {password})    *githubapi#issues#List_All()*
   List issues List all issues assigned to the authenticated user across all
   visible repositories including owned repositories, member repositories, and
@@ -484,6 +512,93 @@ githubapi#issues#Get_event({owner}, {repo}, {id})
   Get a single event
 
   Github API : GET /repos/:owner/:repo/issues/events/:id
+
+githubapi#labels#GetAll({owner}, {repo})           *githubapi#labels#GetAll()*
+  List all labels for this repository
+
+  Github API : GET /repos/:owner/:repo/labels
+
+githubapi#labels#Get({owner}, {repo}, {name})         *githubapi#labels#Get()*
+  Get a single label
+
+  Github API : GET /repos/:owner/:repo/labels/:name
+
+githubapi#labels#Create({owner}, {repo}, {user}, {password}, {label})
+                                                   *githubapi#labels#Create()*
+  Create a label
+
+  Github API : POST /repos/:owner/:repo/labels Input:
+>
+    {
+        "name": "bug",
+        "color": "f29513"
+    }
+<
+
+githubapi#labels#Update({owner}, {repo}, {user}, {password}, {label})
+                                                   *githubapi#labels#Update()*
+  Update a label
+
+  Github API : PATCH /repos/:owner/:repo/labels/:name Input:
+>
+    {
+        "name": "bug",
+        "color": "f29513"
+    }
+<
+
+githubapi#labels#Delete({owner}, {repo}, {name}, {user}, {password})
+                                                   *githubapi#labels#Delete()*
+  Delete a label
+
+  Github API : DELETE /repos/:owner/:repo/labels/:name
+
+githubapi#labels#List({owner}, {repo}, {num})        *githubapi#labels#List()*
+  List labels on an issue
+
+  Github API : GET /repos/:owner/:repo/issues/:number/labels
+
+githubapi#labels#Add({owner}, {repo}, {num}, {labels}, {user}, {password})
+                                                      *githubapi#labels#Add()*
+  Add labels to an issue
+
+  Github API : POST /repos/:owner/:repo/issues/:number/labels Input:
+>
+    [
+        "Label1",
+        "Label2"
+    ]
+<
+
+githubapi#labels#Remove({owner}, {repo}, {num}, {name}, {user}, {password})
+                                                   *githubapi#labels#Remove()*
+  Remove a label from an issue
+
+  Github API : DELETE /repos/:owner/:repo/issues/:number/labels/:name
+
+githubapi#labels#Replace({owner}, {repo}, {num}, {labels}, {user}, {password})
+                                                  *githubapi#labels#Replace()*
+  Replace all labels for an issue
+
+  Github API : PUT /repos/:owner/:repo/issues/:number/labels Input:
+>
+    [
+        "Label1",
+        "Label2"
+    ]
+<
+
+githubapi#labels#RemoveAll({owner}, {repo}, {num}, {user}, {password})
+                                                *githubapi#labels#RemoveAll()*
+  Remove all label from an issue
+
+  Github API : DELETE /repos/:owner/:repo/issues/:number/labels
+
+githubapi#labels#ListAllinMilestone({owner}, {repo}, {num})
+                                       *githubapi#labels#ListAllinMilestone()*
+  Get labels for every issue in a milestone
+
+  Github API : GET /repos/:owner/:repo/milestones/:number/labels
 
 githubapi#util#Get_current_time()          *githubapi#util#Get_current_time()*
   Get current time in a timestamp in ISO 8601 format: YYYY-MM-DDTHH:MM:SSZ
