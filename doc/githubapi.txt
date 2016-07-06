@@ -17,6 +17,12 @@ default : https://api.github.com/
 ==============================================================================
 FUNCTIONS                                                *githubapi-functions*
 
+githubapi#ListAllOrgs({since})                       *githubapi#ListAllOrgs()*
+  List all orgs in github,{since} is the integer ID of the last Organization
+  that you've seen.
+
+  Github API : GET /organizations
+
 githubapi#activity#List_events()            *githubapi#activity#List_events()*
   List public events
 
@@ -646,6 +652,11 @@ githubapi#labels#ListAllinMilestone({owner}, {repo}, {num})
   Get labels for every issue in a milestone
 
   Github API : GET /repos/:owner/:repo/milestones/:number/labels
+
+githubapi#user#ListOrgs({auth})                    *githubapi#user#ListOrgs()*
+  List all orgs for the auth user.
+
+  Github API : GET /user/orgs
 
 githubapi#util#Get_current_time()          *githubapi#util#Get_current_time()*
   Get current time in a timestamp in ISO 8601 format: YYYY-MM-DDTHH:MM:SSZ

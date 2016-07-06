@@ -51,3 +51,12 @@ function! githubapi#users#ListFollowing(username) abort
    endfor
    return following
 endfunction
+
+""
+" @public
+" List orgs of a specified user.
+"
+" Github API : /users/:username/orgs
+function! githubapi#users#ListAllOrgs(user) abort
+    return githubapi#util#Get(join(['users', a:user, 'orgs'], '/'))
+endfunction
