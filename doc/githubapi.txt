@@ -653,10 +653,134 @@ githubapi#labels#ListAllinMilestone({owner}, {repo}, {num})
 
   Github API : GET /repos/:owner/:repo/milestones/:number/labels
 
+githubapi#orgs#Get({org})                               *githubapi#orgs#Get()*
+  Get an organization
+
+  Github API : GET /orgs/:org
+
+githubapi#orgs#Edit({org}, {orgdata}, {user}, {password})
+                                                       *githubapi#orgs#Edit()*
+  Edit an organization
+
+  Github API : PATCH /orgs/:org Input:
+>
+     {
+       "billing_email": "support@github.com",
+       "blog": "https://github.com/blog",
+       "company": "GitHub",
+       "email": "support@github.com",
+       "location": "San Francisco",
+       "name": "github",
+       "description": "GitHub, the company."
+     }
+<
+
+githubapi#orgs#ListMembers({org}, {filter}, {role})
+                                                *githubapi#orgs#ListMembers()*
+  List all users who are members of an organization.
+
+    {filter}Filter members returned in the list. Can be one of:
+    * 2fa_disabled: Members without two-factor authentication enabled.
+      Available for organization owners.
+    * all: All members the authenticated user can see.
+    * Default: all.
+
+    {role}Filter members returned by their role. Can be one of:
+    * all: All members of the organization, regardless of role.
+    * admin: Organization owners.
+    * member: Non-owner organization members.
+    * Default: all.
+
+  Github API : GET /orgs/:org/members
+
+githubapi#orgs#CheckMembership({org}, {username}, {user}, {password})
+                                            *githubapi#orgs#CheckMembership()*
+  Check if a user is, publicly or privately, a member of the organization.
+
+  Status:
+
+    * 204: requester is an organization member and user is a member
+    * 404: requester is an organization member and user is not a member,
+      requester is not an organization member and is inquiring about
+      themselves
+    * 302: requester is not an organization member
+
+  Github API : GET /orgs/:org/members/:username
+
+githubapi#orgs#DeleteMember({org}, {username}, {user}, {password})
+                                               *githubapi#orgs#DeleteMember()*
+  Remove a member
+
+  Github API : DELETE /orgs/:org/members/:username
+
+githubapi#orgs#ListPublicMembers({org})   *githubapi#orgs#ListPublicMembers()*
+  List public members of an org
+
+  Github API : GET /orgs/:org/public_members
+
+githubapi#orgs#CheckPublicMembership({org}, {username})
+                                      *githubapi#orgs#CheckPublicMembership()*
+  Check public membership
+
+  Github API : GET /orgs/:org/public_members/:username
+
+githubapi#orgs#Publicize({org}, {user}, {password})
+                                                  *githubapi#orgs#Publicize()*
+  Publicize a user's membership The user can publicize their own membership.
+  (A user cannot publicize the membership for another user.)
+
+  Github API : PUT /orgs/:org/public_members/:username
+
+githubapi#orgs#ConcealUser({org}, {user}, {password})
+                                                *githubapi#orgs#ConcealUser()*
+  Conceal a user's membership
+
+  Github API : DELETE /orgs/:org/public_members/:username
+
+githubapi#orgs#GetMemberships({org}, {username}, {user}, {password})
+                                             *githubapi#orgs#GetMemberships()*
+  Get organization membership
+
+  Github API : GET /orgs/:org/memberships/:username
+
+githubapi#orgs#UpdateMembership({org}, {username}, {user}, {password}, {role})
+                                           *githubapi#orgs#UpdateMembership()*
+  Add or update organization membership,use admin or member for {role}
+
+  Github API : PUT /orgs/:org/memberships/:username
+
+githubapi#orgs#RemoveMembership({org}, {username}, {user}, {password})
+                                           *githubapi#orgs#RemoveMembership()*
+  Remove organization membership
+
+  Github API : DELETE /orgs/:org/memberships/:username
+
 githubapi#user#ListOrgs({auth})                    *githubapi#user#ListOrgs()*
   List all orgs for the auth user.
 
   Github API : GET /user/orgs
+
+githubapi#user#GetOrgMembership({user}, {password}, {org})
+                                           *githubapi#user#GetOrgMembership()*
+  Get your organization membership
+
+  Github API : GET /user/memberships/orgs/:org
+
+githubapi#user#EditOrgMembership({org}, {state}, {user}, {password})
+                                          *githubapi#user#EditOrgMembership()*
+  Edit your organization membership
+
+  Github API : PATCH /user/memberships/orgs/:org Input:
+>
+     {
+       "state": "active"
+     }
+<
+
+githubapi#users#ListAllOrgs({user})            *githubapi#users#ListAllOrgs()*
+  List orgs of a specified user.
+
+  Github API : /users/:username/orgs
 
 githubapi#util#Get_current_time()          *githubapi#util#Get_current_time()*
   Get current time in a timestamp in ISO 8601 format: YYYY-MM-DDTHH:MM:SSZ
