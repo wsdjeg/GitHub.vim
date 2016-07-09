@@ -94,17 +94,23 @@
  - [List events for a repository](#List-events-for-a-repository)
  - [Get a single event](#Get-a-single-event)
 - [Labels](#labels)
- - [List all labels for this repository](#list all labels for this repository)
- - [Get a single label](#get a single label)
- - [Create a label](#create a label)
- - [Update a label](#update a label)
- - [Delete a label](#delete a label)
- - [List labels on an issue](#list labels on an issue)
- - [Add labels to an issue](#add labels to an issue)
- - [Remove a label from an issue](#remove a label from an issue)
- - [Replace all labels for an issue](#replace all labels for an issue)
- - [Remove all labels from an issue](#remove all labels from an issue)
- - [Get labels for every issue in a milestone](#get labels for every issue in a milestone)
+ - [List all labels for this repository](#list-all-labels-for-this-repository)
+ - [Get a single label](#get-a-single-label)
+ - [Create a label](#create-a-label)
+ - [Update a label](#update-a-label)
+ - [Delete a label](#delete-a-label)
+ - [List labels on an issue](#list-labels-on-an-issue)
+ - [Add labels to an issue](#add-labels-to-an-issue)
+ - [Remove a label from an issue](#remove-a-label-from-an-issue)
+ - [Replace all labels for an issue](#replace-all-labels-for-an-issue)
+ - [Remove all labels from an issue](#remove-all-labels-from-an-issue)
+ - [Get labels for every issue in a milestone](#get-labels-for-every-issue-in-a-milestone)
+- [Milestones](#milestones)
+ - [List milestones for a repository](#list milestones for a repository)
+ - [Get a single milestone](#get a single milestone)
+ - [Create a milestone](#create a milestone)
+ - [Update a milestone](#update a milestone)
+ - [Delete a milestone](#delete a milestone)
 
 #### [Migration](#migration-8)
 #### [Miscellaneous](#miscellaneous-9)
@@ -442,13 +448,67 @@ This call lists all the available assignees to which issues may be assigned.
 ```
 #### Labels
 ##### List all labels for this repository
+```
+    githubapi#labels#GetAll(owner,repo)
+```
 ##### Get a single label
+```
+    githubapi#labels#Get(owner,repo,name)
+```
 ##### Create a label
+```
+    githubapi#labels#Create(owner,repo,user,password,label)
+```
 ##### Update a label
+```
+    githubapi#labels#Update(owner,repo,user,password,label)
+```
 ##### Delete a label
+```
+    githubapi#labels#Delete(owner,repo,name,user,password)
+```
 ##### List labels on an issue
+```
+    githubapi#labels#List(owner,repo,num)
+```
 ##### Add labels to an issue
+```
+    githubapi#labels#Add(owner,repo,num,labels,user,password)
+```
 ##### Remove a label from an issue
+```
+    githubapi#labels#Remove(owner,repo,num,name,user,password)
+```
 ##### Replace all labels for an issue
+```
+    githubapi#labels#Replace(owner,repo,num,labels,user,password)
+```
 ##### Remove all labels from an issue
+```
+    githubapi#labels#RemoveAll(owner,repo,num,user,password)
+```
 ##### Get labels for every issue in a milestone
+```
+    githubapi#labels#ListAllinMilestone(owner,repo,num)
+```
+#### Milestones
+##### List milestones for a repository
+```
+    githubapi#issues#ListAllMilestones(owner,repo,state,sort,direction)
+```
+##### Get a single milestone
+```
+    githubapi#issues#GetSingleMilestone(owner,repo,num)
+```
+##### Create a milestone
+```
+    githubapi#issues#CreateMilestone(owner,repo,milestone,user,password)
+```
+##### Update a milestone
+```
+    githubapi#issues#UpdateMilestone(owner,repo,num,milestone,user,password)
+```
+##### Delete a milestone
+```
+    githubapi#issues#DeleteMilestone(owner,repo,num,user,password)
+```

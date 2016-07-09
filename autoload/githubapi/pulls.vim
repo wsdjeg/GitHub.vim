@@ -95,5 +95,8 @@ endfunction
 "
 " Github API : PUT /repos/:owner/:repo/pulls/:number/merge
 function! githubapi#pulls#Merge(owner,repo,number,msg,user,password) abort
-    
+   return githubapi#util#Get(join(['repos', a:owner, a:repo, 'pulls', a:number, 'merge'], '/'),
+               \ ['-X', 'PUT',
+               \ '-d', json_encode(a:msg),
+               \ '-u', a:user . ':' . a:password])
 endfunction
