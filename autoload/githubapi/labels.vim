@@ -20,13 +20,13 @@ endfunction
 " @public
 " Create a label
 "
-" Github API : POST /repos/:owner/:repo/labels
 " Input: >
 "   {
 "       "name": "bug",
 "       "color": "f29513"
 "   }
 " <
+" Github API : POST /repos/:owner/:repo/labels
 function! githubapi#labels#Create(owner,repo,user,password,label) abort
     return githubapi#util#GetStatus(join(['repos', a:owner, a:repo, 'labels'], '/'),
                 \ ['-X', 'POST',
@@ -38,13 +38,13 @@ endfunction
 " @public
 " Update a label
 "
-" Github API : PATCH /repos/:owner/:repo/labels/:name
 " Input: >
 "   {
 "       "name": "bug",
 "       "color": "f29513"
 "   }
 " <
+" Github API : PATCH /repos/:owner/:repo/labels/:name
 function! githubapi#labels#Update(owner,repo,user,password,label) abort
     return githubapi#util#Get(join(['repos', a:owner, a:repo, 'labels'], '/'),
                 \ ['-X', 'PATCH',
@@ -76,13 +76,13 @@ endfunction
 " @public
 " Add labels to an issue
 "
-" Github API : POST /repos/:owner/:repo/issues/:number/labels
 " Input: >
 "   [
 "       "Label1",
 "       "Label2"
 "   ]
 " <
+" Github API : POST /repos/:owner/:repo/issues/:number/labels
 function! githubapi#labels#Add(owner,repo,num,labels,user,password) abort
     return githubapi#util#Get(join(['repos', a:owner, a:repo, 'issues', a:num, 'labels'], '/'),
                 \ ['-X', 'POST', '-d', json_encode(a:labels),
@@ -104,13 +104,13 @@ endfunction
 " @public
 " Replace all labels for an issue
 "
-" Github API : PUT /repos/:owner/:repo/issues/:number/labels
 " Input: >
 "   [
 "       "Label1",
 "       "Label2"
 "   ]
 " <
+" Github API : PUT /repos/:owner/:repo/issues/:number/labels
 function! githubapi#labels#Replace(owner,repo,num,labels,user,password) abort
     return githubapi#util#Get(join(['repos', a:owner, a:repo, 'issues', a:num, 'labels'], '/'),
                 \ ['-X', 'PUT', '-d', json_encode(a:labels),

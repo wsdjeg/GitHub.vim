@@ -247,7 +247,7 @@ githubapi#gist#Create({desc}, {filename}, {content}, {public}, {user},
   {password})                                        *githubapi#gist#Create()*
   Create a gist
 
-  POST : /gists Input:
+  Input:
 >
      {
        "description": "the description for this gist",
@@ -259,12 +259,13 @@ githubapi#gist#Create({desc}, {filename}, {content}, {public}, {user},
        }
      }
 <
+  POST : /gists
 
 githubapi#gist#Edit({desc}, {filename}, {content}, {public}, {user},
   {password}, {id})                                    *githubapi#gist#Edit()*
   Edit a gist
 
-  PATCH : /gists/:id Input:
+  Input:
 >
      {
        "description": "the description for this gist",
@@ -283,9 +284,9 @@ githubapi#gist#Edit({desc}, {filename}, {content}, {public}, {user},
        }
      }
 <
-  Note: All files from the previous version of the gist are carried over by
-  default if not included in the object. Deletes can be performed by including
-  the filename with a null object.
+  PATCH : /gists/:id Note: All files from the previous version of the gist are
+  carried over by default if not included in the object. Deletes can be
+  performed by including the filename with a null object.
 
 githubapi#gist#ListCommits({id})                *githubapi#gist#ListCommits()*
   List gist commits
@@ -379,8 +380,6 @@ githubapi#issues#Create({owner}, {repo}, {user}, {password}, {issue})
                                                    *githubapi#issues#Create()*
   Create an issue
 
-  Github API : POST /repos/:owner/:repo/issues
-
   Input:
 >
     {
@@ -393,6 +392,7 @@ githubapi#issues#Create({owner}, {repo}, {user}, {password}, {issue})
      ]
     }
 <
+  Github API : POST /repos/:owner/:repo/issues
 
 githubapi#issues#Lock({owner}, {repo}, {num}, {user}, {password})
                                                      *githubapi#issues#Lock()*
@@ -422,10 +422,6 @@ githubapi#issues#Addassignee({owner}, {repo}, {num}, {assignees}, {user},
   {password})                                 *githubapi#issues#Addassignee()*
   Add assignees to an Issue
 
-  Github API : POST /repos/:owner/:repo/issues/:number/assignees
-
-  NOTE: need `Accep:application/vnd.github.cerberus-preview+json`
-
   Input:
 >
     {
@@ -435,13 +431,14 @@ githubapi#issues#Addassignee({owner}, {repo}, {num}, {assignees}, {user},
      ]
     }
 <
+  Github API : POST /repos/:owner/:repo/issues/:number/assignees
+
+  NOTE: need `Accep:application/vnd.github.cerberus-preview+json`
 
 githubapi#issues#Removeassignee({owner}, {repo}, {num}, {assignees}, {user},
   {password})                              *githubapi#issues#Removeassignee()*
   Remove assignees from an Issue
 
-  DELETE /repos/:owner/:repo/issues/:number/assignees
-
   Input:
 >
     {
@@ -451,6 +448,8 @@ githubapi#issues#Removeassignee({owner}, {repo}, {num}, {assignees}, {user},
      ]
     }
 <
+  DELETE /repos/:owner/:repo/issues/:number/assignees
+
   NOTE: need `Accep:application/vnd.github.cerberus-preview+json`
 
 githubapi#issues#List_comments({owner}, {repo}, {num}, {since})
@@ -544,7 +543,7 @@ githubapi#issues#CreateMilestone({owner}, {repo}, {milestone}, {user},
   {password})                             *githubapi#issues#CreateMilestone()*
   Create a milestone
 
-  Github API : POST /repos/:owner/:repo/milestones Input
+  Input
 >
      {
        "title": "v1.0",
@@ -553,6 +552,7 @@ githubapi#issues#CreateMilestone({owner}, {repo}, {milestone}, {user},
        "due_on": "2012-10-09T23:39:01Z"
      }
 <
+  Github API : POST /repos/:owner/:repo/milestones
 
 githubapi#issues#UpdateMilestone({owner}, {repo}, {num}, {milestone}, {user},
   {password})                             *githubapi#issues#UpdateMilestone()*
@@ -580,25 +580,27 @@ githubapi#labels#Create({owner}, {repo}, {user}, {password}, {label})
                                                    *githubapi#labels#Create()*
   Create a label
 
-  Github API : POST /repos/:owner/:repo/labels Input:
+  Input:
 >
     {
         "name": "bug",
         "color": "f29513"
     }
 <
+  Github API : POST /repos/:owner/:repo/labels
 
 githubapi#labels#Update({owner}, {repo}, {user}, {password}, {label})
                                                    *githubapi#labels#Update()*
   Update a label
 
-  Github API : PATCH /repos/:owner/:repo/labels/:name Input:
+  Input:
 >
     {
         "name": "bug",
         "color": "f29513"
     }
 <
+  Github API : PATCH /repos/:owner/:repo/labels/:name
 
 githubapi#labels#Delete({owner}, {repo}, {name}, {user}, {password})
                                                    *githubapi#labels#Delete()*
@@ -615,13 +617,14 @@ githubapi#labels#Add({owner}, {repo}, {num}, {labels}, {user}, {password})
                                                       *githubapi#labels#Add()*
   Add labels to an issue
 
-  Github API : POST /repos/:owner/:repo/issues/:number/labels Input:
+  Input:
 >
     [
         "Label1",
         "Label2"
     ]
 <
+  Github API : POST /repos/:owner/:repo/issues/:number/labels
 
 githubapi#labels#Remove({owner}, {repo}, {num}, {name}, {user}, {password})
                                                    *githubapi#labels#Remove()*
@@ -633,13 +636,14 @@ githubapi#labels#Replace({owner}, {repo}, {num}, {labels}, {user}, {password})
                                                   *githubapi#labels#Replace()*
   Replace all labels for an issue
 
-  Github API : PUT /repos/:owner/:repo/issues/:number/labels Input:
+  Input:
 >
     [
         "Label1",
         "Label2"
     ]
 <
+  Github API : PUT /repos/:owner/:repo/issues/:number/labels
 
 githubapi#labels#RemoveAll({owner}, {repo}, {num}, {user}, {password})
                                                 *githubapi#labels#RemoveAll()*
@@ -662,7 +666,7 @@ githubapi#orgs#Edit({org}, {orgdata}, {user}, {password})
                                                        *githubapi#orgs#Edit()*
   Edit an organization
 
-  Github API : PATCH /orgs/:org Input:
+  Input:
 >
      {
        "billing_email": "support@github.com",
@@ -674,6 +678,7 @@ githubapi#orgs#Edit({org}, {orgdata}, {user}, {password})
        "description": "GitHub, the company."
      }
 <
+  Github API : PATCH /orgs/:org
 
 githubapi#orgs#ListMembers({org}, {filter}, {role})
                                                 *githubapi#orgs#ListMembers()*
@@ -755,6 +760,77 @@ githubapi#orgs#RemoveMembership({org}, {username}, {user}, {password})
 
   Github API : DELETE /orgs/:org/memberships/:username
 
+githubapi#pulls#ListAllPRs({owner}, {repo})     *githubapi#pulls#ListAllPRs()*
+  List all the PRs of a repo.
+
+  Github API : GET /repos/:owner/:repo/pulls
+
+githubapi#pulls#Get({owner}, {repo}, {number})         *githubapi#pulls#Get()*
+  Get a single pull request
+
+  Github API : GET /repos/:owner/:repo/pulls/:number
+
+githubapi#pulls#create({owner}, {repo}, {user}, {password}, {pull})
+                                                    *githubapi#pulls#create()*
+  Create a pull request
+
+  Input:
+>
+     {
+       "title": "Amazing new feature",
+       "body": "Please pull this in!",
+       "head": "octocat:new-feature",
+       "base": "master"
+     }
+<
+  or:
+>
+     {
+       "issue": 5,
+       "head": "octocat:new-feature",
+       "base": "master"
+     }
+<
+  Github API : POST /repos/:owner/:repo/pulls
+
+githubapi#pulls#update({owner}, {repo}, {number}, {pull}, {user}, {password})
+                                                    *githubapi#pulls#update()*
+  Update a pull request
+
+  Input:
+>
+     {
+       "title": "new title",
+       "body": "updated body",
+       "state": "open"
+     }
+<
+  Github API : PATCH /repos/:owner/:repo/pulls/:number
+
+githubapi#pulls#ListCommits({owner}, {repo}, {number})
+                                               *githubapi#pulls#ListCommits()*
+  List commits on a pull request
+
+  Github API : GET /repos/:owner/:repo/pulls/:number/commits
+
+githubapi#pulls#ListFiles({owner}, {repo}, {number})
+                                                 *githubapi#pulls#ListFiles()*
+  List pull requests files
+
+  Github API : GET /repos/:owner/:repo/pulls/:number/files
+
+githubapi#pulls#CheckMerged({owner}, {repo}, {number})
+                                               *githubapi#pulls#CheckMerged()*
+  Get if a pull request has been merged
+
+  Github API : GET /repos/:owner/:repo/pulls/:number/merge
+
+githubapi#pulls#Merge({owner}, {repo}, {number}, {msg}, {user}, {password})
+                                                     *githubapi#pulls#Merge()*
+  Merge a pull request (Merge Button)
+
+  Github API : PUT /repos/:owner/:repo/pulls/:number/merge
+
 githubapi#user#ListOrgs({auth})                    *githubapi#user#ListOrgs()*
   List all orgs for the auth user.
 
@@ -770,12 +846,13 @@ githubapi#user#EditOrgMembership({org}, {state}, {user}, {password})
                                           *githubapi#user#EditOrgMembership()*
   Edit your organization membership
 
-  Github API : PATCH /user/memberships/orgs/:org Input:
+  Input:
 >
      {
        "state": "active"
      }
 <
+  Github API : PATCH /user/memberships/orgs/:org
 
 githubapi#users#ListAllOrgs({user})            *githubapi#users#ListAllOrgs()*
   List orgs of a specified user.

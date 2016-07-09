@@ -21,7 +21,6 @@ endfunction
 " @public
 " Edit an organization
 "
-" Github API : PATCH /orgs/:org
 " Input: >
 "    {
 "      "billing_email": "support@github.com",
@@ -33,6 +32,7 @@ endfunction
 "      "description": "GitHub, the company."
 "    }
 " <
+" Github API : PATCH /orgs/:org
 function! githubapi#orgs#Edit(org,orgdata,user,password) abort
     return githubapi#util#Get(join(['orgs', a:org], '/'),
                 \ ['-X', 'PATCH', '-d', json_encode(a:orgdata),

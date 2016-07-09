@@ -32,12 +32,12 @@ endfunction
 " @public
 " Edit your organization membership
 "
-" Github API : PATCH /user/memberships/orgs/:org
 " Input: >
 "    {
 "      "state": "active"
 "    }
 " <
+" Github API : PATCH /user/memberships/orgs/:org
 function! githubapi#user#EditOrgMembership(org,state,user,password) abort
     return githubapi#util#Get(join(['user', 'memberships', 'org', a:org], '/'),
                 \ ['-X', 'PATCH',

@@ -65,8 +65,6 @@ endfunction
 " @public
 " Create an issue
 "
-" Github API : POST /repos/:owner/:repo/issues
-"
 " Input: >
 "   {
 "    "title": "Found a bug",
@@ -78,6 +76,7 @@ endfunction
 "    ]
 "   }
 " <
+" Github API : POST /repos/:owner/:repo/issues
 function! githubapi#issues#Create(owner,repo,user,password,issue) abort
     return githubapi#util#Get('repos/' . a:owner . '/' . a:repo . '/issues',
                 \ ['-X', 'POST', '-d', json_encode(a:issue),
@@ -138,10 +137,6 @@ endfunction
 " @public
 " Add assignees to an Issue
 "
-" Github API : POST /repos/:owner/:repo/issues/:number/assignees
-"
-" NOTE: need `Accep:application/vnd.github.cerberus-preview+json`
-"
 " Input: >
 "   {
 "    "assignees": [
@@ -150,6 +145,9 @@ endfunction
 "    ]
 "   }
 " <
+" Github API : POST /repos/:owner/:repo/issues/:number/assignees
+"
+" NOTE: need `Accep:application/vnd.github.cerberus-preview+json`
 function! githubapi#issues#Addassignee(owner,repo,num,assignees,user,password) abort
     return githubapi#util#Get('repos/' . a:owner . '/' . a:repo . '/issues/' . a:num . '/assignees',
                 \ ['-X', 'POST', '-d', json_encode(a:assignees), '-u', a:user . ':' . a:password,
@@ -160,8 +158,6 @@ endfunction
 " @public
 " Remove assignees from an Issue
 "
-" DELETE /repos/:owner/:repo/issues/:number/assignees
-"
 " Input: >
 "   {
 "    "assignees": [
@@ -170,6 +166,8 @@ endfunction
 "    ]
 "   }
 " <
+" DELETE /repos/:owner/:repo/issues/:number/assignees
+"
 " NOTE: need `Accep:application/vnd.github.cerberus-preview+json`
 function! githubapi#issues#Removeassignee(owner,repo,num,assignees,user,password) abort
     return githubapi#util#Get('repos/' . a:owner . '/' . a:repo . '/issues/' . a:num . '/assignees',
@@ -381,7 +379,6 @@ endfunction
 " @public
 " Create a milestone
 "
-" Github API : POST /repos/:owner/:repo/milestones
 " Input >
 "    {
 "      "title": "v1.0",
@@ -390,6 +387,7 @@ endfunction
 "      "due_on": "2012-10-09T23:39:01Z"
 "    }
 " <
+" Github API : POST /repos/:owner/:repo/milestones
 function! githubapi#issues#CreateMilestone(owner,repo,milestone,user,password) abort
     return githubapi#util#GetStatus(join(['repos', a:owner, a:repo, 'milestones'], '/'),
                 \ ['-X', 'POST',

@@ -69,7 +69,6 @@ endfunction
 " @public
 " Create a gist
 "
-" POST : /gists
 " Input: >
 "    {
 "      "description": "the description for this gist",
@@ -81,6 +80,7 @@ endfunction
 "      }
 "    }
 " <
+" POST : /gists
 function! githubapi#gist#Create(desc,filename,content,public,user,password) abort
     let data = {}
     let data.description = a:desc
@@ -94,7 +94,6 @@ endfunction
 " @public
 " Edit a gist
 "
-" PATCH : /gists/:id
 " Input: >
 "    {
 "      "description": "the description for this gist",
@@ -113,6 +112,7 @@ endfunction
 "      }
 "    }
 " <
+" PATCH : /gists/:id
 " Note: All files from the previous version of the gist are carried over by default
 " if not included in the object. Deletes can be performed by including the filename
 " with a null object.
