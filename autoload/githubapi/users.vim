@@ -1,3 +1,13 @@
+""
+" @public
+" Get all users
+"
+" Github API : GET /users
+function! githubapi#users#GetAllUsers() abort
+    return githubapi#util#Get('users', [])
+endfunction
+
+
 function! githubapi#users#starred(user,page) abort
     return json_decode(join(systemlist('curl -s https://api.github.com/users/' .
                 \a:user . '/starred' . '?page=' . a:page ),"\n"))
@@ -24,12 +34,6 @@ endfunction
 " GET /users/:username
 function! githubapi#users#GetUser(username) abort
    return githubapi#util#Get('users/' . a:username, [])
-endfunction
-
-"Get the authenticated user
-"GET /user
-function! githubapi#users#GetAuthUser(username,password) abort
-    return githubapi#util#Get('user' , ['-u', a:username . ':' . a:password])
 endfunction
 
 "List followers of a user
@@ -59,4 +63,13 @@ endfunction
 " Github API : /users/:username/orgs
 function! githubapi#users#ListAllOrgs(user) abort
     return githubapi#util#Get(join(['users', a:user, 'orgs'], '/'))
+endfunction
+
+""
+" @public
+" Check if one user follows another
+"
+" Github API : GET /users/:username/following/:target_user
+function! githubapi#users#CheckTargetFollow(username,target) abort
+    return githubapi#util#GetStatus(join(['users', a:username, 'following', a:target], '/'),[])
 endfunction

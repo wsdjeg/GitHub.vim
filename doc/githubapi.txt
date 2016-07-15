@@ -831,6 +831,24 @@ githubapi#pulls#Merge({owner}, {repo}, {number}, {msg}, {user}, {password})
 
   Github API : PUT /repos/:owner/:repo/pulls/:number/merge
 
+githubapi#user#GetFollowers({user}, {password})
+                                               *githubapi#user#GetFollowers()*
+  List the authenticated user's followers:
+
+  Github API : GET /user/followers
+
+githubapi#user#CheckFollowing({username}, {user}, {password})
+                                             *githubapi#user#CheckFollowing()*
+  Check if you are following a user
+
+  Github API : GET /user/following/:username
+
+githubapi#user#Follow({username}, {user}, {password})
+                                                     *githubapi#user#Follow()*
+  follow a user
+
+  Github API :  PUT /user/following/:username
+
 githubapi#user#ListOrgs({auth})                    *githubapi#user#ListOrgs()*
   List all orgs for the auth user.
 
@@ -854,10 +872,62 @@ githubapi#user#EditOrgMembership({org}, {state}, {user}, {password})
 <
   Github API : PATCH /user/memberships/orgs/:org
 
+githubapi#user#UpdateUser({data}, {user}, {password})
+                                                 *githubapi#user#UpdateUser()*
+  Update the authenticated user
+
+  Input
+>
+     {
+     "name": "monalisa octocat",
+     "email": "octocat@github.com",
+     "blog": "https://github.com/blog",
+     "company": "GitHub",
+     "location": "San Francisco",
+     "hireable": true,
+     "bio": "There once..."
+     }
+<
+  Github API : PATCH /user
+
+githubapi#user#ListEmails({user}, {password})    *githubapi#user#ListEmails()*
+  List emails for a user
+
+  Github API : GET /user/emails
+
+githubapi#user#AddEmails({user}, {password}, {emails})
+                                                  *githubapi#user#AddEmails()*
+  Add email address(es)
+
+  Github API : POST /user/emails
+
+githubapi#user#DeleteEmails({user}, {password}, {emails})
+                                               *githubapi#user#DeleteEmails()*
+  Delete email address(es)
+
+  Github API : DELETE /user/emails
+
+githubapi#user#UnFollow({username}, {user}, {password})
+                                                   *githubapi#user#UnFollow()*
+  Unfollow a user
+
+  Github API : DELETE /user/following/:username
+
+githubapi#users#GetAllUsers()                  *githubapi#users#GetAllUsers()*
+  Get all users
+
+  Github API : GET /users
+
 githubapi#users#ListAllOrgs({user})            *githubapi#users#ListAllOrgs()*
   List orgs of a specified user.
 
   Github API : /users/:username/orgs
+
+githubapi#users#CheckTargetFollow({username}, {target})
+                                         *githubapi#users#CheckTargetFollow()*
+  Check if one user follows another
+
+  Github API : GET /users/:username/following/:target_user
 
 githubapi#util#Get_current_time()          *githubapi#util#Get_current_time()*
   Get current time in a timestamp in ISO 8601 format: YYYY-MM-DDTHH:MM:SSZ
