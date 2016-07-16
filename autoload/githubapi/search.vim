@@ -20,21 +20,73 @@
 " Github API : GET /search/repositories
 function! githubapi#search#SearchRepos(q,sort,order) abort
     let url = 'search/repositories'
-    let url = githubapi#util#parserArgs(url, 'sort', a:sort, ['stars', 'forks', 'updated'], '')
-    if index(['stars', 'forks', 'updated'], a:sort) != -1
-        let url = githubapi#util#parserArgs(url, 'order', a:order, ['asc', 'desc'], 'desc')
+    let _sort = ['stars', 'forks', 'updated']
+    let _order = ['asc', 'desc']
+    let url = githubapi#util#parserArgs(url, 'sort', a:sort, _sort, '')
+    if index(_sort, a:sort) != -1
+        let url = githubapi#util#parserArgs(url, 'order', a:order, _order, 'desc')
     endif
     if stridx(url, '?') == -1
         let url .= '?'
     else
         let url .= '&'
     endif
-    let url .= s:Parser(a:q)
+    let url .= s:Parser(a:q, s:repo_scopes)
     return githubapi#util#Get(url, [])
 endfunction
 
-function! s:Parser(q) abort
-    let scopes = {
+function! githubapi#search#SearchCode(q,sort,order) abort
+    let url = 'search/code'
+    let _sort = ['indexed']
+    let _order = ['asc', 'desc']
+    let url = githubapi#util#parserArgs(url, 'sort', a:sort, _sort, '')
+    if index(_sort, a:sort) != -1
+        let url = githubapi#util#parserArgs(url, 'order', a:order, _order, 'desc')
+    endif
+    if stridx(url, '?') == -1
+        let url .= '?'
+    else
+        let url .= '&'
+    endif
+    let url .= s:Parser(a:q, s:code_scopes)
+    return githubapi#util#Get(url, [])
+endfunction
+
+function! githubapi#search#SearchIssues(q,sort,order) abort
+    let url = 'search/issues'
+    let _sort = ['comments', 'created', 'updated']
+    let _order = ['asc', 'desc']
+    let url = githubapi#util#parserArgs(url, 'sort', a:sort, _sort, '')
+    if index(_sort, a:sort) != -1
+        let url = githubapi#util#parserArgs(url, 'order', a:order, _order, 'desc')
+    endif
+    if stridx(url, '?') == -1
+        let url .= '?'
+    else
+        let url .= '&'
+    endif
+    let url .= s:Parser(a:q, s:issues_scopes)
+    return githubapi#util#Get(url, [])
+endfunction
+
+function! githubapi#search#SearchUsers(q,sort,order) abort
+    let url = 'search/users'
+    let _sort = ['followers', 'repositories', 'joined']
+    let _order = ['asc', 'desc']
+    let url = githubapi#util#parserArgs(url, 'sort', a:sort, _sort, '')
+    if index(_sort, a:sort) != -1
+        let url = githubapi#util#parserArgs(url, 'order', a:order, _order, 'desc')
+    endif
+    if stridx(url, '?') == -1
+        let url .= '?'
+    else
+        let url .= '&'
+    endif
+    let url .= s:Parser(a:q, s:users_scopes)
+    return githubapi#util#Get(url, [])
+endfunction
+
+let s:repo_scopes = {
                 \ 'in'       : 'name,description',
                 \ 'size'     : '',
                 \ 'forks'    : '',
@@ -46,6 +98,11 @@ function! s:Parser(q) abort
                 \ 'stars'    : '',
                 \ 'keywords' : ''
                 \ }
+let s:code_scopes = {}
+let s:issues_scopes = {}
+let s:users_scopes = {}
+function! s:Parser(q,scopes) abort
+    let scopes = copy(a:scopes)
     " parser q
     let rs = ''
     if type(a:q) == type({})
