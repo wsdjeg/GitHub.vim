@@ -831,6 +831,27 @@ githubapi#pulls#Merge({owner}, {repo}, {number}, {msg}, {user}, {password})
 
   Github API : PUT /repos/:owner/:repo/pulls/:number/merge
 
+githubapi#search#SearchRepos({q}, {sort}, {order})
+                                              *githubapi#search#SearchRepos()*
+  Search for repos, for how to {sort} result, you can use `stars`,`forks` and
+  `updated`. and for {order} you can use `asc` and `desc`.for {q} see: Input:
+>
+                  {
+                  'in'       : 'name,description',
+                  'size'     : '',
+                  'forks'    : '',
+                  'fork'     : '',
+                  'created'  : '',
+                  'pushed'   : '',
+                  'user'     : '',
+                  'language' : '',
+                  'stars'    : '',
+                  'keywords' : ''
+                  }
+<
+
+  Github API : GET /search/repositories
+
 githubapi#user#GetFollowers({user}, {password})
                                                *githubapi#user#GetFollowers()*
   List the authenticated user's followers:
