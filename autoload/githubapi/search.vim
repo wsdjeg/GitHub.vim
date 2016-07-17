@@ -31,7 +31,7 @@ function! githubapi#search#SearchRepos(q,sort,order) abort
     else
         let url .= '&'
     endif
-    let url .= s:Parser(a:q, s:repo_scopes)
+    let url .= s:parser(a:q, s:repo_scopes)
     return githubapi#util#Get(url, [])
 endfunction
 
@@ -48,7 +48,7 @@ function! githubapi#search#SearchCode(q,sort,order) abort
     else
         let url .= '&'
     endif
-    let url .= s:Parser(a:q, s:code_scopes)
+    let url .= s:parser(a:q, s:code_scopes)
     return githubapi#util#Get(url, [])
 endfunction
 
@@ -65,7 +65,7 @@ function! githubapi#search#SearchIssues(q,sort,order) abort
     else
         let url .= '&'
     endif
-    let url .= s:Parser(a:q, s:issues_scopes)
+    let url .= s:parser(a:q, s:issues_scopes)
     return githubapi#util#Get(url, [])
 endfunction
 
@@ -82,26 +82,70 @@ function! githubapi#search#SearchUsers(q,sort,order) abort
     else
         let url .= '&'
     endif
-    let url .= s:Parser(a:q, s:users_scopes)
+    let url .= s:parser(a:q, s:users_scopes)
     return githubapi#util#Get(url, [])
 endfunction
 
+" default scopes
 let s:repo_scopes = {
-                \ 'in'       : 'name,description',
-                \ 'size'     : '',
-                \ 'forks'    : '',
-                \ 'fork'     : '',
-                \ 'created'  : '',
-                \ 'pushed'   : '',
-                \ 'user'     : '',
-                \ 'language' : '',
-                \ 'stars'    : '',
-                \ 'keywords' : ''
-                \ }
-let s:code_scopes = {}
-let s:issues_scopes = {}
-let s:users_scopes = {}
-function! s:Parser(q,scopes) abort
+            \ 'in'       : 'name,description',
+            \ 'size'     : '',
+            \ 'forks'    : '',
+            \ 'fork'     : '',
+            \ 'created'  : '',
+            \ 'pushed'   : '',
+            \ 'user'     : '',
+            \ 'language' : '',
+            \ 'stars'    : '',
+            \ 'keywords' : ''
+            \ }
+let s:code_scopes = {
+            \ 'in'        : 'file',
+            \ 'path'      : '',
+            \ 'filename'  : '',
+            \ 'extension' : '',
+            \ 'user'      : '',
+            \ 'size'      : '',
+            \ 'forks'     : '',
+            \ 'fork'      : '',
+            \ 'language'  : ''
+            \ }
+" https://help.github.com/articles/searching-issues/
+let s:issues_scopes = {
+            \ 'type'      : 'pr,issue',
+            \ 'in'        : 'title,body,comments',
+            \ 'author'    : '',
+            \ 'assignee'  : '',
+            \ 'mentions'  : '',
+            \ 'commenter' : '',
+            \ 'involves'  : '',
+            \ 'team'      : '',
+            \ 'state'     : '',
+            \ 'label'     : '',
+            \ 'milestone' : '',
+            \ 'no'        : '',
+            \ 'language'  : '',
+            \ 'is'        : '',
+            \ 'created'   : '',
+            \ 'updated'   : '',
+            \ 'merged'    : '',
+            \ 'status'    : '',
+            \ 'head'      : '',
+            \ 'base'      : '',
+            \ 'closed'    : '',
+            \ 'comments'  : '',
+            \ 'user'      : ''
+            \ }
+let s:users_scopes = {
+            \ 'type' : 'org,user',
+            \ 'in' : 'username,email',
+            \ 'repos' : '',
+            \ 'location' : '',
+            \ 'language' : '',
+            \ 'created' : '',
+            \ 'followers' : ''
+            \ }
+function! s:parser(q,scopes) abort
     let scopes = copy(a:scopes)
     " parser q
     let rs = ''
@@ -111,10 +155,27 @@ function! s:Parser(q,scopes) abort
             call remove(a:q, 'keywords')
         endif
         for scope in keys(scopes)
-            let rs .= '+' . scope . ':' . get(a:q, scope, get(scopes, scope))
+            if has_key(a:q, scope) && !empty(get(a:q, scope))
+                let rs .= '+' . scope . ':' . get(a:q, scope)
+            endif
         endfor
     elseif type(a:q) == type('')
         let rs .= 'q=' . a:q
     endif
     return rs
 endfunction
+
+fu! s:valid(args,base) abort
+    if type(a:args) == type('') && index(a:base, a:args) != -1
+        return 1
+    endif
+    if type(a:args) != type(a:base)
+        return 0
+    endif
+    for a in a:args
+        if index(a:base, a) == -1
+            return 0
+        endif
+    endfor
+    return 1
+endf
