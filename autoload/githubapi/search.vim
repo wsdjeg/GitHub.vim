@@ -86,9 +86,9 @@ function! githubapi#search#SearchUsers(q,sort,order) abort
     return githubapi#util#Get(url, [])
 endfunction
 
-" default scopes
+" default       scopes   [valid values, default values]
 let s:repo_scopes = {
-            \ 'in'       : 'name,description',
+            \ 'in'       : [['name', 'description', 'readme'], 'name,description'],
             \ 'size'     : '',
             \ 'forks'    : '',
             \ 'fork'     : '',
@@ -156,7 +156,10 @@ function! s:parser(q,scopes) abort
         endif
         for scope in keys(scopes)
             if has_key(a:q, scope) && !empty(get(a:q, scope))
-                let rs .= '+' . scope . ':' . get(a:q, scope)
+                let res = s:getArgv(get(a:q, scope), get(scopes, scope))
+                if !empty(res)
+                    let rs .= '+' . scope . ':' . res
+                endif
             endif
         endfor
     elseif type(a:q) == type('')
@@ -165,17 +168,25 @@ function! s:parser(q,scopes) abort
     return rs
 endfunction
 
-fu! s:valid(args,base) abort
-    if type(a:args) == type('') && index(a:base, a:args) != -1
-        return 1
-    endif
-    if type(a:args) != type(a:base)
-        return 0
-    endif
-    for a in a:args
-        if index(a:base, a) == -1
-            return 0
+fu! s:getArgv(args,base) abort
+    if type(a:base) == type([])
+        let vars = a:base[0]
+        let default = a:base[1]
+        let f = 0
+        for a in (type(a:args) == type('') ? split(a:args, ',') : a:args)
+            if index(vars, a) == -1
+                let f = 1
+            endif
+        endfor
+        if f && !empty(default)
+            let result = default
+        elseif f
+            let result = ''
+        else
+            let result = a:args
         endif
-    endfor
-    return 1
+        return result
+    elseif type(a:base) == type('') && empty(a:base)
+        return ''
+    endif
 endf
