@@ -1,9 +1,10 @@
 function! s:systemlist(cmd) abort
+    let cmd = ''
     if type(a:cmd) == type([]) && !has('nvim')
         let cmd = join(a:cmd, " ")
-        return systemlist(cmd)
     endif
-    return systemlist(a:cmd)
+    call githubapi#util#log('systemlist cmd : ' . string(cmd))
+    return systemlist(cmd)
 endfunction
 
 function! githubapi#util#Get(url,args) abort
