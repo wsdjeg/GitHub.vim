@@ -1,10 +1,18 @@
+function! s:systemlist(cmd) abort
+    if type(a:cmd) == type([]) && !has('nvim')
+        let cmd = join(a:cmd, " ")
+        return systemlist(cmd)
+    endif
+    return systemlist(a:cmd)
+endfunction
+
 function! githubapi#util#Get(url,args) abort
     let cmd = ['curl', '-s', g:githubapi_root_url . a:url]
     if len(a:args) > 0
         call extend(cmd, a:args)
     endif
     call githubapi#util#log('util#Get cmd : ' . string(cmd))
-    let result = join(systemlist(cmd),"\n")
+    let result = join(s:systemlist(cmd),"\n")
     return empty(result) ? result : json_decode(result)
 endfunction
 
