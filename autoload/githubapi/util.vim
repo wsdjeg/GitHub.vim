@@ -68,3 +68,16 @@ function! githubapi#util#CleanLog() abort
     let s:log = []
     echon "Github-api.vim's log has beed cleaned up!"
 endfunction
+
+function! githubapi#util#parserArgs(base,name,var,values,default) abort
+    if empty(a:default) && index(a:values, a:var) == -1
+        return a:base
+    endif
+    let url = a:base . (stridx(a:base, '?') ==# -1 ? '?' : '&')
+    if index(a:values, a:var) == -1
+        let url .= a:name . '=' . a:default
+    else
+        let url .= a:name . '=' . a:var
+    endif
+    return url
+endfunction
