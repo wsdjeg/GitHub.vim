@@ -136,207 +136,207 @@ something you can do with the API but not with Github-api.vim, please open an is
 #### Event
 ##### List public events
 ```
-    githubapi#activity#List_events()
+    github#api#activity#List_events()
 ```
 ##### List repository events
 ```
-    githubapi#activity#List_repo_events(owner,repo)
+    github#api#activity#List_repo_events(owner,repo)
 ```
 ##### List issue events for a repository
 ##### List public events for a network of repositories
 ```
-    githubapi#activity#List_net_events(owner,repo)
+    github#api#activity#List_net_events(owner,repo)
 ```
 ##### List public events for an organization
 ```
-    githubapi#activity#List_org_events(org)
+    github#api#activity#List_org_events(org)
 ```
 ##### List events that a user has received
 ```
-    githubapi#activity#List_user_events(user)
+    github#api#activity#List_user_events(user)
 ```
 ##### List public events that a user has received
 ```
-    githubapi#activity#List_public_user_events(user)
+    github#api#activity#List_public_user_events(user)
 ```
 ##### List events performed by a user
 ```
-    githubapi#activity#Performed_events(user)
+    github#api#activity#Performed_events(user)
 ```
 ##### List public events performed by a user
 ```
-    githubapi#activity#Performed_events(user)
+    github#api#activity#Performed_events(user)
 ```
 ##### List events for an organization
 ```
-    githubapi#activity#List_user_org_events(user,org,password)
+    github#api#activity#List_user_org_events(user,org,password)
 ```
 #### Notifications
 ##### Notification Reasons
 ##### List your notifications
 ```
-    githubapi#activity#List_notifications(user,password)
+    github#api#activity#List_notifications(user,password)
 ```
 ##### List your notifications in a repository
 ```
-    githubapi#activity#List_notifications_for_repo(onwer,repo,user,password)
+    github#api#activity#List_notifications_for_repo(onwer,repo,user,password)
 ```
 ##### Mark as read
 ```
-    githubapi#activity#Mark_All_as_read(user,password,last_read_at)
+    github#api#activity#Mark_All_as_read(user,password,last_read_at)
 ```
 ##### Mark notifications as read in a repository
 ```
-    githubapi#activity#Mark_All_as_read_for_repo(owner,repo,user,password,last_read_at)
+    github#api#activity#Mark_All_as_read_for_repo(owner,repo,user,password,last_read_at)
 ```
 ##### View a single thread
 ```
-    githubapi#activity#Get_thread(id,user,password)
+    github#api#activity#Get_thread(id,user,password)
 ```
 ##### Mark a thread as read
 ```
-    githubapi#activity#Mark_thread(id,user,password)
+    github#api#activity#Mark_thread(id,user,password)
 ```
 ##### Get a Thread Subscription
 ```
-    githubapi#activity#Get_thread_sub(id,user,password)
+    github#api#activity#Get_thread_sub(id,user,password)
 ```
 ##### Set a Thread Subscription
 ```
-    githubapi#activity#Set_thread_sub(id,user,password,subscribed,ignored)
+    github#api#activity#Set_thread_sub(id,user,password,subscribed,ignored)
 ```
 ##### Delete a Thread Subscription
 ```
-    githubapi#activity#Del_thread_sub(id,user,password)
+    github#api#activity#Del_thread_sub(id,user,password)
 ```
 #### Starring
 ##### List Stargazers
 ```
-    githubapi#activity#List_stargazers(owner,repo)
+    github#api#activity#List_stargazers(owner,repo)
 ```
 ##### List repositories being starred
 ##### Check if you are starring a repository
 ```
-    githubapi#activity#CheckStarred(owner,repo,user,password)
+    github#api#activity#CheckStarred(owner,repo,user,password)
 ```
 ##### Star a repository
 ```
-    githubapi#activity#Star(owner,repo,user,password)
+    github#api#activity#Star(owner,repo,user,password)
 ```
 ##### Unstar a repository
 ```
-    githubapi#activity#Unstar(owner,repo,user,password)
+    github#api#activity#Unstar(owner,repo,user,password)
 ```
 #### Watching
 ##### List watchers
 ```
-    githubapi#activity#List_watchers(owner,repo)
+    github#api#activity#List_watchers(owner,repo)
 ```
 ##### List repositories being watched
 List repositories being watched by a user.
 ```
-    githubapi#activity#List_watched_repo(user)
+    github#api#activity#List_watched_repo(user)
 ```
 List repositories being watched by the authenticated user.
 ```
-    githubapi#activity#List_auth_watched_repo(user,password)
+    github#api#activity#List_auth_watched_repo(user,password)
 ```
 ##### Get a Repository Subscription
 ```
-    githubapi#activity#Check_repo_Sub(owner,repo,user,password)
+    github#api#activity#Check_repo_Sub(owner,repo,user,password)
 ```
 ##### Set a Repository Subscription
 ```
-    githubapi#activity#Set_repo_sub(owner,repo,user,password,sub,ignore)
+    github#api#activity#Set_repo_sub(owner,repo,user,password,sub,ignore)
 ```
 ##### Delete a Repository Subscription
 ```
-    githubapi#activity#Del_repo_sub(owner,repo,user,password)
+    github#api#activity#Del_repo_sub(owner,repo,user,password)
 ```
 #### Gists
 ##### Authentication
 ##### Truncation
 ##### List a user's gists
 ```
-    githubapi#gist#List(user)
+    github#api#gist#List(user)
 ```
 ##### List a authenticated user's gists
 ```
-    githubapi#gist#ListAll(user,password)
+    github#api#gist#ListAll(user,password)
 ```
 ##### List all public gists
 ```
-    githubapi#gist#ListPublic(since)
+    github#api#gist#ListPublic(since)
 ```
 ##### List starred gists
 ```
-    githubapi#gist#ListStarred(user,password,since)
+    github#api#gist#ListStarred(user,password,since)
 ```
 ##### Get a single gist
 ```
-    githubapi#gist#GetSingle(id)
+    github#api#gist#GetSingle(id)
 ```
 ##### Get a specific revision of a gist
 ```
-    githubapi#gist#GetSingleSha(id,sha)
+    github#api#gist#GetSingleSha(id,sha)
 ```
 ##### Create a gist
 ```
-    githubapi#gist#Create(desc,filename,content,public,user,password)
+    github#api#gist#Create(desc,filename,content,public,user,password)
 ```
 ##### Edit a gist
 ```
-    githubapi#gist#Edit(desc,filename,content,public,user,password,id)
+    github#api#gist#Edit(desc,filename,content,public,user,password,id)
 ```
 ##### List gist commits
 ```
-    githubapi#gist#ListCommits(id)
+    github#api#gist#ListCommits(id)
 ```
 ##### Star a gist
 ```
-    githubapi#gist#Star(user,password,id)
+    github#api#gist#Star(user,password,id)
 ```
 ##### Unstar a gist
 ```
-    githubapi#gist#Unstar(user,password,id)
+    github#api#gist#Unstar(user,password,id)
 ```
 ##### Check if a gist is starred
 ```
-    githubapi#gist#CheckStar(user,password,id)
+    github#api#gist#CheckStar(user,password,id)
 ```
 ##### Fork a gist
 ```
-    githubapi#gist#Fork(user,password,id)
+    github#api#gist#Fork(user,password,id)
 ```
 ##### List gist forks
 ```
-    githubapi#gist#ListFork(user,password,id)
+    github#api#gist#ListFork(user,password,id)
 ```
 ##### Delete a gist
 ```
-    githubapi#gist#Del(user,password,id)
+    github#api#gist#Del(user,password,id)
 ```
 ##### Custom media types
 ##### Comments
 ##### List comments on a gist
 ```
-    githubapi#gist#ListComments(id)
+    github#api#gist#ListComments(id)
 ```
 ##### Get a single comment
 ```
-    githubapi#gist#GetComment(gistid,commentid)
+    github#api#gist#GetComment(gistid,commentid)
 ```
 ##### Create a comment
 ```
-    githubapi#gist#CreateComment(id,user,password,body)
+    github#api#gist#CreateComment(id,user,password,body)
 ```
 ##### Edit a comment
 ```
-    githubapi#gist#EditComment(id,user,password,body)
+    github#api#gist#EditComment(id,user,password,body)
 ```
 ##### Delete a comment
 ```
-    githubapi#gist#DelComment(gistid,id,user,password)
+    github#api#gist#DelComment(gistid,id,user,password)
 ```
 ##### Custom media types
 ### Issues
@@ -344,25 +344,25 @@ List repositories being watched by the authenticated user.
 visible repositories including owned repositories, member
 repositories, and organization repositories:
 ```
-    githubapi#issues#List_All(user,password)
+    github#api#issues#List_All(user,password)
 ```
 - List all issues across owned and member repositories assigned
 to the authenticated user:
 ```
-    githubapi#issues#List_All_for_User(user,password)
+    github#api#issues#List_All_for_User(user,password)
 ```
 - List all issues for a given organization assigned to the
 authenticated user:
 ```
-    githubapi#issues#List_All_for_User_In_Org(org,user,password)
+    github#api#issues#List_All_for_User_In_Org(org,user,password)
 ```
 - List issues for a repository:
 ```
-    githubapi#issues#List_All_for_Repo(owner,repo)
+    github#api#issues#List_All_for_Repo(owner,repo)
 ```
 - Get a single issue:
 ```
-    githubapi#issues#Get_issue(owner,repo,num)
+    github#api#issues#Get_issue(owner,repo,num)
 ```
 - Create an issue:
 ```
@@ -375,140 +375,140 @@ authenticated user:
             "bug"
         ]
     }
-    githubapi#issues#Create(owner,repo,user,password,json)
+    github#api#issues#Create(owner,repo,user,password,json)
 ```
 - Edit an issue:
 ```
-    githubapi#issues#Edit(owner,repo,num,user,password,json)
+    github#api#issues#Edit(owner,repo,num,user,password,json)
 ```
 - Lock an issue:
 ```
-    githubapi#issues#Lock(owner,repo,num,user,password)
+    github#api#issues#Lock(owner,repo,num,user,password)
 ```
 - Unlock an issue:
 ```
-    githubapi#issues#Unlock(owner,repo,num,user,password)
+    github#api#issues#Unlock(owner,repo,num,user,password)
 ```
 #### assignees
 ##### list-assignees
 This call lists all the available assignees to which issues may be assigned.
 ```
-    githubapi#issues#List_assignees(owner,repo)
+    github#api#issues#List_assignees(owner,repo)
 ```
 ##### check-assignees
 ```
-    githubapi#issues#Check_assignee(owner,repo,assignee)
+    github#api#issues#Check_assignee(owner,repo,assignee)
 ```
 ##### add-assignees-to-an-issue
 ```
-    githubapi#issues#Addassignee(owner,repo,num,assignees,user,password)
+    github#api#issues#Addassignee(owner,repo,num,assignees,user,password)
 ```
 ##### remove-assignees-from-an-issue
 ```
-    githubapi#issues#Removeassignee(owner,repo,num,assignees,user,password)
+    github#api#issues#Removeassignee(owner,repo,num,assignees,user,password)
 ```
 #### Comments
 ##### List comments on an issue
 ```
-    githubapi#issues#List_comments(owner,repo,num,since)
+    github#api#issues#List_comments(owner,repo,num,since)
 ```
 ##### List comments in a repository
 ```
-    githubapi#issues#List_All_comments(owner,repo,sort,desc,since)
+    github#api#issues#List_All_comments(owner,repo,sort,desc,since)
 ```
 ##### Get a single comment
 ```
-    githubapi#issues#Get_comment(owner,repo,id)
+    github#api#issues#Get_comment(owner,repo,id)
 ```
 ##### Create a comment
 ```
-    githubapi#issues#Create_comment(owner,repo,num,json,user,password)
+    github#api#issues#Create_comment(owner,repo,num,json,user,password)
 ```
 ##### Edit a comment
 ```
-    githubapi#issues#Edit_comment(owner,repo,id,json,user,password)
+    github#api#issues#Edit_comment(owner,repo,id,json,user,password)
 ```
 ##### Delete a comment
 ```
-    githubapi#issues#Delete_comment(owner,repo,id,user,password)
+    github#api#issues#Delete_comment(owner,repo,id,user,password)
 ```
 ##### Custom media types
 #### Events
 ##### List events for an issue
 ```
-    githubapi#issues#List_events(owner,repo,num)
+    github#api#issues#List_events(owner,repo,num)
 ```
 ##### List events for a repository
 ```
-    githubapi#issues#List_events_for_repo(owner,repo)
+    github#api#issues#List_events_for_repo(owner,repo)
 ```
 ##### Get a single event
 ```
-    githubapi#issues#Get_event(owner,repo,id)
+    github#api#issues#Get_event(owner,repo,id)
 ```
 #### Labels
 ##### List all labels for this repository
 ```
-    githubapi#labels#GetAll(owner,repo)
+    github#api#labels#GetAll(owner,repo)
 ```
 ##### Get a single label
 ```
-    githubapi#labels#Get(owner,repo,name)
+    github#api#labels#Get(owner,repo,name)
 ```
 ##### Create a label
 ```
-    githubapi#labels#Create(owner,repo,user,password,label)
+    github#api#labels#Create(owner,repo,user,password,label)
 ```
 ##### Update a label
 ```
-    githubapi#labels#Update(owner,repo,user,password,label)
+    github#api#labels#Update(owner,repo,user,password,label)
 ```
 ##### Delete a label
 ```
-    githubapi#labels#Delete(owner,repo,name,user,password)
+    github#api#labels#Delete(owner,repo,name,user,password)
 ```
 ##### List labels on an issue
 ```
-    githubapi#labels#List(owner,repo,num)
+    github#api#labels#List(owner,repo,num)
 ```
 ##### Add labels to an issue
 ```
-    githubapi#labels#Add(owner,repo,num,labels,user,password)
+    github#api#labels#Add(owner,repo,num,labels,user,password)
 ```
 ##### Remove a label from an issue
 ```
-    githubapi#labels#Remove(owner,repo,num,name,user,password)
+    github#api#labels#Remove(owner,repo,num,name,user,password)
 ```
 ##### Replace all labels for an issue
 ```
-    githubapi#labels#Replace(owner,repo,num,labels,user,password)
+    github#api#labels#Replace(owner,repo,num,labels,user,password)
 ```
 ##### Remove all labels from an issue
 ```
-    githubapi#labels#RemoveAll(owner,repo,num,user,password)
+    github#api#labels#RemoveAll(owner,repo,num,user,password)
 ```
 ##### Get labels for every issue in a milestone
 ```
-    githubapi#labels#ListAllinMilestone(owner,repo,num)
+    github#api#labels#ListAllinMilestone(owner,repo,num)
 ```
 #### Milestones
 ##### List milestones for a repository
 ```
-    githubapi#issues#ListAllMilestones(owner,repo,state,sort,direction)
+    github#api#issues#ListAllMilestones(owner,repo,state,sort,direction)
 ```
 ##### Get a single milestone
 ```
-    githubapi#issues#GetSingleMilestone(owner,repo,num)
+    github#api#issues#GetSingleMilestone(owner,repo,num)
 ```
 ##### Create a milestone
 ```
-    githubapi#issues#CreateMilestone(owner,repo,milestone,user,password)
+    github#api#issues#CreateMilestone(owner,repo,milestone,user,password)
 ```
 ##### Update a milestone
 ```
-    githubapi#issues#UpdateMilestone(owner,repo,num,milestone,user,password)
+    github#api#issues#UpdateMilestone(owner,repo,num,milestone,user,password)
 ```
 ##### Delete a milestone
 ```
-    githubapi#issues#DeleteMilestone(owner,repo,num,user,password)
+    github#api#issues#DeleteMilestone(owner,repo,num,user,password)
 ```
