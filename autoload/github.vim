@@ -4,7 +4,7 @@
 " that you've seen.
 "
 " Github API : GET /organizations
-function! githubapi#ListAllOrgs(since) abort
+function! github#ListAllOrgs(since) abort
     let url = 'organizations'
     if !empty(a:since)
         let url = url . '?since=' . a:since

@@ -18,13 +18,13 @@
 " <
 "
 " Github API : GET /search/repositories
-function! githubapi#search#SearchRepos(q,sort,order) abort
+function! github#api#search#SearchRepos(q,sort,order) abort
     let url = 'search/repositories'
     let _sort = ['stars', 'forks', 'updated']
     let _order = ['asc', 'desc']
-    let url = githubapi#util#parserArgs(url, 'sort', a:sort, _sort, '')
+    let url = github#api#util#parserArgs(url, 'sort', a:sort, _sort, '')
     if index(_sort, a:sort) != -1
-        let url = githubapi#util#parserArgs(url, 'order', a:order, _order, 'desc')
+        let url = github#api#util#parserArgs(url, 'order', a:order, _order, 'desc')
     endif
     if stridx(url, '?') == -1
         let url .= '?'
@@ -32,16 +32,16 @@ function! githubapi#search#SearchRepos(q,sort,order) abort
         let url .= '&'
     endif
     let url .= s:parser(a:q, s:repo_scopes)
-    return githubapi#util#Get(url, [])
+    return github#api#util#Get(url, [])
 endfunction
 
-function! githubapi#search#SearchCode(q,sort,order) abort
+function! github#api#search#SearchCode(q,sort,order) abort
     let url = 'search/code'
     let _sort = ['indexed']
     let _order = ['asc', 'desc']
-    let url = githubapi#util#parserArgs(url, 'sort', a:sort, _sort, '')
+    let url = github#api#util#parserArgs(url, 'sort', a:sort, _sort, '')
     if index(_sort, a:sort) != -1
-        let url = githubapi#util#parserArgs(url, 'order', a:order, _order, 'desc')
+        let url = github#api#util#parserArgs(url, 'order', a:order, _order, 'desc')
     endif
     if stridx(url, '?') == -1
         let url .= '?'
@@ -49,16 +49,16 @@ function! githubapi#search#SearchCode(q,sort,order) abort
         let url .= '&'
     endif
     let url .= s:parser(a:q, s:code_scopes)
-    return githubapi#util#Get(url, [])
+    return github#api#util#Get(url, [])
 endfunction
 
-function! githubapi#search#SearchIssues(q,sort,order) abort
+function! github#api#search#SearchIssues(q,sort,order) abort
     let url = 'search/issues'
     let _sort = ['comments', 'created', 'updated']
     let _order = ['asc', 'desc']
-    let url = githubapi#util#parserArgs(url, 'sort', a:sort, _sort, '')
+    let url = github#api#util#parserArgs(url, 'sort', a:sort, _sort, '')
     if index(_sort, a:sort) != -1
-        let url = githubapi#util#parserArgs(url, 'order', a:order, _order, 'desc')
+        let url = github#api#util#parserArgs(url, 'order', a:order, _order, 'desc')
     endif
     if stridx(url, '?') == -1
         let url .= '?'
@@ -66,16 +66,16 @@ function! githubapi#search#SearchIssues(q,sort,order) abort
         let url .= '&'
     endif
     let url .= s:parser(a:q, s:issues_scopes)
-    return githubapi#util#Get(url, [])
+    return github#api#util#Get(url, [])
 endfunction
 
-function! githubapi#search#SearchUsers(q,sort,order) abort
+function! github#api#search#SearchUsers(q,sort,order) abort
     let url = 'search/users'
     let _sort = ['followers', 'repositories', 'joined']
     let _order = ['asc', 'desc']
-    let url = githubapi#util#parserArgs(url, 'sort', a:sort, _sort, '')
+    let url = github#api#util#parserArgs(url, 'sort', a:sort, _sort, '')
     if index(_sort, a:sort) != -1
-        let url = githubapi#util#parserArgs(url, 'order', a:order, _order, 'desc')
+        let url = github#api#util#parserArgs(url, 'order', a:order, _order, 'desc')
     endif
     if stridx(url, '?') == -1
         let url .= '?'
@@ -83,7 +83,7 @@ function! githubapi#search#SearchUsers(q,sort,order) abort
         let url .= '&'
     endif
     let url .= s:parser(a:q, s:users_scopes)
-    return githubapi#util#Get(url, [])
+    return github#api#util#Get(url, [])
 endfunction
 
 " default       scopes   [valid values, default values]

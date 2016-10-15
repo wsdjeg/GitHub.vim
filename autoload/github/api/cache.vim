@@ -1,7 +1,7 @@
 let s:save_cpo = &cpo
 set cpo&vim
 
-function! githubapi#cache#Update() abort
+function! github#api#cache#Update() abort
     
 endfunction
 

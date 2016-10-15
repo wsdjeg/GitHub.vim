@@ -1,4 +1,4 @@
-function! githubapi#repos#Response() abort
+function! github#api#repos#Response() abort
     let l:keys = ['owner', 'git_url', 'collaborators_url', 'fork', 'notifications_url', 'languages_url', 'size', 'name', 'clone_url',
                 \'created_at', 'tags_url', 'pushed_at', 'language', 'ssh_url', 'git_tags_url', 'has_pages', 'open_issues_count',
                 \'mirror_url', 'description', 'events_url', 'has_wiki', 'deployments_url', 'has_issues', 'milestones_url',

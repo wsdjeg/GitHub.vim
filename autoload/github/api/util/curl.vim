@@ -1,5 +1,5 @@
 " in vim systemlist() and system() can only use string as it's argv.
-function! githubapi#util#curl#Get(url,opt) abort
+function! github#api#util#curl#Get(url,opt) abort
     let cmd = ['curl', '-q','-s', '-i', a:url, '-k']
     call extend(cmd, a:opt)
     return s:parser(systemlist(cmd))

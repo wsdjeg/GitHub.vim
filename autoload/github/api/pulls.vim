@@ -3,8 +3,8 @@
 " List all the PRs of a repo.
 "
 " Github API : GET /repos/:owner/:repo/pulls
-function! githubapi#pulls#ListAllPRs(owner,repo) abort
-    return githubapi#util#Get(join(['repos', a:owner, a:repo, 'pulls'], '/'), [])
+function! github#api#pulls#ListAllPRs(owner,repo) abort
+    return github#api#util#Get(join(['repos', a:owner, a:repo, 'pulls'], '/'), [])
 endfunction
 
 ""
@@ -12,8 +12,8 @@ endfunction
 " Get a single pull request
 "
 " Github API : GET /repos/:owner/:repo/pulls/:number
-function! githubapi#pulls#Get(owner,repo,number) abort
-    return githubapi#util#Get(join(['repos', a:owner, a:repo, 'pulls', a:number], '/'), [])
+function! github#api#pulls#Get(owner,repo,number) abort
+    return github#api#util#Get(join(['repos', a:owner, a:repo, 'pulls', a:number], '/'), [])
 endfunction
 
 ""
@@ -36,8 +36,8 @@ endfunction
 "    }
 " <
 " Github API : POST /repos/:owner/:repo/pulls
-function! githubapi#pulls#create(owner,repo,user,password,pull) abort
-    return githubapi#util#Get(join(['repos', a:owner, a:repo, 'pulls'], '/'),
+function! github#api#pulls#create(owner,repo,user,password,pull) abort
+    return github#api#util#Get(join(['repos', a:owner, a:repo, 'pulls'], '/'),
                 \ ['-X', 'POST',
                 \ '-d', json_encode(a:pull),
                 \ '-u', a:user . ':' . a:password])
@@ -55,8 +55,8 @@ endfunction
 "    }
 " <
 " Github API : PATCH /repos/:owner/:repo/pulls/:number
-function! githubapi#pulls#update(owner,repo,number,pull,user,password) abort
-    return githubapi#util#Get(join(['repos', a:owner, a:repo, 'pulls', a:number], '/'),
+function! github#api#pulls#update(owner,repo,number,pull,user,password) abort
+    return github#api#util#Get(join(['repos', a:owner, a:repo, 'pulls', a:number], '/'),
                 \ ['-X', 'PATCH',
                 \ '-d', json_encode(a:pull),
                 \ '-u', a:user . ':' . a:password])
@@ -67,8 +67,8 @@ endfunction
 " List commits on a pull request
 "
 " Github API : GET /repos/:owner/:repo/pulls/:number/commits
-function! githubapi#pulls#ListCommits(owner,repo,number) abort
-    return githubapi#util#Get(join(['repos', a:owner, a:repo, 'pulls', a:number, 'commits'], '/'), [])
+function! github#api#pulls#ListCommits(owner,repo,number) abort
+    return github#api#util#Get(join(['repos', a:owner, a:repo, 'pulls', a:number, 'commits'], '/'), [])
 endfunction
 
 ""
@@ -76,8 +76,8 @@ endfunction
 " List pull requests files
 "
 " Github API : GET /repos/:owner/:repo/pulls/:number/files
-function! githubapi#pulls#ListFiles(owner,repo,number) abort
-    return githubapi#util#Get(join(['repos', a:owner, a:repo, 'pulls', a:number, 'files'], '/'), [])
+function! github#api#pulls#ListFiles(owner,repo,number) abort
+    return github#api#util#Get(join(['repos', a:owner, a:repo, 'pulls', a:number, 'files'], '/'), [])
 endfunction
 
 ""
@@ -85,8 +85,8 @@ endfunction
 " Get if a pull request has been merged
 "
 " Github API : GET /repos/:owner/:repo/pulls/:number/merge
-function! githubapi#pulls#CheckMerged(owner,repo,number) abort
-    return githubapi#util#GetStatus(join(['repos', a:owner, a:repo , 'pulls', a:number, 'merge'], '/'), []) == 204
+function! github#api#pulls#CheckMerged(owner,repo,number) abort
+    return github#api#util#GetStatus(join(['repos', a:owner, a:repo , 'pulls', a:number, 'merge'], '/'), []) == 204
 endfunction
 
 ""
@@ -94,8 +94,8 @@ endfunction
 " Merge a pull request (Merge Button)
 "
 " Github API : PUT /repos/:owner/:repo/pulls/:number/merge
-function! githubapi#pulls#Merge(owner,repo,number,msg,user,password) abort
-   return githubapi#util#Get(join(['repos', a:owner, a:repo, 'pulls', a:number, 'merge'], '/'),
+function! github#api#pulls#Merge(owner,repo,number,msg,user,password) abort
+   return github#api#util#Get(join(['repos', a:owner, a:repo, 'pulls', a:number, 'merge'], '/'),
                \ ['-X', 'PUT',
                \ '-d', json_encode(a:msg),
                \ '-u', a:user . ':' . a:password])

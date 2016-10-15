@@ -17,5 +17,5 @@ function! s:User.ToString() abort
     
 endfunction
 
-let g:githubapi#obj#User = copy(s:User)
+let g:github#api#obj#User = copy(s:User)
 
