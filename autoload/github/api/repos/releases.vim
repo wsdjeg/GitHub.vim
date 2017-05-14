@@ -14,7 +14,7 @@
 " <
 " Github API : POST /repos/:owner/:repo/releases
 function! github#api#repos#releases#Create(owner,repo,user,password, release) abort
-    return github#api#util#Get('repos/' . a:owner . '/' . a:repo . '/issues',
+    return github#api#util#Get('repos/' . a:owner . '/' . a:repo . '/releases',
                 \ ['-X', 'POST', '-d', json_encode(a:release),
                 \ '-u', a:user . ':' . a:password])
 endfunction
