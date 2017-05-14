@@ -834,6 +834,17 @@ github#api#pulls#Merge({owner}, {repo}, {number}, {msg}, {user}, {password})
 
   Github API : PUT /repos/:owner/:repo/pulls/:number/merge
 
+github#api#repos#releases#Create({owner}, {repo}, {user}, {password},
+  {release})                              *github#api#repos#releases#Create()*
+  Create an release
+
+  Input:
+>
+<
+  {  "tag_name": "v1.0.0",  "target_commitish": "master",  "name": "v1.0.0",
+  "body": "Description of the release",  "draft": false,  "prerelease": false
+  } < Github API : POST /repos/:owner/:repo/releases
+
 github#api#search#SearchRepos({q}, {sort}, {order})
                                              *github#api#search#SearchRepos()*
   Search for repos, for how to {sort} result, you can use `stars`,`forks` and
