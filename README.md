@@ -1,4 +1,5 @@
 ### GitHub.vim
+> Another github v3 api implemented in viml
 
 [![Build Status](https://travis-ci.org/wsdjeg/GitHub.vim.svg?branch=master)](https://travis-ci.org/wsdjeg/GitHub.vim)
 [![Gitter](https://badges.gitter.im/wsdjeg/GitHub.vim.svg)](https://gitter.im/wsdjeg/GitHub.vim?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge)
@@ -6,10 +7,10 @@
 [![Support Vim 7.4 or above](https://img.shields.io/badge/support-%20Vim%207.4%20or%20above-yellowgreen.svg?style=flat-square)](https://github.com/vim/vim-win32-installer)
 [![MIT License](https://img.shields.io/badge/license-MIT-blue.svg?style=flat-square)](LICENSE)
 [![Doc](https://img.shields.io/badge/doc-%3Ah%20github-orange.svg?style=flat-square)](doc/github.txt)
-[![Powered by vital.vim](https://img.shields.io/badge/powered%20by-vital.vim-80273f.svg?style=flat-square)](https://github.com/vim-jp/vital.vim)
 
-#### [Intro](#intro-1)
-#### [Activity](#activity-2)
+
+- [Intro](#intro)
+- [Activity](#activity)
 - [Events](#events)
  - [List public events](#list-public-events)
  - [List repository events](#list-repository-events)
@@ -48,7 +49,7 @@
  - Watch a repository (LEGACY)
  - Stop watching a repository (LEGACY)
 
-#### [Gist](#gist-3)
+- [Gist](#gist-3)
 - [Authentication](#authentication)
 - [Truncation](#truncation)
 - [List a user's gists](#list-a-user's-gists)
@@ -74,8 +75,8 @@
  - [Delete a comment](#delete-a-comment)
  - [Custom media types](#custom-media-types)
 
-#### [Git Data](#git_date-6)
-#### [Issues](#issues-7)
+- [Git Data](#git_date-6)
+- [Issues](#issues-7)
 - [Assignees](#assignees)
  - [List assignees](#list-assignees)
  - [Check assignee](#check-assignees)
@@ -112,15 +113,15 @@
  - [Update a milestone](#update a milestone)
  - [Delete a milestone](#delete a milestone)
 
-#### [Migration](#migration-8)
-#### [Miscellaneous](#miscellaneous-9)
-#### [Organizations](#organizations-10)
-#### [Pull Requests](#pull_requests-11)
-#### [Reactions](#reactions-12)
-#### [Repositories](#repositories-13)
-#### [Search](#search-14)
-#### [Users](#users-15)
-#### [Enterprise](#enterprise-16)
+- [Migration](#migration-8)
+- [Miscellaneous](#miscellaneous-9)
+- [Organizations](#organizations-10)
+- [Pull Requests](#pull_requests-11)
+- [Reactions](#reactions-12)
+- [Repositories](#repositories-13)
+- [Search](#search-14)
+- [Users](#users-15)
+- [Enterprise](#enterprise-16)
 
 ### Intro
 This is a viml library to access the Github API v3. With it, you can manage
