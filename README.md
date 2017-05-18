@@ -17,16 +17,41 @@ It is WIP, it will covers the full API.
 
 [![Throughput Graph](https://graphs.waffle.io/wsdjeg/GitHub.vim/throughput.svg)](https://waffle.io/wsdjeg/GitHub.vim/metrics/throughput)
 
-Should you have any question, any remark, or if you find a bug, or if there is
+If you have any question, any remark, or if you find a bug, or if there is
 something you can do with the API but not with Github-api.vim, please open an issue.
 
 ## Install
 
-It is easy to install the lib via vim plugin manager:
+It is easy to install the lib via [dein](https://github.com/Shougo/dein.vim):
 
 ```vim
 call dein#add('wsdjeg/GitHub.vim')
 ```
 
 ## Usage
+
+create issue:
+
+```viml
+function! CreateIssue(owner, repo) abort
+    let username = input('your github username:')
+    let password = input('your github password:')
+    let title = input('Issue title: ')
+    let issue = {
+                \ 'title': title,
+                \ 'body': s:body(),
+                \ }
+    let response = github#api#issues#Create(a:owner, a:repo,
+                \ username, password, issue)
+    if !empty(response)
+        echomsg 'Create successed! ' . response.url
+    else
+        echom 'Create failed!'
+    endif
+endfunction
+
+func! s:body()
+    return 'Testting Github.vim...'
+endf
+```
 
