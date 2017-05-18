@@ -1,4 +1,4 @@
-### GitHub.vim
+# GitHub.vim
 > Another github v3 api implemented in viml
 
 [![Build Status](https://travis-ci.org/wsdjeg/GitHub.vim.svg?branch=master)](https://travis-ci.org/wsdjeg/GitHub.vim)
@@ -8,122 +8,7 @@
 [![MIT License](https://img.shields.io/badge/license-MIT-blue.svg?style=flat-square)](LICENSE)
 [![Doc](https://img.shields.io/badge/doc-%3Ah%20github-orange.svg?style=flat-square)](doc/github.txt)
 
-
-- [Intro](#intro)
-- [Activity](#activity)
-- [Events](#events)
- - [List public events](#list-public-events)
- - [List repository events](#list-repository-events)
- - [List issue events for a repository](#list-issue-events-for-a-repository)
- - [List public events for a network of repositories](#list-public-events-for-a-network-of-repositories)
- - [List public events for an organization](#list-public-events-for-an-organization)
- - [List events that a user has received](#list-events-that-a-user-has-received)
- - [List public events that a user has received](#list-public-events-that-a-user-has-received)
- - [List events performed by a user](#list-events-performed-by-a-user)
- - [List public events performed by a user](#list-public-events-performed-by-a-user)
- - [List events for an organization](#list-events-for-an-organization)
-- [Notifications](#notifications)
- - [Notification Reasons](#notification-Reasons)
- - [List your notifications](#list-your-notifications)
- - [List your notifications in a repository](#list-your-notifications-in-a-repository)
- - [Mark as read](#mark-as-read)
- - [Mark notifications as read in a repository](#mark-notifications-as-read-in-a-repository)
- - [View a single thread](#view-a-single-thread)
- - [Mark a thread as read](#mark-a-thread-as-read)
- - [Get a Thread Subscription](#get-a-Thread-Subscription)
- - [Set a Thread Subscription](#set-a-Thread-Subscription)
- - [Delete a Thread Subscription](#delete-a-Thread-Subscription)
-- [Starring](#starring)
- - [List Stargazers](#list-stargazers)
- - [List repositories being starred](#list-repositories-being-starred)
- - [Check if you are starring a repository](#check-if-you-are-starring-a-repository)
- - [Star a repository](#star-a-repository)
- - [Unstar a repository](#unstar-a-repository)
-- [Watching](#watching)
- - [List watchers](#list watchers)
- - [List repositories being watched](#list repositories being watched)
- - [Get a Repository Subscription](#get a Repository Subscription)
- - [Set a Repository Subscription](#set a Repository Subscription)
- - [Delete a Repository Subscription](#delete a Repository Subscription)
- - Check if you are watching a repository (LEGACY)
- - Watch a repository (LEGACY)
- - Stop watching a repository (LEGACY)
-
-- [Gist](#gist-3)
-- [Authentication](#authentication)
-- [Truncation](#truncation)
-- [List a user's gists](#list-a-user's-gists)
-- [List all public gists](#list-all-public-gists)
-- [List starred gists](#list-starred-gists)
-- [Get a single gist](#get-a-single-gist)
-- [Get a specific revision of a gist](#get-a-specific-revision-of-a-gist)
-- [Create a gist](#create-a-gist)
-- [Edit a gist](#edit-a-gist)
-- [List gist commits](#list-gist-commits)
-- [Star a gist](#star-a-gist)
-- [Unstar a gist](#unstar-a-gist)
-- [Check if a gist is starred](#check-if-a-gist-is-starred)
-- [Fork a gist](#fork-a-gist)
-- [List gist forks](#list-gist-forks)
-- [Delete a gist](#delete-a-gist)
-- [Custom media types](#custom-media-types)
-- [Comments](#comments)
- - [List comments on a gist](#list-comments-on-a-gist)
- - [Get a single comment](#get-a-single-comment)
- - [Create a comment](#create-a-comment)
- - [Edit a comment](#edit-a-comment)
- - [Delete a comment](#delete-a-comment)
- - [Custom media types](#custom-media-types)
-
-- [Git Data](#git_date-6)
-- [Issues](#issues-7)
-- [Assignees](#assignees)
- - [List assignees](#list-assignees)
- - [Check assignee](#check-assignees)
- - [Add assignees to an Issue](#add-assignees-to-an-issue)
- - [Remove assignees from an Issue](#remove-assignees-from-an-issue)
-- [Comments](#comments)
- - [List comments on an issue](#list-comments-on-an-issue)
- - [List comments in a repository](#list-comments-in-a-repository)
- - [Get a single comment](#get-a-single-comment)
- - [Create a comment](#create-a-comment)
- - [Edit a comment](#edit-a-comment)
- - [Delete a comment](#delete-a-comment)
- - [Custom media types](#custom-media-types)
-- [Events](#events)
- - [List events for an issue](#List-events-for-an-issue)
- - [List events for a repository](#List-events-for-a-repository)
- - [Get a single event](#Get-a-single-event)
-- [Labels](#labels)
- - [List all labels for this repository](#list-all-labels-for-this-repository)
- - [Get a single label](#get-a-single-label)
- - [Create a label](#create-a-label)
- - [Update a label](#update-a-label)
- - [Delete a label](#delete-a-label)
- - [List labels on an issue](#list-labels-on-an-issue)
- - [Add labels to an issue](#add-labels-to-an-issue)
- - [Remove a label from an issue](#remove-a-label-from-an-issue)
- - [Replace all labels for an issue](#replace-all-labels-for-an-issue)
- - [Remove all labels from an issue](#remove-all-labels-from-an-issue)
- - [Get labels for every issue in a milestone](#get-labels-for-every-issue-in-a-milestone)
-- [Milestones](#milestones)
- - [List milestones for a repository](#list milestones for a repository)
- - [Get a single milestone](#get a single milestone)
- - [Create a milestone](#create a milestone)
- - [Update a milestone](#update a milestone)
- - [Delete a milestone](#delete a milestone)
-
-- [Migration](#migration-8)
-- [Miscellaneous](#miscellaneous-9)
-- [Organizations](#organizations-10)
-- [Pull Requests](#pull_requests-11)
-- [Reactions](#reactions-12)
-- [Repositories](#repositories-13)
-- [Search](#search-14)
-- [Users](#users-15)
-- [Enterprise](#enterprise-16)
-
-### Intro
+## Intro
 This is a viml library to access the Github API v3. With it, you can manage
 Github resources (repositories, user profiles, organizations, etc.) from viml
 scripts.
@@ -133,17 +18,24 @@ It is WIP, it will covers the full API.
 Should you have any question, any remark, or if you find a bug, or if there is
 something you can do with the API but not with Github-api.vim, please open an issue.
 
-### Activity
-#### Event
-##### List public events
+## Activity
+
+### Event
+
+#### List public events
+
 ```
     github#api#activity#List_events()
 ```
+
 ##### List repository events
+
 ```
     github#api#activity#List_repo_events(owner,repo)
 ```
+
 ##### List issue events for a repository
+
 ##### List public events for a network of repositories
 ```
     github#api#activity#List_net_events(owner,repo)
