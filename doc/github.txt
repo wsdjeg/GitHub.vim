@@ -834,6 +834,9 @@ github#api#pulls#Merge({owner}, {repo}, {number}, {msg}, {user}, {password})
 
   Github API : PUT /repos/:owner/:repo/pulls/:number/merge
 
+github#api#repos#get_repo({owner}, {repo})       *github#api#repos#get_repo()*
+  Get a single repository GET /repos/:owner/:repo
+
 github#api#repos#releases#Create({owner}, {repo}, {user}, {password},
   {release})                              *github#api#repos#releases#Create()*
   Create an release

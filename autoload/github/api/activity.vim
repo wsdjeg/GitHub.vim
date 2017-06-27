@@ -217,8 +217,20 @@ endfunction
 " List stargazers of the repo
 "
 " Github API : GET /repos/:owner/:repo/stargazers
-function! github#api#activity#List_stargazers(owner,repo) abort
-    return github#api#util#Get(join(['repos', a:owner, a:repo, 'stargazers'], '/'), [])
+function! github#api#activity#List_stargazers(owner,repo, ...) abort
+    if a:0 > 0
+        let page = a:1
+        let repo = github#api#repos#get_repo(a:owner, a:repo)
+        if has_key(repo, 'id')
+            let repo_id = repo.id
+            " https://api.github.com/repositories/77358263/stargazers?page=97
+            return github#api#util#Get(join(['repositories', repo_id,  'stargazers?page=' . page], '/'), [])
+        else
+            return repo
+        endif
+    else
+        return github#api#util#Get(join(['repos', a:owner, a:repo, 'stargazers'], '/'), [])
+    endif
 endfunction
 
 ""

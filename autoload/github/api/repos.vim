@@ -11,3 +11,11 @@ function! github#api#repos#Response() abort
                 \'stargazers_url', 'git_refs_url']
     return l:keys
 endfunction
+
+""
+" Get a single repository
+" @public
+" GET /repos/:owner/:repo
+function! github#api#repos#get_repo(owner, repo) abort
+    return github#api#util#Get('repos/' . a:owner . '/' . a:repo, [])
+endfunction
