@@ -22,7 +22,7 @@ endfunction
 function! github#api#util#GetLastPage(url) abort
     let cmd = ['curl', '-si', g:githubapi_root_url . a:url]
     call github#api#util#log('util#GetLastPage cmd : ' . string(cmd))
-    let result = filter(copy(systemlist(cmd)), "v:val =~# '^Link'")
+    let result = filter(copy(s:systemlist(cmd)), "v:val =~# '^Link'")
     if len(result) > 0
         let line = result[0]
         if !empty(line) && !empty(matchstr(line, 'rel="last"'))
@@ -39,7 +39,7 @@ function! github#api#util#GetStatus(url,opt) abort
         call extend(cmd, a:opt)
     endif
     call github#api#util#log('util#GetStatus cmd : ' . string(cmd))
-    let result = filter(copy(systemlist(cmd)), "v:val =~# '^Status:'")
+    let result = filter(copy(s:systemlist(cmd)), "v:val =~# '^Status:'")
     return matchstr(result[0],'\d\+')
 endfunction
 
