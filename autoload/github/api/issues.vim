@@ -67,7 +67,10 @@ function! github#api#issues#List_All_for_Repo(owner,repo, ...) abort
     endif
     let issues = []
     for i in range(1,github#api#util#GetLastPage('repos/' . a:owner . '/' . a:repo . '/issues' . args))
-        call extend(issues,github#api#util#Get('repos/' . a:owner . '/' . a:repo . '/issues' . args . page_key . i, []))
+        let iss = github#api#util#Get('repos/' . a:owner . '/' . a:repo . '/issues' . args . page_key . i, [])
+        if !empty(iss) && type(iss) == 3
+            call extend(issues,)
+        endif
     endfor
     return issues
 endfunction

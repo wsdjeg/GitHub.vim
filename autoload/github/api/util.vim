@@ -10,7 +10,7 @@ function! s:systemlist(cmd) abort
 endfunction
 
 function! github#api#util#Get(url,args) abort
-    let cmd = ['curl', '-s', g:githubapi_root_url . a:url]
+    let cmd = ['curl', '-s', s:geturl(a:url)]
     if len(a:args) > 0
         call extend(cmd, a:args)
     endif
@@ -20,7 +20,7 @@ function! github#api#util#Get(url,args) abort
 endfunction
 
 function! github#api#util#GetLastPage(url) abort
-    let cmd = ['curl', '-si', g:githubapi_root_url . a:url]
+    let cmd = ['curl', '-si', s:geturl(a:url)]
     call github#api#util#log('util#GetLastPage cmd : ' . string(cmd))
     let result = filter(copy(s:systemlist(cmd)), "v:val =~# '^Link'")
     if len(result) > 0
@@ -34,7 +34,7 @@ function! github#api#util#GetLastPage(url) abort
 endfunction
 
 function! github#api#util#GetStatus(url,opt) abort
-    let cmd = ['curl', '-is', g:githubapi_root_url . a:url]
+    let cmd = ['curl', '-is', s:geturl(a:url)]
     if len(a:opt) > 0
         call extend(cmd, a:opt)
     endif
@@ -82,4 +82,8 @@ function! github#api#util#parserArgs(base,name,var,values,default) abort
         let url .= a:name . '=' . a:var
     endif
     return url
+endfunction
+
+function! s:geturl(url) abort
+    return substitute(g:githubapi_root_url . a:url, '&', '\\&', 'g')
 endfunction
