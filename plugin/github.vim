@@ -1,9 +1,10 @@
-let s:save_cpo = &cpoptions
-set cpoptions&vim
-
 if exists('g:GitHub_api_plugin_loaded')
     finish
 endif
+
+let s:save_cpo = &cpoptions
+set cpoptions&vim
+
 ""
 " Github api root url:
 "

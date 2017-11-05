@@ -26,7 +26,7 @@ endfunction
 "
 " Github API: GET /repos/:owner/:repo/releases/latest
 function! github#api#repos#releases#latest(owner, repo)
-    return github#api#util#Get('repos/' . a:owner . '/' . a:repo . '/releases/latest')
+    return github#api#util#Get('repos/' . a:owner . '/' . a:repo . '/releases/latest', [])
 endfunction
 
 

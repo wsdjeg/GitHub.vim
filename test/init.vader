@@ -1,2 +1,3 @@
-Execute ( SpaceVim api: SpaceVim main code ):
-  AssertEqual 1, 1
+Execute ( Github.vim : plugin ):
+  source plugin/github.vim
+  AssertEqual g:githubapi_root_url, 'https://api.github.com/'
