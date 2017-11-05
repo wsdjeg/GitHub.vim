@@ -12,9 +12,33 @@
 "  "prerelease": false
 " }
 " <
-" Github API : POST /repos/:owner/:repo/releases
+" Github API: POST /repos/:owner/:repo/releases
 function! github#api#repos#releases#Create(owner,repo,user,password, release) abort
     return github#api#util#Get('repos/' . a:owner . '/' . a:repo . '/releases',
                 \ ['-X', 'POST', '-d', json_encode(a:release),
                 \ '-u', a:user . ':' . a:password])
 endfunction
+
+
+""
+" @public
+" Get the latest release
+"
+" Github API: GET /repos/:owner/:repo/releases/latest
+function! github#api#repos#releases#latest(owner, repo)
+    return github#api#util#Get('repos/' . a:owner . '/' . a:repo . '/releases/latest')
+endfunction
+
+
+" TODO Get a single release
+" TODO Get a release by tag name
+" TODO Edit a release
+" TODO Delete a release
+" TODO List assets for a release
+" TODO Upload a release asset
+" TODO List releases for a repository
+" TODO Get a single release asset
+" TODO Edit a release asset
+" TODO Delete a release asset
+
+

@@ -846,7 +846,13 @@ github#api#repos#releases#Create({owner}, {repo}, {user}, {password},
 <
   {  "tag_name": "v1.0.0",  "target_commitish": "master",  "name": "v1.0.0",
   "body": "Description of the release",  "draft": false,  "prerelease": false
-  } < Github API : POST /repos/:owner/:repo/releases
+  } < Github API: POST /repos/:owner/:repo/releases
+
+github#api#repos#releases#latest({owner}, {repo})
+                                          *github#api#repos#releases#latest()*
+  Get the latest release
+
+  Github API: GET /repos/:owner/:repo/releases/latest
 
 github#api#search#SearchRepos({q}, {sort}, {order})
                                              *github#api#search#SearchRepos()*
