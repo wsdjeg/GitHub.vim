@@ -45,10 +45,29 @@ endfunction
 " List issues for a repository
 " GET /repos/:owner/:repo/issues
 " NOTE: this only list opened issues and pull request
-function! github#api#issues#List_All_for_Repo(owner,repo) abort
+function! github#api#issues#List_All_for_Repo(owner,repo, ...) abort
+    let args = ''
+    let page_key = '?page='
+    if !empty(a:1)
+        let args = '?'
+        if has_key(a:1, 'state')
+            let args .= 'state=' . a:1.state
+        endif
+        if has_key(a:1, 'since')
+            if args[-1:] !=# '?'
+                let args .='&'
+            endif
+            let args .= 'state=' . a:1.since
+        endif
+        if args[-1:] !=# '?'
+            let page_key = '&page='
+        else
+            let page_key = 'page='
+        endif
+    endif
     let issues = []
-    for i in range(1,github#api#util#GetLastPage('repos/' . a:owner . '/' . a:repo . '/issues'))
-        call extend(issues,github#api#util#Get('repos/' . a:owner . '/' . a:repo . '/issues?page=' . i, []))
+    for i in range(1,github#api#util#GetLastPage('repos/' . a:owner . '/' . a:repo . '/issues' . args))
+        call extend(issues,github#api#util#Get('repos/' . a:owner . '/' . a:repo . '/issues' . args . page_key . i, []))
     endfor
     return issues
 endfunction
@@ -187,8 +206,8 @@ function! github#api#issues#List_comments(owner,repo,num,since) abort
                 \. '/issues/' . a:num . '/comments'
                 \. (empty(a:since) ? '' : '?since='.a:since)))
         call extend(comments,github#api#util#Get('repos/' . a:owner . '/' . a:repo
-                \. '/issues/' . a:num . '/comments?page=' . i
-                \. (empty(a:since) ? '' : '&since='.a:since), []))
+                    \. '/issues/' . a:num . '/comments?page=' . i
+                    \. (empty(a:since) ? '' : '&since='.a:since), []))
     endfor
     return comments
 endfunction
@@ -284,29 +303,29 @@ function! github#api#issues#List_events(owner,repo,num) abort
 endfunction
 
 function! s:GetEvent(event) abort
-   let events = {
-               \ 'closed' : 'The issue was closed by the actor. When the commit_id is present, '
-               \ . 'it identifies the commit that closed the issue using "closes / fixes #NN" syntax.',
-               \ 'reopened' : 'The issue was reopened by the actor.',
-               \ 'subscribed' : 'The actor subscribed to receive notifications for an issue.',
-               \ 'merged' : 'The issue was merged by the actor. The `commit_id` attribute is the SHA1 of the HEAD commit that was merged.',
-               \ 'referenced' : 'The issue was referenced from a commit message. '
-               \ . 'The `commit_id` attribute is the commit SHA1 of where that happened.',
-               \ 'mentioned' : 'The actor was @mentioned in an issue body.',
-               \ 'assigned' : 'The issue was assigned to the actor.',
-               \ 'unassigned' : 'The actor was unassigned from the issue.',
-               \ 'labeled' : 'A label was added to the issue.',
-               \ 'unlabeled' : 'A label was removed from the issue.',
-               \ 'milestoned' : 'The issue was added to a milestone.',
-               \ 'demilestoned' : 'The issue was removed from a milestone.',
-               \ 'renamed' : 'The issue title was changed.',
-               \ 'locked' : 'The issue was locked by the actor.',
-               \ 'unlocked' : 'The issue was unlocked by the actor.',
-               \ 'head_ref_deleted' : 'The pull request`s branch was deleted.',
-               \ 'head_ref_restored' : 'The pull request`s branch was restored. '
-               \ }
-   let event = json_decode(a:event).event
-   return get(events, event)
+    let events = {
+                \ 'closed' : 'The issue was closed by the actor. When the commit_id is present, '
+                \ . 'it identifies the commit that closed the issue using "closes / fixes #NN" syntax.',
+                \ 'reopened' : 'The issue was reopened by the actor.',
+                \ 'subscribed' : 'The actor subscribed to receive notifications for an issue.',
+                \ 'merged' : 'The issue was merged by the actor. The `commit_id` attribute is the SHA1 of the HEAD commit that was merged.',
+                \ 'referenced' : 'The issue was referenced from a commit message. '
+                \ . 'The `commit_id` attribute is the commit SHA1 of where that happened.',
+                \ 'mentioned' : 'The actor was @mentioned in an issue body.',
+                \ 'assigned' : 'The issue was assigned to the actor.',
+                \ 'unassigned' : 'The actor was unassigned from the issue.',
+                \ 'labeled' : 'A label was added to the issue.',
+                \ 'unlabeled' : 'A label was removed from the issue.',
+                \ 'milestoned' : 'The issue was added to a milestone.',
+                \ 'demilestoned' : 'The issue was removed from a milestone.',
+                \ 'renamed' : 'The issue title was changed.',
+                \ 'locked' : 'The issue was locked by the actor.',
+                \ 'unlocked' : 'The issue was unlocked by the actor.',
+                \ 'head_ref_deleted' : 'The pull request`s branch was deleted.',
+                \ 'head_ref_restored' : 'The pull request`s branch was restored. '
+                \ }
+    let event = json_decode(a:event).event
+    return get(events, event)
 endfunction
 
 ""
