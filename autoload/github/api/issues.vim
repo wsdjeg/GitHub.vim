@@ -57,7 +57,7 @@ function! github#api#issues#List_All_for_Repo(owner,repo, ...) abort
             if args[-1:] !=# '?'
                 let args .='&'
             endif
-            let args .= 'state=' . a:1.since
+            let args .= 'since=' . a:1.since
         endif
         if args[-1:] !=# '?'
             let page_key = '&page='
@@ -69,7 +69,7 @@ function! github#api#issues#List_All_for_Repo(owner,repo, ...) abort
     for i in range(1,github#api#util#GetLastPage('repos/' . a:owner . '/' . a:repo . '/issues' . args))
         let iss = github#api#util#Get('repos/' . a:owner . '/' . a:repo . '/issues' . args . page_key . i, [])
         if !empty(iss) && type(iss) == 3
-            call extend(issues,)
+            call extend(issues, iss)
         endif
     endfor
     return issues
