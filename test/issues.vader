@@ -16,5 +16,3 @@ Execute ( issues: List issues for a repository ):
       \ 'state' : 'all'
       \ }
       \ )[-1].number, github#api#issues#Get_issue('wsdjeg', 'Github.vim', 16).number
-  Log join(github#api#util#GetLog(), "\n")
-

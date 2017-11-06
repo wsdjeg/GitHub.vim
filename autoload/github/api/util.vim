@@ -47,7 +47,7 @@ endfunction
 " @public
 " Get current time in a timestamp in ISO 8601 format: YYYY-MM-DDTHH:MM:SSZ
 function! github#api#util#Get_current_time() abort
-   return strftime('%Y-%m-%dT%TZ')
+    return strftime('%Y-%m-%dT%TZ')
 endfunction
 
 let s:log = []
@@ -84,7 +84,20 @@ function! github#api#util#parserArgs(base,name,var,values,default) abort
     return url
 endfunction
 
-function! s:geturl(url) abort
-    return g:githubapi_root_url . a:url
-    return substitute(g:githubapi_root_url . a:url, '&', '\\&', 'g')
-endfunction
+let s:clientid = $CLIENTID
+let s:clientsecret = $CLIENTSECRET
+if !empty(s:clientid) && !empty(s:clientsecret)
+    function! s:geturl(url) abort
+        return g:githubapi_root_url . a:url
+    endfunction
+else
+    function! s:geturl(url) abort
+        let url = a:url
+        if stridx(a:url, '?') != -1
+            let url .= '&client_id=' . s:clientid . '&client_secret=' . s:clientsecret
+        else
+            let url .= '?client_id=' . s:clientid . '&client_secret=' . s:clientsecret
+        endif
+        return g:githubapi_root_url . url
+    endfunction
+endif
