@@ -29,6 +29,8 @@ It is easy to install the lib via [dein](https://github.com/Shougo/dein.vim):
 call dein#add('wsdjeg/GitHub.vim')
 ```
 
+**NOTE:** For unauthenticated requests, the rate limit allows for up to 60 requests per hour. Unauthenticated requests are associated with the originating IP address, and not the user making requests.Increasing the unauthenticated rate limit, you need [Create OAuth app](https://github.com/settings/applications/new), and set EVN: `CLIENTID` and `CLIENTSECRET`.
+
 ## Usage
 
 create issue:
