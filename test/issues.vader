@@ -1,0 +1,2 @@
+Execute ( issues: Get the latest release ):
+  AssertEqual github#api#issues#Get_issue('wsdjeg', 'Github.vim', 2).title, 'How to remove new lines?'
