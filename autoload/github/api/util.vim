@@ -88,10 +88,6 @@ let s:clientid = $CLIENTID
 let s:clientsecret = $CLIENTSECRET
 if !empty(s:clientid) && !empty(s:clientsecret)
     function! s:geturl(url) abort
-        return g:githubapi_root_url . a:url
-    endfunction
-else
-    function! s:geturl(url) abort
         let url = a:url
         if stridx(a:url, '?') != -1
             let url .= '&client_id=' . s:clientid . '&client_secret=' . s:clientsecret
@@ -99,5 +95,9 @@ else
             let url .= '?client_id=' . s:clientid . '&client_secret=' . s:clientsecret
         endif
         return g:githubapi_root_url . url
+    endfunction
+else
+    function! s:geturl(url) abort
+        return g:githubapi_root_url . a:url
     endfunction
 endif
