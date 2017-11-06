@@ -85,5 +85,6 @@ function! github#api#util#parserArgs(base,name,var,values,default) abort
 endfunction
 
 function! s:geturl(url) abort
+    return g:githubapi_root_url . a:url
     return substitute(g:githubapi_root_url . a:url, '&', '\\&', 'g')
 endfunction
