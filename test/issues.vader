@@ -13,5 +13,5 @@ Execute ( issues: List issues for a repository ):
       \ 'since' : github#api#repos#releases#latest('wsdjeg', 'Github.vim').created_at,
       \ 'state' : 'open'
       \ }
-      \ )[-1].number, github#api#issues#Get_issue('wsdjeg', 'Github.vim', 16).number
+      \ )[-1].number, github#api#issues#Get_issue('wsdjeg', 'Github.vim', 17).number
 
