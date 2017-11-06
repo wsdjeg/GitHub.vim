@@ -6,3 +6,12 @@ Execute ( issues: Lists all the available assignees ):
 
 Execute ( issues: Check assignee ):
   AssertEqual github#api#issues#Check_assignee('wsdjeg', 'Github.vim', 'wsdjeg'), 1
+
+Execute ( issues: List issues for a repository ):
+  AssertEqual github#api#issues#List_All_for_Repo('wsdjeg', 'Github.vim', 
+      \ {
+      \ 'since' : github#api#repos#releases#latest('wsdjeg', 'Github.vim').created_at,
+      \ 'state' : 'open'
+      \ }
+      \ )[-1].number, github#api#issues#Get_issue('wsdjeg', 'Github.vim', 16).number
+
