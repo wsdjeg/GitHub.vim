@@ -417,7 +417,7 @@ github#api#issues#List_assignees({owner}, {repo})
 
 github#api#issues#Check_assignee({owner}, {repo}, {assignee})
                                           *github#api#issues#Check_assignee()*
-  Check assignee
+  check assignee
 
   Github API : GET /repos/:owner/:repo/assignees/:assignee
 
