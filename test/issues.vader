@@ -1,2 +1,5 @@
-Execute ( issues: Get the latest release ):
+Execute ( issues: Get a single issue ):
   AssertEqual github#api#issues#Get_issue('wsdjeg', 'Github.vim', 2).title, 'How to remove new lines?'
+
+Execute ( issues: Lists all the available assignees ):
+  AssertEqual github#api#issues#List_assignees('wsdjeg', 'Github.vim')[0].login, 'wsdjeg'
