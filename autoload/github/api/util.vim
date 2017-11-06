@@ -23,13 +23,17 @@ function! github#api#util#GetLastPage(url) abort
     let cmd = ['curl', '-si', s:geturl(a:url)]
     call github#api#util#log('util#GetLastPage cmd : ' . string(cmd))
     let result = filter(copy(s:systemlist(cmd)), "v:val =~# '^Link'")
+    let page = 1
     if len(result) > 0
         let line = result[0]
         if !empty(line) && !empty(matchstr(line, 'rel="last"'))
-            return split(matchstr(line,'=\d\+',0,2),'=')[0]
+            call github#api#util#log(line)
+            let page = split(matchstr(line,'page=\d\+',0,2),'=')[1]
+            call github#api#util#log(page)
+            return page
         endif
     else
-        return 1
+        return page
     endif
 endfunction
 
