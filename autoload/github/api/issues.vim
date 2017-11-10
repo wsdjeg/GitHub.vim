@@ -277,7 +277,7 @@ endfunction
 " <
 " Github API : PATCH /repos/:owner/:repo/issues/comments/:id
 function! github#api#issues#Edit_comment(owner,repo,id,json,user,password) abort
-    return github#api#util#Get('repos/' . a:owner . '/' . a:repo . '/issues/'  . '/comments/' . a:id,
+    return github#api#util#Get('repos/' . a:owner . '/' . a:repo . '/issues/comments/' . a:id,
                 \ ['-X', 'PATCH', '-u', a:user . ':' . a:password, '-d', json_encode(a:json)])
 endfunction
 
