@@ -262,7 +262,7 @@ endfunction
 " <
 " Github API : POST /repos/:owner/:repo/issues/:number/comments
 function! github#api#issues#Create_comment(owner,repo,num,json,user,password) abort
-    return github#api#util#Get('repos/' . a:owner . '/' . a:repo . '/issues/' . a:num . '/comments/',
+    return github#api#util#Get('repos/' . a:owner . '/' . a:repo . '/issues/' . a:num . '/comments',
                 \ ['-X', 'POST', '-u', a:user . ':' . a:password, '-d', json_encode(a:json)])
 endfunction
 
