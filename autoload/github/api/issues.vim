@@ -48,16 +48,17 @@ endfunction
 function! github#api#issues#List_All_for_Repo(owner,repo, ...) abort
     let args = ''
     let page_key = '?page='
-    if !empty(a:1)
+    let opts = get(a:000, 0, {})
+    if !empty(opts)
         let args = '?'
-        if has_key(a:1, 'state')
-            let args .= 'state=' . a:1.state
+        if has_key(opts, 'state')
+            let args .= 'state=' . opts.state
         endif
-        if has_key(a:1, 'since')
+        if has_key(opts, 'since')
             if args[-1:] !=# '?'
                 let args .='&'
             endif
-            let args .= 'since=' . a:1.since
+            let args .= 'since=' . opts.since
         endif
         if args[-1:] !=# '?'
             let page_key = '&page='
