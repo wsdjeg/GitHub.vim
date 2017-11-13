@@ -854,6 +854,12 @@ github#api#repos#releases#latest({owner}, {repo})
 
   Github API: GET /repos/:owner/:repo/releases/latest
 
+github#api#repos#releases#list_assets({owner}, {repo}, {release_id})
+                                     *github#api#repos#releases#list_assets()*
+  List assets for a release
+
+  Github API: GET /repos/:owner/:repo/releases/:id/assets
+
 github#api#search#SearchRepos({q}, {sort}, {order})
                                              *github#api#search#SearchRepos()*
   Search for repos, for how to {sort} result, you can use `stars`,`forks` and

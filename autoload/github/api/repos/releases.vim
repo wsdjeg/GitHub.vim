@@ -30,11 +30,21 @@ function! github#api#repos#releases#latest(owner, repo)
 endfunction
 
 
+""
+" @public
+" List assets for a release
+"
+" Github API: GET /repos/:owner/:repo/releases/:id/assets
+function! github#api#repos#releases#list_assets(owner, repo, release_id)
+
+    return github#api#util#Get('repos/' . a:owner . '/' . a:repo . '/releases/' . a:release_id . '/assets', [])
+
+endfunction
+
 " TODO Get a single release
 " TODO Get a release by tag name
 " TODO Edit a release
 " TODO Delete a release
-" TODO List assets for a release
 " TODO Upload a release asset
 " TODO List releases for a repository
 " TODO Get a single release asset
