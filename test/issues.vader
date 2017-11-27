@@ -9,7 +9,6 @@ Execute ( issues: Check assignee ):
 
 Execute ( issues: List issues for a repository ):
   let g:last_time = github#api#repos#releases#latest('wsdjeg', 'Github.vim').created_at
-  Log g:last_time
   AssertEqual github#api#issues#List_All_for_Repo('wsdjeg', 'Github.vim', 
       \ {
       \ 'since' : g:last_time,
