@@ -1,7 +1,14 @@
 function! s:systemlist(cmd) abort
     let cmd = ''
+    let quote = &shellxquote == '"' ?  "'" : '"'
     if type(a:cmd) == type([]) && !has('nvim')
-        let cmd = join(a:cmd, " ")
+        for argv in a:cmd
+            if type(argv) == 4
+                let cmd .= ' ' . quote .  substitute(json_encode(argv), '"', '"""', 'g') . quote
+            else
+                let cmd .= ' ' . quote . substitute(argv, '"', '"""', 'g') . quote
+            endif
+        endfor
     else
         let cmd = a:cmd
     endif
