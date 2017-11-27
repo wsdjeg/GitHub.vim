@@ -4,9 +4,9 @@ function! s:systemlist(cmd) abort
     if type(a:cmd) == type([]) && !has('nvim')
         for argv in a:cmd
             if type(argv) == 4
-                let cmd .= ' ' . quote .  substitute(json_encode(argv), '"', '"""', 'g') . quote
+                let cmd .= quote .  substitute(json_encode(argv), '"', '"""', 'g') . quote . ' '
             else
-                let cmd .= ' ' . quote . substitute(argv, '"', '"""', 'g') . quote
+                let cmd .= quote . substitute(argv, '"', '"""', 'g') . quote . ' '
             endif
         endfor
     else
