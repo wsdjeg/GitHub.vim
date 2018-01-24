@@ -10,6 +10,7 @@ set cpoptions&vim
 "
 " default : https://api.github.com/
 let g:githubapi_root_url = 'https://api.github.com/'
+let g:githubapi_verbose = get(g:, 'githubapi_verbose', 0)
 
 let g:GitHub_api_plugin_loaded = 1
 
