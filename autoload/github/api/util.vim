@@ -16,6 +16,7 @@ function! s:systemlist(cmd) abort
     let result = systemlist(cmd)
     if !empty(v:shell_error) && g:githubapi_verbose == 1
       echom v:shell_error
+      echom result
     endif
     return result
 endfunction
