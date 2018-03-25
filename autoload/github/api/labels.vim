@@ -4,7 +4,7 @@
 "
 " Github API : GET /repos/:owner/:repo/labels
 function! github#api#labels#GetAll(owner,repo) abort
-    return github#api#util#Get(join(['repos', a:owner, a:repo, 'labels'], '/'), ['-H', 'application/vnd.github.jean-grey-preview+json'])
+    return github#api#util#Get(join(['repos', a:owner, a:repo, 'labels'], '/'), ['-H', 'Accept: application/vnd.github.symmetra-preview+json'])
 endfunction
 
 ""
