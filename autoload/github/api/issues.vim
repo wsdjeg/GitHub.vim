@@ -386,7 +386,7 @@ function! github#api#issues#ListAllMilestones(owner,repo,state,sort,direction) a
     else
         let url = url . '&direction=' . a:direction
     endif
-    return github#api#util#Get(url, [])
+    return github#api#util#Get(url, ['-H', 'application/vnd.github.jean-grey-preview+json'])
 endfunction
 
 ""
