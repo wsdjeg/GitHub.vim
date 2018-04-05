@@ -235,6 +235,19 @@ endfunction
 
 ""
 " @public
+" List all stargazers of the repo
+"
+" Github API : GET /repos/:owner/:repo/stargazers
+function! github#api#activity#List_all_stargazers(owner, repo) abort
+    let issues = []
+    for i in range(1,github#api#util#GetLastPage('issues', ['-u', a:user . ':' . a:password]))
+        call extend(issues,github#api#util#Get('issues?page=' . i, ['-u', a:user . ':' . a:password]))
+    endfor
+    return issues
+endfunction
+
+""
+" @public
 " Check starred
 "
 " Github API : GET /user/starred/:owner/:repo

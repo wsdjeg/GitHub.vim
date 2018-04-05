@@ -152,6 +152,12 @@ github#api#activity#List_stargazers({owner}, {repo})
 
   Github API : GET /repos/:owner/:repo/stargazers
 
+github#api#activity#List_all_stargazers({owner}, {repo})
+                                   *github#api#activity#List_all_stargazers()*
+  List all stargazers of the repo
+
+  Github API : GET /repos/:owner/:repo/stargazers
+
 github#api#activity#CheckStarred({owner}, {repo}, {user}, {password})
                                           *github#api#activity#CheckStarred()*
   Check starred
