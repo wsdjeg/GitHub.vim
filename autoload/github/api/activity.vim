@@ -240,7 +240,7 @@ endfunction
 " Github API : GET /repos/:owner/:repo/stargazers
 function! github#api#activity#List_all_stargazers(owner, repo) abort
     let issues = []
-    for i in range(1,github#api#util#GetLastPage('repos/' . a:owner . '/' . a:repo . '/' . 'stargazers', []))
+    for i in range(1,github#api#util#GetLastPage('repos/' . a:owner . '/' . a:repo . '/' . 'stargazers'))
         call extend(issues,github#api#util#Get('repos/' . a:owner . '/' . a:repo . '/' . 'stargazers?page=' . i, []))
     endfor
     return issues
