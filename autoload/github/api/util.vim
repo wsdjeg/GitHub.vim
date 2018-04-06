@@ -15,8 +15,8 @@ function! s:systemlist(cmd) abort
     call github#api#util#log('systemlist cmd : ' . string(cmd))
     let result = systemlist(cmd)
     if !empty(v:shell_error) && g:githubapi_verbose == 1
-      echom v:shell_error
-      echom result
+        echom v:shell_error
+        echom result
     endif
     return result
 endfunction
@@ -100,10 +100,10 @@ function! github#api#util#parserArgs(base,name,var,values,default) abort
     return url
 endfunction
 
-let s:clientid = $CLIENTID
-let s:clientsecret = $CLIENTSECRET
-if !empty(s:clientid) && !empty(s:clientsecret)
-    function! s:geturl(url) abort
+function! s:geturl(url) abort
+    let s:clientid = $CLIENTID
+    let s:clientsecret = $CLIENTSECRET
+    if !empty(s:clientid) && !empty(s:clientsecret)
         let url = a:url
         if stridx(a:url, '?') != -1
             let url .= '&client_id=' . s:clientid . '&client_secret=' . s:clientsecret
@@ -111,9 +111,7 @@ if !empty(s:clientid) && !empty(s:clientsecret)
             let url .= '?client_id=' . s:clientid . '&client_secret=' . s:clientsecret
         endif
         return g:githubapi_root_url . url
-    endfunction
-else
-    function! s:geturl(url) abort
+    else
         return g:githubapi_root_url . a:url
-    endfunction
-endif
+    endif
+endfunction
