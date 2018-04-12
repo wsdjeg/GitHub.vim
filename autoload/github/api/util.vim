@@ -31,6 +31,35 @@ function! github#api#util#Get(url,args) abort
     return empty(result) ? result : json_decode(result)
 endfunction
 
+let s:wrapper = {
+            \ 'result' : '',
+            \ 'callback' : '',
+            \ }
+
+function! s:wrapper.on_stdout(id, data, event) abort
+    let self.result .= join(a:data, "\n")
+endfunction
+
+function! s:wrapper.on_exit(id, data, event) abort
+    if a:data == 0 && a:event ==# 'exit'
+        if !empty(self.result)
+            call call(self.callback, [json_decode(self.result)])
+        endif
+    endif
+endfunction
+
+
+" async get issue list, the func accept one argv issue_list
+function! github#api#util#async_get(url, args, func) abort
+    let cmd = ['curl', '-s', s:geturl(a:url)]
+    if len(a:args) > 0
+        call extend(cmd, a:args)
+    endif
+    let opt = deepcopy(s:wrapper)
+    let opt.callback = a:func
+    call jobstart(cmd, opt)
+endfunction
+
 function! github#api#util#GetLastPage(url) abort
     let cmd = ['curl', '-si', s:geturl(a:url)]
     call github#api#util#log('util#GetLastPage cmd : ' . string(cmd))

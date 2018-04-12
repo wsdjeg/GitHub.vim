@@ -76,6 +76,12 @@ function! github#api#issues#List_All_for_Repo(owner,repo, ...) abort
     return issues
 endfunction
 
+function! github#api#issues#async_list_opened(owner, repo, callback) abort
+    for i in range(1,github#api#util#GetLastPage('repos/' . a:owner . '/' . a:repo . '/issues'))
+        call github#api#util#async_get('repos/' . a:owner . '/' . a:repo . '/issues?page=' . i, [], a:callback)
+    endfor
+endfunction
+
 ""
 " Get a single issue
 " @public
