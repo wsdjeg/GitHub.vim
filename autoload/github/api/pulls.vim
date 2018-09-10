@@ -77,7 +77,15 @@ endfunction
 "
 " Github API : GET /repos/:owner/:repo/pulls/:number/files
 function! github#api#pulls#ListFiles(owner,repo,number) abort
-    return github#api#util#Get(join(['repos', a:owner, a:repo, 'pulls', a:number, 'files'], '/'), [])
+    let page_key = '?page='
+    let issues = []
+    for i in range(1,github#api#util#GetLastPage(join(['repos', a:owner, a:repo, 'pulls', a:number, 'files'], '/')))
+        let iss = github#api#util#Get(join(['repos', a:owner, a:repo, 'pulls', a:number, 'files'], '/') . page_key . i, [])
+        if !empty(iss) && type(iss) == 3
+            call extend(issues, iss)
+        endif
+    endfor
+    return issues
 endfunction
 
 ""
