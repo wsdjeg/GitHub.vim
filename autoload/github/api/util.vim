@@ -22,7 +22,7 @@ function! s:systemlist(cmd) abort
 endfunction
 
 function! github#api#util#Get(url,args) abort
-    let cmd = ['curl', '-s', s:geturl(a:url)]
+    let cmd = [g:githubapi_curl_exe, '-s', s:geturl(a:url)]
     if len(a:args) > 0
         call extend(cmd, a:args)
     endif
