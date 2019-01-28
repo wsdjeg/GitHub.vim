@@ -13,9 +13,9 @@ function! s:systemlist(cmd) abort
         let cmd = a:cmd
     endif
     call github#api#util#log('systemlist cmd : ' . string(cmd))
-    echom cmd
     let result = systemlist(cmd)
     if !empty(v:shell_error) && g:githubapi_verbose == 1
+        echom cmd
         echom v:shell_error
         echom string(result)
     endif
