@@ -117,7 +117,9 @@ endfunction
 " PATCH /repos/:owner/:repo/issues/:number
 function! github#api#issues#Edit(owner,repo,num,user,password,issue) abort
     return github#api#util#Get('repos/' . a:owner . '/' . a:repo . '/issues/' . a:num,
-                \ ['-X', 'PATCH', '-d', json_encode(a:issue),
+                \ ['-X', 'PATCH',
+                \ '-H', 'Accept: application/vnd.github.symmetra-preview+json',
+                \ '-d', json_encode(a:issue),
                 \ '-u', a:user . ':' . a:password])
 endfunction
 
